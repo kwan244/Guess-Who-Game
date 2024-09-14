@@ -59,7 +59,7 @@ public class App extends Application {
    * @throws IOException if the FXML file is not found
    */
   public static void openChat(MouseEvent event, String profession) throws IOException {
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/chat.fxml"));
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + profession + ".fxml"));
     Parent root = loader.load();
 
     ChatController chatController = loader.getController();
