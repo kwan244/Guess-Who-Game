@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameStateContext;
-import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
  * Controller class for the room view. Handles user interactions within the room where the user can
@@ -35,9 +35,8 @@ public class RoomController {
   @FXML
   public void initialize() {
     if (isFirstTimeInit) {
-      TextToSpeech.speak(
-          "Chat with the three customers, and guess who is the "
-              + context.getProfessionToGuess());
+      FreeTextToSpeech.speak(
+          "Chat with the three customers, and guess who is the " + context.getProfessionToGuess());
       isFirstTimeInit = false;
     }
     lblProfession.setText(context.getProfessionToGuess());
