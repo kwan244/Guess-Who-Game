@@ -78,8 +78,8 @@ public class App extends Application {
    * @param profession the profession to set in the chat controller
    * @throws IOException if the FXML file is not found
    */
-  public static void openClue(MouseEvent event, String clue) throws IOException {
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/ShoeprintScene.fxml"));
+  public static void openClue(MouseEvent event, String clueName) throws IOException {
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + clueName + ".fxml"));
     Parent root = loader.load();
 
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

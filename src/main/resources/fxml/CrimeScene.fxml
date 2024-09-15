@@ -28,7 +28,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectWaitress" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="529.0" layoutY="528.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0">
+      <Rectangle fx:id="rectShoeprint" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="529.0" layoutY="528.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
@@ -36,7 +36,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectCashier1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="37.0" layoutX="315.0" layoutY="472.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="37.0">
+      <Rectangle fx:id="rectPaper" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="37.0" layoutX="315.0" layoutY="472.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="37.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
