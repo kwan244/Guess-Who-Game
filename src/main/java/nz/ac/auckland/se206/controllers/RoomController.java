@@ -84,4 +84,31 @@ public class RoomController {
   private void handleGuessClick(ActionEvent event) throws IOException {
     context.handleGuessClick();
   }
+
+  /**
+   * Handles the exit button click event.
+   *
+   * @param event the action event triggered by clicking the exit button
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void handleToolClick1(ActionEvent event) throws IOException {}
+
+  /**
+   * Handles the exit button click event.
+   *
+   * @param event the action event triggered by clicking the exit button
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void handleToolClick2(ActionEvent event) throws IOException {}
+
+  /**
+   * Handles the exit button click event.
+   *
+   * @param event the action event triggered by clicking the exit button
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void handleToolClick3(ActionEvent event) throws IOException {}
 }
