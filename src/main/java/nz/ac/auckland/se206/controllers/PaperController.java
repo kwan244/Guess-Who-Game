@@ -13,10 +13,12 @@ public class PaperController {
 
   @FXML private ImageView draggableGlasses;
   @FXML private ImageView paperWithWords;
+  DraggableMaker draggableMaker = new DraggableMaker();
 
   @FXML
   public void initialize() {
     paperWithWords.setOpacity(0.0);
+    draggableMaker.makeDraggable(draggableGlasses);
     draggableGlasses.setOnMouseEntered(this::handleMouseEnterDragGlasses);
     draggableGlasses.setOnMouseExited(this::handleMouseExitDragGlasses);
     draggableGlasses.setOnMousePressed(this::handleMousePressDragGlasses);
@@ -41,14 +43,14 @@ public class PaperController {
   }
 
   private void handleMouseDragGlasses(MouseEvent event) {
-    // Handle dragging of the glasses
-    draggableGlasses.setLayoutX(event.getX() - draggableGlasses.getFitWidth() / 2);
-    draggableGlasses.setLayoutY(event.getY() - draggableGlasses.getFitHeight() / 2);
+    // // Handle dragging of the glasses
+    // draggableGlasses.setLayoutX(event.getX() - draggableGlasses.getFitWidth() / 2);
+    // draggableGlasses.setLayoutY(event.getY() - draggableGlasses.getFitHeight() / 2);
 
-    // System.out.println(
-    //     "Dragging glasses" + draggableGlasses.getLayoutX() + " " +
-    // draggableGlasses.getLayoutY());
-    // Check if glasses are inside the paper
+    // // System.out.println(
+    // //     "Dragging glasses" + draggableGlasses.getLayoutX() + " " +
+    // // draggableGlasses.getLayoutY());
+    // // Check if glasses are inside the paper
     if (isInside(draggableGlasses, paperWithWords)) {
       paperWithWords.setOpacity(1.0);
     } else {
