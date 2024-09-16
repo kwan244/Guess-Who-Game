@@ -38,9 +38,12 @@ public class GameStarted implements GameState {
       case "rectCashier":
         FreeTextToSpeech.speak("Welcome to my cafe!");
         return;
-      case "rectWaitress":
-        FreeTextToSpeech.speak("Hi, let me know when you are ready to order!");
-        return;
+      case "rectShoeprint":
+        App.openClue(event, "ShoeprintScene");
+        break;
+      case "rectPaper":
+        App.openClue(event, "PaperScene");
+        break;
     }
     App.openChat(event, context.getProfession(rectangleId));
   }

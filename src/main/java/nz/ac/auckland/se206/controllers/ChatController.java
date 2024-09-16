@@ -134,4 +134,13 @@ public class ChatController {
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     App.setRoot("CrimeScene");
   }
+
+  @FXML
+  private void handleToolClick1(ActionEvent event) {}
+
+  @FXML
+  private void handleToolClick2(ActionEvent event) {}
+
+  @FXML
+  private void handleToolClick3(ActionEvent event) {}
 }
