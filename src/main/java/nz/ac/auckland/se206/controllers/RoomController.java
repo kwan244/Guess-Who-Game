@@ -35,8 +35,7 @@ public class RoomController {
   @FXML
   public void initialize() {
     if (isFirstTimeInit) {
-      FreeTextToSpeech.speak(
-          "Chat with the three customers, and guess who is the " + context.getProfessionToGuess());
+      FreeTextToSpeech.speak("Chat with the three customers, and guess who is the thief?");
       isFirstTimeInit = false;
     }
     lblProfession.setText(context.getProfessionToGuess());

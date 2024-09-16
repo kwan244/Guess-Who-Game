@@ -49,7 +49,7 @@ public class ChatController {
   private String getSystemPrompt() {
     Map<String, String> map = new HashMap<>();
     map.put("profession", profession);
-    return PromptEngineering.getPrompt("chat.txt", map);
+    return PromptEngineering.getPrompt("/prompts/" + profession + ".txt", map);
   }
 
   /**
@@ -79,7 +79,7 @@ public class ChatController {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    txtaChat.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+    txtaChat.appendText(profession + ": " + msg.getContent() + "\n\n");
   }
 
   /**
@@ -90,6 +90,10 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+    if (chatCompletionRequest == null) {
+      throw new IllegalStateException(
+          "ChatCompletionRequest is not initialized. Make sure to call setProfession first.");
+    }
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
@@ -118,7 +122,7 @@ public class ChatController {
       return;
     }
     txtInput.clear();
-    ChatMessage msg = new ChatMessage("user", message);
+    ChatMessage msg = new ChatMessage("player", message);
     appendChatMessage(msg);
     runGpt(msg);
   }
