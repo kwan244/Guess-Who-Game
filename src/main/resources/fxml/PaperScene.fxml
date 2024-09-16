@@ -18,6 +18,11 @@
             <Image url="@../images/SE206_BETA_PaperSceneBefore.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="paperWithWords" fitHeight="528.0" fitWidth="987.0" layoutX="-37.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/SE206_BETA_PaperSceneAfter.png" />
+         </image>
+      </ImageView>
       <Button layoutX="687.0" layoutY="549.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
       <Pane focusTraversable="true" layoutX="320.0" layoutY="519.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
          <children>

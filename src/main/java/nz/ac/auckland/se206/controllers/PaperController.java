@@ -12,9 +12,11 @@ import nz.ac.auckland.se206.App;
 public class PaperController {
 
   @FXML private ImageView draggableGlasses;
+  @FXML private ImageView paperWithWords;
 
   @FXML
   public void initialize() {
+    paperWithWords.setOpacity(0.0);
     draggableGlasses.setOnMouseEntered(this::handleMouseEnterDragGlasses);
     draggableGlasses.setOnMouseExited(this::handleMouseExitDragGlasses);
     draggableGlasses.setOnMousePressed(this::handleMousePressDragGlasses);
@@ -39,33 +41,38 @@ public class PaperController {
   }
 
   private void handleMouseDragGlasses(MouseEvent event) {
-    // 获取相对于父容器的坐标，而不是全局坐标
-    double offsetX = event.getSceneX() - draggableGlasses.getBoundsInParent().getMinX();
-    double offsetY = event.getSceneY() - draggableGlasses.getBoundsInParent().getMinY();
-
-    double newX = event.getSceneX() - offsetX;
-    double newY = event.getSceneY() - offsetY;
-
-    // 防止眼镜移出屏幕的边界
-    if (newX >= 0
-        && newX
-            <= draggableGlasses.getParent().getBoundsInLocal().getWidth()
-                - draggableGlasses.getFitWidth()) {
-      draggableGlasses.setLayoutX(newX);
-    }
-    if (newY >= 0
-        && newY
-            <= draggableGlasses.getParent().getBoundsInLocal().getHeight()
-                - draggableGlasses.getFitHeight()) {
-      draggableGlasses.setLayoutY(newY);
-    }
     // Handle dragging of the glasses
-    // draggableGlasses.setLayoutX(event.getX() - draggableGlasses.getFitWidth() / 2);
-    // draggableGlasses.setLayoutY(event.getY() - draggableGlasses.getFitHeight() / 2);
+    draggableGlasses.setLayoutX(event.getX() - draggableGlasses.getFitWidth() / 2);
+    draggableGlasses.setLayoutY(event.getY() - draggableGlasses.getFitHeight() / 2);
 
     // System.out.println(
     //     "Dragging glasses" + draggableGlasses.getLayoutX() + " " +
     // draggableGlasses.getLayoutY());
+    // Check if glasses are inside the paper
+    if (isInside(draggableGlasses, paperWithWords)) {
+      paperWithWords.setOpacity(1.0);
+    } else {
+      paperWithWords.setOpacity(0.0);
+    }
+  }
+
+  private boolean isInside(ImageView glasses, ImageView paper) {
+    // Get the bounds of the glasses and paper
+    double glassesX = glasses.getLayoutX();
+    double glassesY = glasses.getLayoutY();
+    double glassesWidth = glasses.getFitWidth();
+    double glassesHeight = glasses.getFitHeight();
+
+    double paperX = paper.getLayoutX();
+    double paperY = paper.getLayoutY();
+    double paperWidth = paper.getFitWidth();
+    double paperHeight = paper.getFitHeight();
+
+    // Check if glasses are inside the paper
+    return glassesX + glassesWidth > paperX
+        && glassesX < paperX + paperWidth
+        && glassesY + glassesHeight > paperY
+        && glassesY < paperY + paperHeight;
   }
 
   /**
