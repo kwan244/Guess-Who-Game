@@ -21,6 +21,7 @@
       <Button layoutX="687.0" layoutY="549.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
       <Pane focusTraversable="true" layoutX="320.0" layoutY="519.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
          <children>
+            <Pane layoutX="142.0" layoutY="4.0" prefHeight="61.0" prefWidth="61.0" style="-fx-background-color: ffffff;" />
             <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/magnifier.jpg" />

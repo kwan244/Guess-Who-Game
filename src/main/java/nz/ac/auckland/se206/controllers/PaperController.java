@@ -15,8 +15,6 @@ public class PaperController {
 
   @FXML
   public void initialize() {
-    // Initially, disable floorboard interactions
-    // draggableGlasses.setDisable(true);
     draggableGlasses.setOnMouseEntered(this::handleMouseEnterDragGlasses);
     draggableGlasses.setOnMouseExited(this::handleMouseExitDragGlasses);
     draggableGlasses.setOnMousePressed(this::handleMousePressDragGlasses);
@@ -35,15 +33,39 @@ public class PaperController {
     draggableGlasses.setStyle("-fx-effect: null;");
   }
 
-  private void handleMouseDragGlasses(MouseEvent event) {
-    // Handle dragging of the glasses
-    draggableGlasses.setLayoutX(event.getSceneX() - draggableGlasses.getFitWidth() / 2);
-    draggableGlasses.setLayoutY(event.getSceneY() - draggableGlasses.getFitHeight() / 2);
-  }
-
   private void handleMousePressDragGlasses(MouseEvent event) {
     // Handle mouse press event for draggable glasses
     draggableGlasses.setCursor(Cursor.CLOSED_HAND);
+  }
+
+  private void handleMouseDragGlasses(MouseEvent event) {
+    // 获取相对于父容器的坐标，而不是全局坐标
+    double offsetX = event.getSceneX() - draggableGlasses.getBoundsInParent().getMinX();
+    double offsetY = event.getSceneY() - draggableGlasses.getBoundsInParent().getMinY();
+
+    double newX = event.getSceneX() - offsetX;
+    double newY = event.getSceneY() - offsetY;
+
+    // 防止眼镜移出屏幕的边界
+    if (newX >= 0
+        && newX
+            <= draggableGlasses.getParent().getBoundsInLocal().getWidth()
+                - draggableGlasses.getFitWidth()) {
+      draggableGlasses.setLayoutX(newX);
+    }
+    if (newY >= 0
+        && newY
+            <= draggableGlasses.getParent().getBoundsInLocal().getHeight()
+                - draggableGlasses.getFitHeight()) {
+      draggableGlasses.setLayoutY(newY);
+    }
+    // Handle dragging of the glasses
+    // draggableGlasses.setLayoutX(event.getX() - draggableGlasses.getFitWidth() / 2);
+    // draggableGlasses.setLayoutY(event.getY() - draggableGlasses.getFitHeight() / 2);
+
+    // System.out.println(
+    //     "Dragging glasses" + draggableGlasses.getLayoutX() + " " +
+    // draggableGlasses.getLayoutY());
   }
 
   /**
