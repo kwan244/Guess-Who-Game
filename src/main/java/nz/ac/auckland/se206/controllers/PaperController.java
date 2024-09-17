@@ -56,9 +56,15 @@ public class PaperController {
     }
   }
 
-  private void handleMouseEnterPaper(MouseEvent event) {}
+  private void handleMouseEnterPaper(MouseEvent event) {
+    paperImage.setCursor(Cursor.OPEN_HAND);
+    paperImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+  }
 
-  private void handleMouseExitPaper(MouseEvent event) {}
+  private void handleMouseExitPaper(MouseEvent event) {
+    paperImage.setCursor(Cursor.DEFAULT);
+    paperImage.setStyle("-fx-effect: null;");
+  }
 
   private void handleMouseEnterDragGlasses(MouseEvent event) {
     // Handle mouse enter event for draggable glasses

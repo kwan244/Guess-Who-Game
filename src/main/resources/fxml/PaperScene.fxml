@@ -13,7 +13,7 @@
             <Image url="@../images/SE206_BETA_JewellryShopNoPaper.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="599.0" fitWidth="789.0" layoutX="15.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="paperImage" fitHeight="599.0" fitWidth="789.0" layoutX="15.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/CrumplePaper1.png" />
          </image>
