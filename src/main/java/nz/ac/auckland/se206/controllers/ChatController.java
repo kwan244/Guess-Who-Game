@@ -6,6 +6,7 @@ import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -15,6 +16,8 @@ import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.SharedTimer;
+import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
 /**
@@ -26,6 +29,9 @@ public class ChatController {
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
+  @FXML private Label timerLabel;
+
+  private SharedTimer sharedTimer;
 
   private ChatCompletionRequest chatCompletionRequest;
   private String profession;
@@ -38,6 +44,14 @@ public class ChatController {
   @FXML
   public void initialize() throws ApiProxyException {
     // Any required initialization code can be placed here
+    sharedTimer = SharedTimer.getInstance();
+    sharedTimer.setTimerLabel(timerLabel);
+    sharedTimer.setTimerListener(
+        new TimerListener() {
+          @Override
+          public void onTimerFinished() {}
+        });
+    sharedTimer.start();
   }
 
   /**
