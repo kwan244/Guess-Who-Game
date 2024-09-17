@@ -14,8 +14,8 @@ public class PaperController {
 
   @FXML private ImageView draggableGlasses;
   @FXML private ImageView paperImage;
-  private boolean isClicked = false;
   private int paperClick = 0;
+  private int glassesClick = 0;
   private final String[] paperImages = {
     "/images/CrumplePaper1.png",
     "/images/CrumplePaper2.png",
@@ -46,8 +46,17 @@ public class PaperController {
 
   private void handlePaperClick(MouseEvent event) {
     paperClick++;
-    if (paperClick < paperImages.length) {
+    if (paperClick < paperImages.length - 1) {
       paperImage.setImage(new Image(getClass().getResourceAsStream(paperImages[paperClick])));
+    }
+
+    // glsses icon should be emphasized when paperClick >= paperImages.length
+    if (paperClick >= paperImages.length - 1 && glassesClick == 0) {
+      draggableGlasses.setStyle("-fx-effect: dropshadow(three-pass-box, yellow, 12, 0.5, 0, 0);");
+    }
+    if (paperClick >= paperImages.length && glassesClick >= 1) {
+      paperImage.setImage(
+          new Image(getClass().getResourceAsStream(paperImages[paperImages.length - 1])));
     }
 
     if (paperClick == paperImages.length) {
@@ -81,6 +90,7 @@ public class PaperController {
   private void handleMousePressDragGlasses(MouseEvent event) {
     // Handle mouse press event for draggable glasses
     draggableGlasses.setCursor(Cursor.CLOSED_HAND);
+    glassesClick++;
   }
 
   // private void handleMouseDragGlasses(MouseEvent event) {
