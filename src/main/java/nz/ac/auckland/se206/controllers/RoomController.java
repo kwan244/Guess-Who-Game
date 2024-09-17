@@ -17,11 +17,12 @@ import nz.ac.auckland.se206.speech.FreeTextToSpeech;
  */
 public class RoomController {
 
-  @FXML private Rectangle rectCashier;
+  @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
-  @FXML private Rectangle rectWaitress;
+  @FXML private Rectangle rectPaper;
+  @FXML private Rectangle rectShoeprint;
   @FXML private Label lblProfession;
   @FXML private Button btnGuess;
 
