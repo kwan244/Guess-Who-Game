@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PaperController">
    <children>
       <ImageView fitHeight="631.0" fitWidth="1049.0" layoutX="-173.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_JewellryShopNoPaper.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="528.0" fitWidth="987.0" layoutX="-37.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="paperImage" fitHeight="599.0" fitWidth="789.0" layoutX="15.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/SE206_BETA_PaperSceneBefore.png" />
+            <Image url="@../images/CrumplePaper1.png" />
          </image>
       </ImageView>
       <Button layoutX="687.0" layoutY="549.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
       <Pane focusTraversable="true" layoutX="320.0" layoutY="519.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
          <children>
+            <Pane layoutX="142.0" layoutY="4.0" prefHeight="61.0" prefWidth="61.0" style="-fx-background-color: ffffff;" />
             <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/magnifier.jpg" />
@@ -32,26 +32,11 @@
                   <Image url="@../images/gloves.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="141.0" layoutY="4.0" pickOnBounds="true">
+            <ImageView fx:id="draggableGlasses" fitHeight="61.0" fitWidth="64.0" layoutX="141.0" layoutY="4.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/Red_Blue_glasses.jpg" />
+                  <Image url="@../images/Red_Blue_glasses.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnMagnifier" layoutX="5.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleToolClick1" opacity="0.0" prefHeight="61.0" prefWidth="61.0" text="Button">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="btnGloves" layoutX="74.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleToolClick2" opacity="0.0" prefHeight="61.0" prefWidth="61.0" text="Button">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="btnGlasses" layoutX="143.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleToolClick3" opacity="0.0" prefHeight="61.0" prefWidth="61.0" text="Button">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </Pane>
    </children>
