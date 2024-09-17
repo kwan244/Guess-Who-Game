@@ -3,11 +3,8 @@ package nz.ac.auckland.se206;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.GameStarted;
@@ -51,22 +48,12 @@ public class GameStateContext {
     @SuppressWarnings("unchecked")
     List<String> professions = (List<String>) obj.get("professions");
 
-    Random random = new Random();
-    Set<String> randomProfessions = new HashSet<>();
-    while (randomProfessions.size() < 3) {
-      String profession = professions.get(random.nextInt(professions.size()));
-      randomProfessions.add(profession);
-    }
-
-    String[] randomProfessionsArray = randomProfessions.toArray(new String[3]);
     rectanglesToProfession = new HashMap<>();
-    rectanglesToProfession.put("rectPerson1", randomProfessionsArray[0]);
-    rectanglesToProfession.put("rectPerson2", randomProfessionsArray[1]);
-    rectanglesToProfession.put("rectPerson3", randomProfessionsArray[2]);
+    rectanglesToProfession.put("rectPerson1", professions.get(0));
+    rectanglesToProfession.put("rectPerson2", professions.get(1));
+    rectanglesToProfession.put("rectPerson3", professions.get(2));
 
-    int randomNumber = random.nextInt(3);
-    rectIdToGuess =
-        randomNumber == 0 ? "rectPerson1" : ((randomNumber == 1) ? "rectPerson2" : "rectPerson3");
+    rectIdToGuess = "rectPerson2"; // Person 2 is the one to guess
     professionToGuess = rectanglesToProfession.get(rectIdToGuess);
   }
 
