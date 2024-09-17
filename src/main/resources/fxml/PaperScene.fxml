@@ -13,14 +13,9 @@
             <Image url="@../images/SE206_BETA_JewellryShopNoPaper.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="528.0" fitWidth="987.0" layoutX="-37.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="599.0" fitWidth="789.0" layoutX="15.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/SE206_BETA_PaperSceneBefore.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="paperWithWords" fitHeight="528.0" fitWidth="987.0" layoutX="-37.0" layoutY="36.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/SE206_BETA_PaperSceneAfter.png" />
+            <Image url="@../images/CrumplePaper1.png" />
          </image>
       </ImageView>
       <Button layoutX="687.0" layoutY="549.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
@@ -37,7 +32,7 @@
                   <Image url="@../images/gloves.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="draggableGlasses" fitHeight="61.0" fitWidth="64.0" layoutX="141.0" layoutY="4.0" nodeOrientation="INHERIT" pickOnBounds="true">
+            <ImageView fx:id="draggableGlasses" fitHeight="61.0" fitWidth="64.0" layoutX="141.0" layoutY="4.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/Red_Blue_glasses.png" />
                </image>
