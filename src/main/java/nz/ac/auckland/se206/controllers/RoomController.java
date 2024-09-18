@@ -9,13 +9,15 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.SharedTimer;
+import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
  * Controller class for the room view. Handles user interactions within the room where the user can
  * chat with customers and guess their profession.
  */
-public class RoomController {
+public class RoomController implements TimerListener {
 
   @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
@@ -25,9 +27,14 @@ public class RoomController {
   @FXML private Rectangle rectShoeprint;
   @FXML private Label lblProfession;
   @FXML private Button btnGuess;
+  @FXML private Label timerLabel;
+  @FXML private SharedTimer sharedTimer;
 
   private static boolean isFirstTimeInit = true;
   private static GameStateContext context = new GameStateContext();
+
+  @Override
+  public void onTimerFinished() {}
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -41,6 +48,17 @@ public class RoomController {
       isFirstTimeInit = false;
     }
     lblProfession.setText(context.getProfessionToGuess());
+    sharedTimer = SharedTimer.getInstance();
+    sharedTimer.setTimerLabel(timerLabel);
+    sharedTimer.setTimerListener(this);
+    sharedTimer.start();
+  }
+
+  /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
+  public void stopTimer() {
+    if (sharedTimer != null) {
+      sharedTimer.stop();
+    }
   }
 
   /**
