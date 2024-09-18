@@ -164,12 +164,21 @@ public class ChatController {
       e.printStackTrace();
     }
   }
-  @FXML
-  private void handleToolClick1(ActionEvent event) {}
 
   @FXML
-  private void handleToolClick2(ActionEvent event) {}
+  private void onGoManagerOffice(ActionEvent event){
+    try {
+      App.setRoot("Manager");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+//   @FXML
+//   private void handleToolClick1(ActionEvent event) {}
 
-  @FXML
-  private void handleToolClick3(ActionEvent event) {}
+//   @FXML
+//   private void handleToolClick2(ActionEvent event) {}
+
+//   @FXML
+//   private void handleToolClick3(ActionEvent event) {}
 }

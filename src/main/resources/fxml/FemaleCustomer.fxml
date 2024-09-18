@@ -18,12 +18,14 @@
       </ImageView>
     <TextArea fx:id="txtaChat" editable="false" layoutX="119.0" layoutY="27.0" opacity="0.4" prefHeight="308.0" prefWidth="546.0" wrapText="true" />
     <TextField fx:id="txtInput" layoutX="119.0" layoutY="380.0" opacity="0.4" prefHeight="26.0" prefWidth="435.0" />
-    <Button fx:id="btnSend" layoutX="561.0" layoutY="378.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
-    <Button layoutX="607.0" layoutY="378.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
+    <Button fx:id="btnSend" layoutX="561.0" layoutY="378.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="25.0" prefWidth="78.0" text="Send" />
       <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
+      <Button layoutX="457.0" layoutY="521.0" mnemonicParsing="false" onAction="#onGoBack" text="Go to Crime Scene" />
+      <Button fx:id="btnManagerRoom" layoutX="218.0" layoutY="521.0" mnemonicParsing="false" onAction="#onGoManagerOffice" text="Manager Office" />
+      <Button fx:id="btnMaleRoom1" layoutX="325.0" layoutY="521.0" mnemonicParsing="false" onAction="#onGoMaleRoom" text="Male Change Room" />
   </children>
 </AnchorPane>
