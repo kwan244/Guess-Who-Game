@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -165,27 +166,27 @@ public class ChatController {
   }
 
   @FXML
-  private void onGoFemaleRoom(ActionEvent event) {
+  private void HandleFemaleRoomClicked(MouseEvent event) {
     try {
-      App.setRoot("FemaleCustomer");
+      App.openChat(event, "FemaleCustomer");
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
   @FXML
-  private void onGoMaleRoom(ActionEvent event) {
+  private void HandleMaleRoomClicked(MouseEvent event) {
     try {
-      App.setRoot("thief");
+      App.openChat(event, "thief");
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
   @FXML
-  private void onGoManagerOffice(ActionEvent event) {
+  private void HandleManagerOfficeClicked(MouseEvent event) {
     try {
-      App.setRoot("Manager");
+      App.openChat(event, "Manager");
     } catch (IOException e) {
       e.printStackTrace();
     }
