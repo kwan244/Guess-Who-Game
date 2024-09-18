@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javazoom.jl.player.Player;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -30,6 +32,7 @@ public class GuessController {
 
   private ChatCompletionRequest chatCompletionRequest;
   private String profession;
+  private boolean isGuessed = false;
   private final String[] WinLoseImages = {
     "/images/you_win.png", "/images/you_lose.png",
   };
@@ -38,20 +41,76 @@ public class GuessController {
   public void initialize() {
     WinLoseImage.setOpacity(0);
     FemaleImage.setOnMouseEntered(this::handleMouseEnterFemale);
-    // MaleImage.setOnMouseEntered(this::handleMouseEnter);
-    // ManagerImage.setOnMouseEntered(this::handleMouseEnter);
+    MaleImage.setOnMouseEntered(this::handleMouseEnterMale);
+    ManagerImage.setOnMouseEntered(this::handleMouseEnterManager);
     FemaleImage.setOnMouseExited(this::handleMouseExitFemale);
+    MaleImage.setOnMouseExited(this::handleMouseExitMale);
+    ManagerImage.setOnMouseExited(this::handleMouseExitManager);
 
     handleGuess();
   }
 
   private void handleGuess() {
     MaleImage.setOnMouseClicked(event -> handleGuessMale(event));
+    ManagerImage.setOnMouseClicked(event -> handleGuessManager(event));
+    FemaleImage.setOnMouseClicked(event -> handleGuessFemale(event));
   }
 
   private void handleGuessMale(MouseEvent event) {
-    WinLoseImage.setImage(new Image(getClass().getResourceAsStream(WinLoseImages[0])));
-    WinLoseImage.setOpacity(1);
+    if (!isGuessed) {
+      WinLoseImage.setImage(new Image(getClass().getResourceAsStream(WinLoseImages[0])));
+      WinLoseImage.setOpacity(1);
+      isGuessed = true;
+    } else {
+      playAudio("Guessed");
+    }
+  }
+
+  private void handleGuessManager(MouseEvent event) {
+    if (!isGuessed) {
+      WinLoseImage.setImage(new Image(getClass().getResourceAsStream(WinLoseImages[1])));
+      WinLoseImage.setOpacity(1);
+      isGuessed = true;
+    } else {
+      playAudio("Guessed");
+    }
+  }
+
+  private void handleGuessFemale(MouseEvent event) {
+    if (!isGuessed) {
+      WinLoseImage.setImage(new Image(getClass().getResourceAsStream(WinLoseImages[1])));
+      WinLoseImage.setOpacity(1);
+      isGuessed = true;
+    } else {
+      playAudio("Guessed");
+    }
+  }
+
+  @FXML
+  private void onPlayAgain(ActionEvent event) {}
+
+  private void handleMouseEnterFemale(MouseEvent event) {
+    FemaleImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+  }
+
+  private void handleMouseEnterMale(MouseEvent event) {
+    MaleImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+  }
+
+  private void handleMouseEnterManager(MouseEvent event) {
+    ManagerImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+  }
+
+  private void handleMouseExitFemale(MouseEvent event) {
+    FemaleImage.setStyle("-fx-effect: null;");
+  }
+
+  private void handleMouseExitMale(MouseEvent event) {
+    MaleImage.setStyle("-fx-effect: null;");
+  }
+
+  private void handleMouseExitManager(MouseEvent event) {
+    ManagerImage.setStyle("-fx-effect: null;");
   }
 
   /**
@@ -139,11 +198,14 @@ public class GuessController {
     runGpt(msg);
   }
 
-  private void handleMouseEnterFemale(MouseEvent event) {
-    FemaleImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
-  }
-
-  private void handleMouseExitFemale(MouseEvent event) {
-    FemaleImage.setStyle("-fx-effect: null;");
+  private void playAudio(String mp3FilePath) {
+    try {
+      FileInputStream fileInputStream =
+          new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
+      Player player = new Player(fileInputStream);
+      player.play();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
