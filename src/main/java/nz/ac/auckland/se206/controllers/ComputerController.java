@@ -40,11 +40,17 @@ public class ComputerController {
     RightRedGlow.setOnMouseClicked(this::handleWireClick);
     LeftYellowGlow.setOnMouseClicked(this::handleWireClick);
     RightYellowGlow.setOnMouseClicked(this::handleWireClick);
+    LeftRedGlow.setVisible(false);
+    RightRedGlow.setVisible(false);
+    LeftBlackGlow.setVisible(false);
+    RightBlackGlow.setVisible(false);
+    LeftYellowGlow.setVisible(false);
+    RightYellowGlow.setVisible(false);
   }
 
   private void handleGloveClick(MouseEvent event) {
     glovewearing = true;
-    glove.setVisible(false);
+    glove.setStyle("-fx-effect:null;");
     LeftRedGlow.setVisible(true);
     RightRedGlow.setVisible(true);
     LeftBlackGlow.setVisible(true);
