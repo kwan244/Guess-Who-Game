@@ -148,6 +148,14 @@ public class ChatController {
   }
 
   @FXML
+  private void onGoFemaleRoom(ActionEvent event){
+    try {
+      App.setRoot("FemaleCustomer");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+  @FXML
   private void handleToolClick1(ActionEvent event) {}
 
   @FXML

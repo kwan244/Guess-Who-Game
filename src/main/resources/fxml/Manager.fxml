@@ -25,5 +25,6 @@
             <Font size="32.0" />
          </font>
       </Label>
+      <Button fx:id="btnFemaleRoom" layoutX="119.0" layoutY="506.0" mnemonicParsing="false" onAction="#onGoFemaleRoom" text="Female Change Room" />
   </children>
 </AnchorPane>
