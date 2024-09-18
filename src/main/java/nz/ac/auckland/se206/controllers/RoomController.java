@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameStateContext;
-import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
  * Controller class for the room view. Handles user interactions within the room where the user can
@@ -17,11 +17,12 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  */
 public class RoomController {
 
-  @FXML private Rectangle rectCashier;
+  @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
-  @FXML private Rectangle rectWaitress;
+  @FXML private Rectangle rectPaper;
+  @FXML private Rectangle rectShoeprint;
   @FXML private Label lblProfession;
   @FXML private Button btnGuess;
 
@@ -35,9 +36,8 @@ public class RoomController {
   @FXML
   public void initialize() {
     if (isFirstTimeInit) {
-      TextToSpeech.speak(
-          "Chat with the three customers, and guess who is the "
-              + context.getProfessionToGuess());
+      FreeTextToSpeech.speak(
+          "Chat with the three customers, and guess who is the " + context.getProfessionToGuess());
       isFirstTimeInit = false;
     }
     lblProfession.setText(context.getProfessionToGuess());
@@ -85,4 +85,31 @@ public class RoomController {
   private void handleGuessClick(ActionEvent event) throws IOException {
     context.handleGuessClick();
   }
+
+  /**
+   * Handles the exit button click event.
+   *
+   * @param event the action event triggered by clicking the exit button
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void handleToolClick1(ActionEvent event) throws IOException {}
+
+  /**
+   * Handles the exit button click event.
+   *
+   * @param event the action event triggered by clicking the exit button
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void handleToolClick2(ActionEvent event) throws IOException {}
+
+  /**
+   * Handles the exit button click event.
+   *
+   * @param event the action event triggered by clicking the exit button
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void handleToolClick3(ActionEvent event) throws IOException {}
 }

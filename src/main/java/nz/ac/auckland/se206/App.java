@@ -59,11 +59,28 @@ public class App extends Application {
    * @throws IOException if the FXML file is not found
    */
   public static void openChat(MouseEvent event, String profession) throws IOException {
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/chat.fxml"));
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + profession + ".fxml"));
     Parent root = loader.load();
 
     ChatController chatController = loader.getController();
     chatController.setProfession(profession);
+
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  /**
+   * Opens the chat view and sets the profession in the chat controller.
+   *
+   * @param event the mouse event that triggered the method
+   * @param profession the profession to set in the chat controller
+   * @throws IOException if the FXML file is not found
+   */
+  public static void openClue(MouseEvent event, String clueName) throws IOException {
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + clueName + ".fxml"));
+    Parent root = loader.load();
 
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
@@ -79,7 +96,7 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Parent root = loadFxml("room");
+    Parent root = loadFxml("CrimeScene");
     scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
