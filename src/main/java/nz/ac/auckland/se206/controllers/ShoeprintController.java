@@ -4,6 +4,8 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.control.Labeled;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
@@ -13,8 +15,9 @@ public class ShoeprintController {
 
   @FXML private ImageView Shoeprint;
   @FXML private ImageView Magnifier;
-  private int ShoeprintClick = 0;
-  private int MagnifierClick = 0;
+  @FXML private ImageView LargeMag;
+  @FXML private Labeled Size;
+  private boolean MagnifierClick = false;
 
   // private final String Shoeprints = "/images/Shoeprint.jpg";
 
@@ -31,17 +34,35 @@ public class ShoeprintController {
 
   @FXML
   private void handleShoeprintClick(MouseEvent event) {
-    ShoeprintClick++;
-    System.out.println("Shoeprint clicked " + ShoeprintClick + " times.");
-    // Add your logic here for handling shoeprint click
+    if (MagnifierClick) {
+      try {
+        // Load the larger shoeprint image
+        Image largeShoeprint = new Image("/images/ShoeprintScene.jpg");
+
+        // Set the larger image in the existing ImageView
+        Shoeprint.setImage(largeShoeprint);
+
+        // Optionally, resize the ImageView to match the new image's size
+        Shoeprint.setFitWidth(500); // Adjust these values as necessary
+        Shoeprint.setFitHeight(500); // Adjust these values as necessary
+
+        // Move the image upwards by adjusting its layoutY property
+        Shoeprint.setLayoutY(
+            Shoeprint.getLayoutY() - 200); // Move 100 units upward, adjust as necessary
+
+        LargeMag.setVisible(true);
+        Size.setVisible(true);
+
+      } catch (Exception e) {
+        System.out.println("Failed to load the large shoeprint image: " + e.getMessage());
+      }
+    }
   }
 
   @FXML
   private void handleMagnifierClick(MouseEvent event) {
     Magnifier.setCursor(Cursor.CLOSED_HAND);
-    MagnifierClick++;
-    System.out.println("Magnifier clicked " + MagnifierClick + " times.");
-    // Add your logic here for handling magnifier click
+    MagnifierClick = true;
   }
 
   @FXML
@@ -51,14 +72,18 @@ public class ShoeprintController {
 
   @FXML
   private void onShoeprintHover(MouseEvent event) {
-    Shoeprint.setCursor(Cursor.OPEN_HAND);
-    Shoeprint.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+    if (MagnifierClick) {
+      Shoeprint.setCursor(Cursor.OPEN_HAND);
+      Shoeprint.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+    }
   }
 
   @FXML
   private void onShoeprintExit(MouseEvent event) {
-    Shoeprint.setCursor(Cursor.DEFAULT);
-    Shoeprint.setStyle("-fx-effect: null;");
+    if (MagnifierClick) {
+      Shoeprint.setCursor(Cursor.DEFAULT);
+      Shoeprint.setStyle("-fx-effect: null;");
+    }
   }
 
   @FXML
