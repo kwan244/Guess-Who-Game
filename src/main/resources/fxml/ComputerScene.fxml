@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ComputerController">
    <children>
@@ -104,30 +103,6 @@
             <Image url="@../images/RedConnection.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectWireR1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff02" height="54.0" layoutX="473.0" layoutY="146.0" stroke="TRANSPARENT" strokeType="INSIDE" width="157.0">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor></Rectangle>
-      <Rectangle fx:id="rectWireR2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="61.0" layoutX="216.0" layoutY="154.0" stroke="TRANSPARENT" strokeType="INSIDE" width="166.0">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor></Rectangle>
-      <Rectangle fx:id="rectWireB1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="54.0" layoutX="225.0" layoutY="246.0" stroke="TRANSPARENT" strokeType="INSIDE" width="157.0">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor></Rectangle>
-      <Rectangle fx:id="rectWireY1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="54.0" layoutX="473.0" layoutY="246.0" stroke="TRANSPARENT" strokeType="INSIDE" width="157.0">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor></Rectangle>
-      <Rectangle fx:id="rectWireY2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="54.0" layoutX="229.0" layoutY="323.0" stroke="TRANSPARENT" strokeType="INSIDE" width="157.0">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor></Rectangle>
-      <Rectangle fx:id="rectWireB2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="54.0" layoutX="473.0" layoutY="333.0" stroke="TRANSPARENT" strokeType="INSIDE" width="157.0">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor></Rectangle>
       <Button layoutX="687.0" layoutY="549.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
       <Pane focusTraversable="true" layoutX="320.0" layoutY="519.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
          <children>

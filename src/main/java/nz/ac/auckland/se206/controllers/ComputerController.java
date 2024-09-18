@@ -63,8 +63,9 @@ public class ComputerController {
     // if glove is clicked and wires are not connected
     if (glovewearing && wireCount < 2) {
       // Each action for each colour wire
-      if (event.getSource().equals(wireR1)) {
+      if (event.getSource().equals(LeftRedGlow)) {
         wireR1 = true;
+        LeftRedGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireR1 && wireR2) {
@@ -74,8 +75,10 @@ public class ComputerController {
           RedConnect.setVisible(true);
           checkAllConnected();
         }
-      } else if (event.getSource().equals(wireR2)) {
+        checkWireCount();
+      } else if (event.getSource().equals(RightRedGlow)) {
         wireR2 = true;
+        RightRedGlow.setVisible(false);
         wireCount++;
         // Check same colour wires is connected
         if (wireR1 && wireR2) {
@@ -85,8 +88,10 @@ public class ComputerController {
           RedConnect.setVisible(true);
           checkAllConnected();
         }
-      } else if (event.getSource().equals(wireB1)) {
+        checkWireCount();
+      } else if (event.getSource().equals(LeftBlackGlow)) {
         wireB1 = true;
+        LeftBlackGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireB1 && wireB2) {
@@ -96,8 +101,10 @@ public class ComputerController {
           BlackConnect.setVisible(true);
           checkAllConnected();
         }
-      } else if (event.getSource().equals(wireB2)) {
+        checkWireCount();
+      } else if (event.getSource().equals(RightBlackGlow)) {
         wireB2 = true;
+        RightBlackGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireB1 && wireB2) {
@@ -107,8 +114,10 @@ public class ComputerController {
           BlackConnect.setVisible(true);
           checkAllConnected();
         }
-      } else if (event.getSource().equals(wireY1)) {
+        checkWireCount();
+      } else if (event.getSource().equals(LeftYellowGlow)) {
         wireY1 = true;
+        LeftYellowGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireY1 && wireY2) {
@@ -118,8 +127,10 @@ public class ComputerController {
           YellowConnect.setVisible(true);
           checkAllConnected();
         }
-      } else if (event.getSource().equals(wireY2)) {
+        checkWireCount();
+      } else if (event.getSource().equals(RightYellowGlow)) {
         wireY2 = true;
+        RightYellowGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireY1 && wireY2) {
@@ -128,7 +139,9 @@ public class ComputerController {
           yellowConnected = true;
           YellowConnect.setVisible(true);
           checkAllConnected();
+          wireCount = 0;
         }
+        checkWireCount();
       }
     }
   }
@@ -137,6 +150,12 @@ public class ComputerController {
     if (redConnected && blackConnected && yellowConnected) {
       // all wires connected
       // show clue
+    }
+  }
+
+  private void checkWireCount() {
+    if (wireCount == 2) {
+      wireCount = 0;
     }
   }
 
