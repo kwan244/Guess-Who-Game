@@ -3,12 +3,14 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -62,7 +64,7 @@ public class ChatController {
   private String getSystemPrompt() {
     Map<String, String> map = new HashMap<>();
     map.put("profession", profession);
-    return PromptEngineering.getPrompt("/prompts/" + profession + ".txt", map);
+    return PromptEngineering.getPrompt("prompts/" + profession + ".txt", map);
   }
 
   /**
@@ -92,7 +94,19 @@ public class ChatController {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    txtaChat.appendText(profession + ": " + msg.getContent() + "\n\n");
+    String sender;
+    if (msg.getRole().equals("user")) {
+      sender = "You";
+    } else {
+      if (this.profession.equals("FemaleCustomer")) {
+        sender = "FemaleCustomer";
+      } else if (this.profession.equals("Manager")) {
+        sender = "Manager";
+      } else {
+        sender = "MaleCustomer";
+      }
+    }
+    Platform.runLater(() -> txtaChat.appendText(sender + ": " + msg.getContent() + "\n\n"));
   }
 
   /**
@@ -134,7 +148,7 @@ public class ChatController {
       return;
     }
     txtInput.clear();
-    ChatMessage msg = new ChatMessage("player", message);
+    ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
     runGpt(msg);
   }
@@ -152,37 +166,37 @@ public class ChatController {
   }
 
   @FXML
-  private void onGoFemaleRoom(ActionEvent event){
+  private void HandleFemaleRoomClicked(MouseEvent event) {
     try {
-      App.setRoot("FemaleCustomer");
+      App.openChat(event, "FemaleCustomer");
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
   @FXML
-  private void onGoMaleRoom(ActionEvent event){
+  private void HandleMaleRoomClicked(MouseEvent event) {
     try {
-      App.setRoot("thief");
+      App.openChat(event, "thief");
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
   @FXML
-  private void onGoManagerOffice(ActionEvent event){
+  private void HandleManagerOfficeClicked(MouseEvent event) {
     try {
-      App.setRoot("Manager");
+      App.openChat(event, "Manager");
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
-//   @FXML
-//   private void handleToolClick1(ActionEvent event) {}
+  //   @FXML
+  //   private void handleToolClick1(ActionEvent event) {}
 
-//   @FXML
-//   private void handleToolClick2(ActionEvent event) {}
+  //   @FXML
+  //   private void handleToolClick2(ActionEvent event) {}
 
-//   @FXML
-//   private void handleToolClick3(ActionEvent event) {}
+  //   @FXML
+  //   private void handleToolClick3(ActionEvent event) {}
 }
