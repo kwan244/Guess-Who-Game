@@ -3,12 +3,17 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.SharedTimer;
+import nz.ac.auckland.se206.TimerListener;
 
-public class ComputerController {
+public class ComputerController implements TimerListener {
+  @FXML private Label timerLabel;
+  @FXML private SharedTimer sharedTimer;
   @FXML private ImageView VistorLog;
   @FXML private ImageView LeftRedGlow;
   @FXML private ImageView RightRedGlow;
@@ -32,6 +37,9 @@ public class ComputerController {
   private boolean yellowConnected = false;
   private int wireCount = 0;
 
+  @Override
+  public void onTimerFinished() {}
+
   public void initialize() throws ApiProxyException {
     //
     glove.setOnMouseClicked(this::handleGloveClick);
@@ -47,6 +55,17 @@ public class ComputerController {
     RightBlackGlow.setVisible(false);
     LeftYellowGlow.setVisible(false);
     RightYellowGlow.setVisible(false);
+    sharedTimer = SharedTimer.getInstance();
+    sharedTimer.setTimerLabel(timerLabel);
+    sharedTimer.setTimerListener(this);
+    sharedTimer.start();
+  }
+
+  /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
+  public void stopTimer() {
+    if (sharedTimer != null) {
+      sharedTimer.stop();
+    }
   }
 
   private void handleGloveClick(MouseEvent event) {

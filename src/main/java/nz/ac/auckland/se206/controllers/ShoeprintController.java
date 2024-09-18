@@ -4,15 +4,20 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.SharedTimer;
+import nz.ac.auckland.se206.TimerListener;
 
-public class ShoeprintController {
+public class ShoeprintController implements TimerListener {
 
+  @FXML private Label timerLabel;
+  @FXML private SharedTimer sharedTimer;
   @FXML private ImageView Shoeprint;
   @FXML private ImageView Magnifier;
   @FXML private ImageView LargeMag;
@@ -20,6 +25,9 @@ public class ShoeprintController {
   private boolean MagnifierClick = false;
 
   // private final String Shoeprints = "/images/Shoeprint.jpg";
+
+  @Override
+  public void onTimerFinished() {}
 
   @FXML
   public void initialize() {
@@ -30,6 +38,17 @@ public class ShoeprintController {
     Shoeprint.setOnMouseEntered(this::onShoeprintHover);
     Shoeprint.setOnMouseExited(this::onShoeprintExit);
     Shoeprint.setOnMousePressed(this::handleShoeprintClick);
+
+    sharedTimer = SharedTimer.getInstance();
+    sharedTimer.setTimerLabel(timerLabel);
+    sharedTimer.setTimerListener(this);
+    sharedTimer.start();
+  }
+
+  public void stopTimer() {
+    if (sharedTimer != null) {
+      sharedTimer.stop();
+    }
   }
 
   @FXML
