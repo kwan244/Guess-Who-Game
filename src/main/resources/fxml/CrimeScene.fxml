@@ -73,21 +73,6 @@
                   <Image url="@../images/Red_Blue_glasses.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="btnMagnifier" layoutX="5.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleToolClick1" onMouseDragged="#handleToolClick1" opacity="0.0" prefHeight="61.0" prefWidth="61.0" text="Button">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="btnGloves" layoutX="74.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleToolClick2" opacity="0.0" prefHeight="61.0" prefWidth="61.0" text="Button">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="btnGlasses" layoutX="143.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleToolClick3" opacity="0.0" prefHeight="61.0" prefWidth="61.0" text="Button">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </Pane>
       <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
