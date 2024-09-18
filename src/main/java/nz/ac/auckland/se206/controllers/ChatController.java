@@ -155,6 +155,15 @@ public class ChatController {
       e.printStackTrace();
     }
   }
+
+  @FXML
+  private void onGoMaleRoom(ActionEvent event){
+    try {
+      App.setRoot("thief");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
   @FXML
   private void handleToolClick1(ActionEvent event) {}
 
