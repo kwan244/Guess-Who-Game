@@ -7,6 +7,7 @@ import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -19,9 +20,14 @@ import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
+import nz.ac.auckland.se206.SharedTimer;
+import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
-public class GuessController {
+public class GuessController implements TimerListener {
+
+  @FXML private Label timerLabel;
+  @FXML private SharedTimer sharedTimer;
   @FXML private ImageView WinLoseImage;
   @FXML private ImageView FemaleImage;
   @FXML private ImageView MaleImage;
@@ -37,6 +43,9 @@ public class GuessController {
     "/images/you_win.png", "/images/you_lose.png",
   };
 
+  @Override
+  public void onTimerFinished() {}
+
   @FXML
   public void initialize() {
     WinLoseImage.setOpacity(0);
@@ -48,6 +57,17 @@ public class GuessController {
     ManagerImage.setOnMouseExited(this::handleMouseExitManager);
 
     handleGuess();
+
+    sharedTimer = SharedTimer.getInstance();
+    sharedTimer.setTimerLabel(timerLabel);
+    sharedTimer.setTimerListener(this);
+    sharedTimer.start();
+  }
+
+  public void stopTimer() {
+    if (sharedTimer != null) {
+      sharedTimer.stop();
+    }
   }
 
   private void handleGuess() {
