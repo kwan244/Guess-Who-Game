@@ -4,16 +4,21 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.SharedTimer;
+import nz.ac.auckland.se206.TimerListener;
 
-public class PaperController {
+public class PaperController implements TimerListener {
 
   @FXML private ImageView draggableGlasses;
   @FXML private ImageView paperImage;
+  @FXML private Label timerLabel;
+  @FXML private SharedTimer sharedTimer;
   private int paperClick = 0;
   private int glassesClick = 0;
   private final String[] paperImages = {
@@ -22,6 +27,9 @@ public class PaperController {
     "/images/CrumplePaper3.png",
     "/images/CrumplePaper4.png",
   };
+
+  @Override
+  public void onTimerFinished() {}
 
   // DraggableMaker draggableMaker = new DraggableMaker();
 
@@ -33,6 +41,17 @@ public class PaperController {
     draggableGlasses.setOnMouseExited(this::handleMouseExitDragGlasses);
     draggableGlasses.setOnMousePressed(this::handleMousePressDragGlasses);
     // draggableGlasses.setOnMouseDragged(this::handleMouseDragGlasses);
+    sharedTimer = SharedTimer.getInstance();
+    sharedTimer.setTimerLabel(timerLabel);
+    sharedTimer.setTimerListener(this);
+    sharedTimer.start();
+  }
+
+  /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
+  public void stopTimer() {
+    if (sharedTimer != null) {
+      sharedTimer.stop();
+    }
   }
 
   private void intializePaper() {
