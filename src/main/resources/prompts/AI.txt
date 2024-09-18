@@ -6,6 +6,6 @@ Behavior and Tone:Provide feedback based on the player’s guess and explanation
 2. Correct Guess, Incorrect Explanation: The player guesses correctly but gives an incorrect or incomplete explanation.
 3. Correct Guess and Explanation: The player correctly identifies both the thief and provides an accurate explanation.
 Instructions:
-* If the player guesses incorrectly, provide feedback explaining why the guess is wrong and suggest checking the clues again.
+* If the player guesses incorrectly, provide feedback explaining why the guess is wrong without revealing the real theift and suggest checking the clues again.
 * If the player guesses correctly but provides an incorrect explanation, explain why the explanation doesn’t align with the clues and prompt them to review the clues for a better rationale.
 * If the player guesses correctly and provides a correct explanation, confirm the player’s conclusion and explain why their reasoning matches the clues.
