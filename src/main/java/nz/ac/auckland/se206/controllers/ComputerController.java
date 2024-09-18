@@ -9,6 +9,7 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 
 public class ComputerController {
+  @FXML private ImageView VistorLog;
   @FXML private ImageView LeftRedGlow;
   @FXML private ImageView RightRedGlow;
   @FXML private ImageView LeftBlackGlow;
@@ -63,7 +64,7 @@ public class ComputerController {
     // if glove is clicked and wires are not connected
     if (glovewearing && wireCount < 2) {
       // Each action for each colour wire
-      if (event.getSource().equals(LeftRedGlow)) {
+      if (event.getSource().equals(LeftRedGlow) && redConnected == false) {
         wireR1 = true;
         LeftRedGlow.setVisible(false);
         wireCount++;
@@ -73,10 +74,16 @@ public class ComputerController {
           // show correct wire connection
           redConnected = true;
           RedConnect.setVisible(true);
+          wireCount = 0;
           checkAllConnected();
         }
-        checkWireCount();
-      } else if (event.getSource().equals(RightRedGlow)) {
+        // Check wire count if there are 2 wires reset
+        if (checkWireCount()) {
+          // reset image, wire count and wire status
+          wireR1 = false;
+          LeftRedGlow.setVisible(true);
+        }
+      } else if (event.getSource().equals(RightRedGlow) && redConnected == false) {
         wireR2 = true;
         RightRedGlow.setVisible(false);
         wireCount++;
@@ -86,10 +93,17 @@ public class ComputerController {
           // show correct wire connection
           redConnected = true;
           RedConnect.setVisible(true);
+          wireCount = 0;
           checkAllConnected();
         }
-        checkWireCount();
-      } else if (event.getSource().equals(LeftBlackGlow)) {
+        // Check wire count if there are 2 wires reset
+        if (checkWireCount()) {
+          // reset image, wire count and wire status
+          wireR2 = false;
+          RightRedGlow.setVisible(true);
+        }
+
+      } else if (event.getSource().equals(LeftBlackGlow) && blackConnected == false) {
         wireB1 = true;
         LeftBlackGlow.setVisible(false);
         wireCount++;
@@ -99,10 +113,16 @@ public class ComputerController {
           // show correct wire connection
           blackConnected = true;
           BlackConnect.setVisible(true);
+          wireCount = 0;
           checkAllConnected();
         }
-        checkWireCount();
-      } else if (event.getSource().equals(RightBlackGlow)) {
+        // Check wire count if there are 2 wires reset
+        if (checkWireCount()) {
+          // reset image, wire count and wire status
+          wireB1 = false;
+          LeftBlackGlow.setVisible(true);
+        }
+      } else if (event.getSource().equals(RightBlackGlow) && blackConnected == false) {
         wireB2 = true;
         RightBlackGlow.setVisible(false);
         wireCount++;
@@ -112,10 +132,16 @@ public class ComputerController {
           // show correct wire connection
           blackConnected = true;
           BlackConnect.setVisible(true);
+          wireCount = 0;
           checkAllConnected();
         }
-        checkWireCount();
-      } else if (event.getSource().equals(LeftYellowGlow)) {
+        // Check wire count if there are 2 wires reset
+        if (checkWireCount()) {
+          // reset image, wire count and wire status
+          wireB2 = false;
+          RightBlackGlow.setVisible(true);
+        }
+      } else if (event.getSource().equals(LeftYellowGlow) && yellowConnected == false) {
         wireY1 = true;
         LeftYellowGlow.setVisible(false);
         wireCount++;
@@ -125,10 +151,16 @@ public class ComputerController {
           // show correct wire connection
           yellowConnected = true;
           YellowConnect.setVisible(true);
+          wireCount = 0;
           checkAllConnected();
         }
-        checkWireCount();
-      } else if (event.getSource().equals(RightYellowGlow)) {
+        // Check wire count if there are 2 wires reset
+        if (checkWireCount()) {
+          // reset image, wire count and wire status
+          wireY1 = false;
+          LeftYellowGlow.setVisible(true);
+        }
+      } else if (event.getSource().equals(RightYellowGlow) && yellowConnected == false) {
         wireY2 = true;
         RightYellowGlow.setVisible(false);
         wireCount++;
@@ -138,10 +170,15 @@ public class ComputerController {
           // show correct wire connection
           yellowConnected = true;
           YellowConnect.setVisible(true);
-          checkAllConnected();
           wireCount = 0;
+          checkAllConnected();
         }
-        checkWireCount();
+        // Check wire count if there are 2 wires reset
+        if (checkWireCount()) {
+          // reset image, wire count and wire status
+          wireY2 = false;
+          RightYellowGlow.setVisible(true);
+        }
       }
     }
   }
@@ -150,13 +187,16 @@ public class ComputerController {
     if (redConnected && blackConnected && yellowConnected) {
       // all wires connected
       // show clue
+      VistorLog.setVisible(true);
     }
   }
 
-  private void checkWireCount() {
+  private boolean checkWireCount() {
     if (wireCount == 2) {
-      wireCount = 0;
+      wireCount = 1;
+      return true;
     }
+    return false;
   }
 
   /**

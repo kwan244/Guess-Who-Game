@@ -27,6 +27,9 @@
                </color>
             </DropShadow>
          </effect>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="RightRedGlow" fitHeight="54.0" fitWidth="166.0" layoutX="463.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -39,6 +42,9 @@
                </color>
             </DropShadow>
          </effect>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="LeftBlackGlow" fitHeight="70.0" fitWidth="162.0" layoutX="230.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -51,6 +57,9 @@
                </color>
             </DropShadow>
          </effect>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="RightBlackGlow" fitHeight="70.0" fitWidth="177.0" layoutX="473.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -63,6 +72,9 @@
                </color>
             </DropShadow>
          </effect>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="LeftYellowGlow" fitHeight="56.0" fitWidth="173.0" layoutX="219.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -75,6 +87,9 @@
                </color>
             </DropShadow>
          </effect>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="RightYellowGlow" fitHeight="65.0" fitWidth="173.0" layoutX="464.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -87,6 +102,9 @@
                </color>
             </DropShadow>
          </effect>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="YellowConnect" fitHeight="96.0" fitWidth="291.0" layoutX="279.0" layoutY="269.0" pickOnBounds="true" visible="false">
          <image>
@@ -101,6 +119,11 @@
       <ImageView fx:id="RedConnect" fitHeight="82.0" fitWidth="300.0" layoutX="289.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/RedConnection.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="VistorLog" fitHeight="471.0" fitWidth="789.0" layoutX="-3.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/Screenshot_20240918_045505.png" />
          </image>
       </ImageView>
       <Button layoutX="687.0" layoutY="549.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
