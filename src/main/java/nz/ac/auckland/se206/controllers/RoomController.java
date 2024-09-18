@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
@@ -101,32 +102,33 @@ public class RoomController implements TimerListener {
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException {
     context.handleGuessClick();
+    App.setRoot("GuessScene");
   }
 
-  /**
-   * Handles the exit button click event.
-   *
-   * @param event the action event triggered by clicking the exit button
-   * @throws IOException if there is an I/O error
-   */
-  @FXML
-  private void handleToolClick1(ActionEvent event) throws IOException {}
+  // /**
+  //  * Handles the exit button click event.
+  //  *
+  //  * @param event the action event triggered by clicking the exit button
+  //  * @throws IOException if there is an I/O error
+  //  */
+  // @FXML
+  // private void handleToolClick1(ActionEvent event) throws IOException {}
 
-  /**
-   * Handles the exit button click event.
-   *
-   * @param event the action event triggered by clicking the exit button
-   * @throws IOException if there is an I/O error
-   */
-  @FXML
-  private void handleToolClick2(ActionEvent event) throws IOException {}
+  // /**
+  //  * Handles the exit button click event.
+  //  *
+  //  * @param event the action event triggered by clicking the exit button
+  //  * @throws IOException if there is an I/O error
+  //  */
+  // @FXML
+  // private void handleToolClick2(ActionEvent event) throws IOException {}
 
-  /**
-   * Handles the exit button click event.
-   *
-   * @param event the action event triggered by clicking the exit button
-   * @throws IOException if there is an I/O error
-   */
-  @FXML
-  private void handleToolClick3(ActionEvent event) throws IOException {}
+  // /**
+  //  * Handles the exit button click event.
+  //  *
+  //  * @param event the action event triggered by clicking the exit button
+  //  * @throws IOException if there is an I/O error
+  //  */
+  // @FXML
+  // private void handleToolClick3(ActionEvent event) throws IOException {}
 }
