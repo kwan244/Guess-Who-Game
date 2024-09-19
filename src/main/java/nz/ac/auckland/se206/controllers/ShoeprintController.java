@@ -19,13 +19,11 @@ public class ShoeprintController implements TimerListener {
 
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
-  @FXML private ImageView Shoeprint;
-  @FXML private ImageView Magnifier;
-  @FXML private ImageView LargeMag;
+  @FXML private ImageView shoeprint;
+  @FXML private ImageView magnifier;
+  @FXML private ImageView largeMag;
   @FXML private Labeled Size;
   private boolean MagnifierClick = false;
-
-  // private final String Shoeprints = "/images/Shoeprint.jpg";
 
   @Override
   public void onTimerFinished() {
@@ -42,14 +40,17 @@ public class ShoeprintController implements TimerListener {
 
   @FXML
   public void initialize() {
-    Magnifier.setOnMouseEntered(this::onMagnifierHover);
-    Magnifier.setOnMouseExited(this::onMagnifierExit);
-    Magnifier.setOnMousePressed(this::handleMagnifierClick);
+    // Set the smaller shoeprint image
+    magnifier.setOnMouseEntered(this::onMagnifierHover);
+    magnifier.setOnMouseExited(this::onMagnifierExit);
+    magnifier.setOnMousePressed(this::handleMagnifierClick);
 
-    Shoeprint.setOnMouseEntered(this::onShoeprintHover);
-    Shoeprint.setOnMouseExited(this::onShoeprintExit);
-    Shoeprint.setOnMousePressed(this::handleShoeprintClick);
+    // Set the smaller shoeprint image
+    shoeprint.setOnMouseEntered(this::onShoeprintHover);
+    shoeprint.setOnMouseExited(this::onShoeprintExit);
+    shoeprint.setOnMousePressed(this::handleShoeprintClick);
 
+    // Start the timer
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
@@ -70,17 +71,17 @@ public class ShoeprintController implements TimerListener {
         Image largeShoeprint = new Image("/images/ShoeprintScene.jpg");
 
         // Set the larger image in the existing ImageView
-        Shoeprint.setImage(largeShoeprint);
+        shoeprint.setImage(largeShoeprint);
 
         // Optionally, resize the ImageView to match the new image's size
-        Shoeprint.setFitWidth(500); // Adjust these values as necessary
-        Shoeprint.setFitHeight(500); // Adjust these values as necessary
+        shoeprint.setFitWidth(500); // Adjust these values as necessary
+        shoeprint.setFitHeight(500); // Adjust these values as necessary
 
         // Move the image upwards by adjusting its layoutY property
-        Shoeprint.setLayoutY(
-            Shoeprint.getLayoutY() - 200); // Move 100 units upward, adjust as necessary
+        shoeprint.setLayoutY(
+            shoeprint.getLayoutY() - 200); // Move 100 units upward, adjust as necessary
 
-        LargeMag.setVisible(true);
+        largeMag.setVisible(true);
         Size.setVisible(true);
 
       } catch (Exception e) {
@@ -91,7 +92,7 @@ public class ShoeprintController implements TimerListener {
 
   @FXML
   private void handleMagnifierClick(MouseEvent event) {
-    Magnifier.setCursor(Cursor.CLOSED_HAND);
+    magnifier.setCursor(Cursor.CLOSED_HAND);
     MagnifierClick = true;
   }
 
@@ -103,28 +104,28 @@ public class ShoeprintController implements TimerListener {
   @FXML
   private void onShoeprintHover(MouseEvent event) {
     if (MagnifierClick) {
-      Shoeprint.setCursor(Cursor.OPEN_HAND);
-      Shoeprint.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+      shoeprint.setCursor(Cursor.OPEN_HAND);
+      shoeprint.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
     }
   }
 
   @FXML
   private void onShoeprintExit(MouseEvent event) {
     if (MagnifierClick) {
-      Shoeprint.setCursor(Cursor.DEFAULT);
-      Shoeprint.setStyle("-fx-effect: null;");
+      shoeprint.setCursor(Cursor.DEFAULT);
+      shoeprint.setStyle("-fx-effect: null;");
     }
   }
 
   @FXML
   private void onMagnifierHover(MouseEvent event) {
-    Magnifier.setCursor(Cursor.OPEN_HAND);
-    Magnifier.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+    magnifier.setCursor(Cursor.OPEN_HAND);
+    magnifier.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
   }
 
   @FXML
   private void onMagnifierExit(MouseEvent event) {
-    Magnifier.setCursor(Cursor.DEFAULT);
-    Magnifier.setStyle("-fx-effect: null;");
+    magnifier.setCursor(Cursor.DEFAULT);
+    magnifier.setStyle("-fx-effect: null;");
   }
 }

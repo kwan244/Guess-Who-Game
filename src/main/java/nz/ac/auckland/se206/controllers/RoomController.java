@@ -24,6 +24,9 @@ import nz.ac.auckland.se206.speech.FreeTextToSpeech;
  */
 public class RoomController implements TimerListener {
 
+  public static boolean isFirstTimeInit = true;
+  public static GameStateContext context = new GameStateContext();
+
   @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
@@ -36,9 +39,6 @@ public class RoomController implements TimerListener {
   @FXML private SharedTimer sharedTimer;
   @FXML private Text guessCondition;
   @FXML private Text canGuess;
-
-  public static boolean isFirstTimeInit = true;
-  public static GameStateContext context = new GameStateContext();
 
   @Override
   public void onTimerFinished() {
@@ -150,31 +150,4 @@ public class RoomController implements TimerListener {
       pause.play();
     }
   }
-
-  // /**
-  //  * Handles the exit button click event.
-  //  *
-  //  * @param event the action event triggered by clicking the exit button
-  //  * @throws IOException if there is an I/O error
-  //  */
-  // @FXML
-  // private void handleToolClick1(ActionEvent event) throws IOException {}
-
-  // /**
-  //  * Handles the exit button click event.
-  //  *
-  //  * @param event the action event triggered by clicking the exit button
-  //  * @throws IOException if there is an I/O error
-  //  */
-  // @FXML
-  // private void handleToolClick2(ActionEvent event) throws IOException {}
-
-  // /**
-  //  * Handles the exit button click event.
-  //  *
-  //  * @param event the action event triggered by clicking the exit button
-  //  * @throws IOException if there is an I/O error
-  //  */
-  // @FXML
-  // private void handleToolClick3(ActionEvent event) throws IOException {}
 }
