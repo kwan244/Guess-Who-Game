@@ -18,7 +18,7 @@
             <Image url="@../images/computerWire.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="LeftRedGlow" fitHeight="150.0" fitWidth="200.0" layoutX="203.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leftRedGlow" fitHeight="150.0" fitWidth="200.0" layoutX="203.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_ComputerSceneRedLeftWire.png" />
          </image>
@@ -33,7 +33,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="RightRedGlow" fitHeight="54.0" fitWidth="166.0" layoutX="463.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rightRedGlow" fitHeight="54.0" fitWidth="166.0" layoutX="463.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_ComputerSceneRedRightWire.png" />
          </image>
@@ -48,7 +48,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="LeftBlackGlow" fitHeight="70.0" fitWidth="162.0" layoutX="230.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leftBlackGlow" fitHeight="70.0" fitWidth="162.0" layoutX="230.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_ComputerSceneBlackLeftWire.png" />
          </image>
@@ -63,7 +63,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="RightBlackGlow" fitHeight="70.0" fitWidth="177.0" layoutX="473.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rightBlackGlow" fitHeight="70.0" fitWidth="177.0" layoutX="473.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_ComputerSceneBlackRightWire.png" />
          </image>
@@ -78,7 +78,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="LeftYellowGlow" fitHeight="56.0" fitWidth="173.0" layoutX="219.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leftYellowGlow" fitHeight="56.0" fitWidth="173.0" layoutX="219.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_ComputerSceneYellowLeftWire.png" />
          </image>
@@ -93,7 +93,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="RightYellowGlow" fitHeight="65.0" fitWidth="173.0" layoutX="464.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rightYellowGlow" fitHeight="65.0" fitWidth="173.0" layoutX="464.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_ComputerSceneYellowRightWire.png" />
          </image>
@@ -108,22 +108,22 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="YellowConnect" fitHeight="96.0" fitWidth="291.0" layoutX="279.0" layoutY="269.0" pickOnBounds="true" visible="false">
+      <ImageView fx:id="yellowConnect" fitHeight="96.0" fitWidth="291.0" layoutX="279.0" layoutY="269.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../images/YellowConnection.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="BlackConnect" fitHeight="137.0" fitWidth="314.0" layoutX="272.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="blackConnect" fitHeight="137.0" fitWidth="314.0" layoutX="272.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/BlackConnection.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="RedConnect" fitHeight="82.0" fitWidth="300.0" layoutX="289.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="redConnect" fitHeight="82.0" fitWidth="300.0" layoutX="289.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/RedConnection.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="VistorLog" fitHeight="471.0" fitWidth="789.0" layoutX="-3.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="vistorLog" fitHeight="471.0" fitWidth="789.0" layoutX="-3.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/Screenshot_20240918_045505.png" />
          </image>
