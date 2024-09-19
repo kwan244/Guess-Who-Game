@@ -36,8 +36,8 @@ public class RoomController implements TimerListener {
   @FXML private Text guessCondition;
   @FXML private Text canGuess;
 
-  private static boolean isFirstTimeInit = true;
-  private static GameStateContext context = new GameStateContext();
+  public static boolean isFirstTimeInit = true;
+  public static GameStateContext context = new GameStateContext();
 
   @Override
   public void onTimerFinished() {}
@@ -50,6 +50,7 @@ public class RoomController implements TimerListener {
   public void initialize() {
     if (isFirstTimeInit) {
       FreeTextToSpeech.speak("Chat with the three customers, and guess who is the thief?");
+      canGuess.setVisible(false);
       isFirstTimeInit = false;
     }
     lblProfession.setText(context.getProfessionToGuess());
@@ -123,7 +124,9 @@ public class RoomController implements TimerListener {
         && GuessCondition.INSTANCE.isManagerClicked()
         && GuessCondition.INSTANCE.isThiefClicked()) {
       context.handleGuessClick();
-      App.openGuess(event, "AI");
+
+     App.openGuess(event, "AI");
+
     } else {
       // Show guess condition
       guessCondition.setVisible(true);
