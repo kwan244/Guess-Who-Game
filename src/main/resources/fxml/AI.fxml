@@ -4,9 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -35,6 +37,16 @@
             <Image url="@../images/icon_MansChangingRoom.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="Incorrect" fitHeight="140.0" fitWidth="186.0" layoutX="625.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/WrongGuess.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Correct" fitHeight="150.0" fitWidth="200.0" layoutX="620.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/CorrectGuess.png" />
+         </image>
+      </ImageView>
       <Text layoutX="122.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click to choose the theif.">
          <font>
             <Font size="15.0" />
@@ -45,11 +57,42 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <ImageView fx:id="WinLoseImage" fitHeight="150.0" fitWidth="200.0" layoutX="516.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/you-win.png" />
-         </image>
-      </ImageView>
       <Button fx:id="btnPlayAgain" layoutX="586.0" layoutY="534.0" mnemonicParsing="false" onAction="#onPlayAgain" prefHeight="26.0" prefWidth="84.0" text="Play Again" />
+      <ImageView fx:id="FemaleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="53.0" onMouseClicked="#handleGuessFemale" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/icon_WomanChangingRoom.jpg" />
+         </image>
+         <effect>
+            <DropShadow spread="0.5">
+               <color>
+                  <Color green="1.0" blue="0.10000000149011612" />
+               </color>
+            </DropShadow>
+         </effect>
+      </ImageView>
+      <ImageView fx:id="ManagerImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="285.0" layoutY="53.0" onMouseClicked="#handleGuessManager" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/icon_ManagerOffice.png" />
+         </image>
+         <effect>
+            <DropShadow spread="0.5">
+               <color>
+                  <Color green="1.0" blue="0.10000000149011612" />
+               </color>
+            </DropShadow>
+         </effect>
+      </ImageView>
+      <ImageView fx:id="MaleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" onMouseClicked="#handleGuessMale" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/icon_MansChangingRoom.png" />
+         </image>
+         <effect>
+            <DropShadow spread="0.5">
+               <color>
+                  <Color green="1.0" blue="0.10000000149011612" />
+               </color>
+            </DropShadow>
+         </effect>
+      </ImageView>
   </children>
 </AnchorPane>

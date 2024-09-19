@@ -4,13 +4,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javazoom.jl.player.Player;
@@ -28,7 +28,11 @@ public class GuessController implements TimerListener {
 
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
-  @FXML private ImageView WinLoseImage;
+  @FXML private ImageView Incorrect;
+  @FXML private ImageView Correct;
+  @FXML private ImageView FemaleImageGlow;
+  @FXML private ImageView MaleImageGlow;
+  @FXML private ImageView ManagerImageGlow;
   @FXML private ImageView FemaleImage;
   @FXML private ImageView MaleImage;
   @FXML private ImageView ManagerImage;
@@ -40,25 +44,15 @@ public class GuessController implements TimerListener {
   private String profession;
   private boolean isGuessed = false;
   private String currentGuess;
-  private final String[] WinLoseImages = {
-    "/images/you_win.png", "/images/you_lose.png",
-  };
 
   @Override
   public void onTimerFinished() {}
 
   @FXML
   public void initialize() {
-    WinLoseImage.setOpacity(0);
-    // FemaleImage.setOnMouseEntered(this::handleMouseEnterFemale);
-    // MaleImage.setOnMouseEntered(this::handleMouseEnterMale);
-    // ManagerImage.setOnMouseEntered(this::handleMouseEnterManager);
-    // FemaleImage.setOnMouseExited(this::handleMouseExitFemale);
-    // MaleImage.setOnMouseExited(this::handleMouseExitMale);
-    // ManagerImage.setOnMouseExited(this::handleMouseExitManager);
-
-    handleGuess();
-
+    ManagerImage.setOnMouseClicked(this::handleGuessManager);
+    FemaleImage.setOnMouseClicked(this::handleGuessFemale);
+    MaleImage.setOnMouseClicked(this::handleGuessMale);
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
@@ -71,44 +65,47 @@ public class GuessController implements TimerListener {
     }
   }
 
-  private void handleGuess() {
-    MaleImage.setOnMouseClicked(event -> handleGuessMale(event));
-    ManagerImage.setOnMouseClicked(event -> handleGuessManager(event));
-    FemaleImage.setOnMouseClicked(event -> handleGuessFemale(event));
-  }
+  // private void applyClickEffect(ImageView selectedImage) {
+  //   // Reset styles for all icons
+  //   FemaleImage.setStyle("-fx-effect: null;");
+  //   MaleImage.setStyle("-fx-effect: null;");
+  //   ManagerImage.setStyle("-fx-effect: null;");
 
-  private void applyClickEffect(ImageView selectedImage) {
-    // Reset styles for all icons
-    FemaleImage.setStyle("-fx-effect: null;");
-    MaleImage.setStyle("-fx-effect: null;");
-    ManagerImage.setStyle("-fx-effect: null;");
+  //   // Apply drop shadow effect to the selected icon
+  //   selectedImage.setStyle("-fx-effect: dropshadow(three-pass-box, yellow, 20, 0.7, 0, 0);");
+  // }
 
-    // Apply drop shadow effect to the selected icon
-    selectedImage.setStyle("-fx-effect: dropshadow(three-pass-box, yellow, 20, 0.7, 0, 0);");
-  }
-
+  @FXML
   private void handleGuessMale(MouseEvent event) {
     if (!isGuessed) {
       currentGuess = "male"; // Store the guess
-      applyClickEffect(MaleImage); // Apply shadow to male icon
+      MaleImageGlow.setVisible(true);
+      ManagerImageGlow.setVisible(false);
+      FemaleImageGlow.setVisible(false);
     } else {
       playAudio("Guessed");
     }
   }
 
+  @FXML
   private void handleGuessManager(MouseEvent event) {
     if (!isGuessed) {
       currentGuess = "manager"; // Store the guess
-      applyClickEffect(ManagerImage); // Apply shadow to male icon
+      MaleImageGlow.setVisible(false);
+      ManagerImageGlow.setVisible(true);
+      FemaleImageGlow.setVisible(false);
     } else {
       playAudio("Guessed");
     }
   }
 
+  @FXML
   private void handleGuessFemale(MouseEvent event) {
     if (!isGuessed) {
       currentGuess = "female"; // Store the guess
-      applyClickEffect(FemaleImage); // Apply shadow to male icon
+      MaleImageGlow.setVisible(false);
+      ManagerImageGlow.setVisible(false);
+      FemaleImageGlow.setVisible(true);
     } else {
       playAudio("Guessed");
     }
@@ -116,30 +113,6 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void onPlayAgain(ActionEvent event) {}
-
-  // private void handleMouseEnterFemale(MouseEvent event) {
-  //   FemaleImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
-  // }
-
-  // private void handleMouseEnterMale(MouseEvent event) {
-  //   MaleImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
-  // }
-
-  // private void handleMouseEnterManager(MouseEvent event) {
-  //   ManagerImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
-  // }
-
-  // private void handleMouseExitFemale(MouseEvent event) {
-  //   FemaleImage.setStyle("-fx-effect: null;");
-  // }
-
-  // private void handleMouseExitMale(MouseEvent event) {
-  //   MaleImage.setStyle("-fx-effect: null;");
-  // }
-
-  // private void handleMouseExitManager(MouseEvent event) {
-  //   ManagerImage.setStyle("-fx-effect: null;");
-  // }
 
   /**
    * Generates the system prompt based on the profession.
@@ -179,7 +152,13 @@ public class GuessController implements TimerListener {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    txtaChat.appendText(profession + ": " + msg.getContent() + "\n\n");
+    String sender;
+    if (msg.getRole().equals("user")) {
+      sender = "You";
+    } else {
+      sender = "AI";
+    }
+    Platform.runLater(() -> txtaChat.appendText(sender + ": " + msg.getContent() + "\n\n"));
   }
 
   /**
@@ -227,14 +206,13 @@ public class GuessController implements TimerListener {
     if (currentGuess != null) {
       switch (currentGuess) {
         case "male":
-          WinLoseImage.setImage(new Image(getClass().getResourceAsStream(WinLoseImages[0])));
+          Correct.setVisible(true);
           break;
         case "female":
         case "manager":
-          WinLoseImage.setImage(new Image(getClass().getResourceAsStream(WinLoseImages[1])));
+          Incorrect.setVisible(true);
           break;
       }
-      WinLoseImage.setOpacity(1); // Now reveal the image
       isGuessed = true; // Mark that the player has guessed
     }
   }
