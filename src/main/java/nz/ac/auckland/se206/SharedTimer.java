@@ -115,6 +115,10 @@ public class SharedTimer {
     }
   }
 
+  public synchronized void resetToFiveMins() {
+      this.timeInSeconds = START_TIME;
+  }
+
   public synchronized boolean getHasReset() {
     return hasReset;
   }
