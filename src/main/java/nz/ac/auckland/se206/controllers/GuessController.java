@@ -115,26 +115,20 @@ public class GuessController implements TimerListener {
   }
 
   @FXML
-  private void onPlayAgain(ActionEvent event) throws IOException {
+  private void onPlayAgain(ActionEvent event) throws ApiProxyException, IOException {
     GuessCondition.INSTANCE.setComputerClicked(false);
     GuessCondition.INSTANCE.setShoeprintClicked(false);
     GuessCondition.INSTANCE.setPaperClicked(false);
     GuessCondition.INSTANCE.setManagerClicked(false);
     GuessCondition.INSTANCE.setThiefClicked(false);
     GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
+
     RoomController.context.setState(RoomController.context.getGameStartedState());
     RoomController.isFirstTimeInit = true;
+    // Reset and start the timer
+    sharedTimer.resetHasReset();
+    sharedTimer.resetToFiveMins(); // Reset the timer to 10 seconds
     App.setRoot("CrimeScene");
-        // Reset and start the timer
-        SharedTimer sharedTimer = SharedTimer.getInstance();
-        sharedTimer.stop(); // Ensure the timer is stopped
-        sharedTimer.resetToFiveMins(); // Reset the timer to 10 seconds
-        sharedTimer.start(); // Start the timer again
-    
-        // Update state and navigate to the "CrimeScene" view
-        RoomController.context.setState(RoomController.context.getGameStartedState());
-        RoomController.isFirstTimeInit = true;
-        App.setRoot("CrimeScene");
   }
 
   /**
