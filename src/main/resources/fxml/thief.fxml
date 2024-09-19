@@ -25,7 +25,7 @@
          </font>
       </Label>
       <Button layoutX="460.0" layoutY="520.0" mnemonicParsing="false" onAction="#onGoBack" text="Go to Crime Scene" />
-      <Button fx:id="btnFemaleRoom" layoutX="209.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#HandleFemaleRoomClicked" text="Female Change Room" />
-      <Button fx:id="btnManagerRoom" layoutX="352.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#HandleManagerOfficeClicked" text="Manager Office" />
+      <Button fx:id="btnFemaleRoom" layoutX="209.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#handleFemaleRoomClicked" text="Female Change Room" />
+      <Button fx:id="btnManagerRoom" layoutX="352.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#handleManagerOfficeClicked" text="Manager Office" />
   </children>
 </AnchorPane>

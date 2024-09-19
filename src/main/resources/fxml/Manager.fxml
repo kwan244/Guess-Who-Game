@@ -25,7 +25,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button fx:id="btnFemaleRoom" layoutX="199.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#HandleFemaleRoomClicked" text="Female Change Room" />
-      <Button fx:id="btnMaleRoom1" layoutX="344.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#HandleMaleRoomClicked" text="Male Change Room" />
+      <Button fx:id="btnFemaleRoom" layoutX="199.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#handleFemaleRoomClicked" text="Female Change Room" />
+      <Button fx:id="btnMaleRoom1" layoutX="344.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#handleMaleRoomClicked" text="Male Change Room" />
   </children>
 </AnchorPane>
