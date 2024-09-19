@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
@@ -29,7 +30,14 @@ public class PaperController implements TimerListener {
   };
 
   @Override
-  public void onTimerFinished() {}
+  public void onTimerFinished() {
+    try {
+      Stage currentStage = (Stage) timerLabel.getScene().getWindow();
+      App.openGuess(currentStage);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   // DraggableMaker draggableMaker = new DraggableMaker();
 

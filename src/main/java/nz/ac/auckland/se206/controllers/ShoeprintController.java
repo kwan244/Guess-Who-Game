@@ -9,6 +9,7 @@ import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
@@ -27,7 +28,14 @@ public class ShoeprintController implements TimerListener {
   // private final String Shoeprints = "/images/Shoeprint.jpg";
 
   @Override
-  public void onTimerFinished() {}
+  public void onTimerFinished() {
+    try {
+      Stage currentStage = (Stage) timerLabel.getScene().getWindow();
+      App.openGuess(currentStage);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   @FXML
   public void initialize() {

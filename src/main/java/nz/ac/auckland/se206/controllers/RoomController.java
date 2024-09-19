@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
@@ -40,7 +41,14 @@ public class RoomController implements TimerListener {
   public static GameStateContext context = new GameStateContext();
 
   @Override
-  public void onTimerFinished() {}
+  public void onTimerFinished() {
+    try {
+      Stage currentStage = (Stage) timerLabel.getScene().getWindow();
+      App.openGuess(currentStage);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -49,7 +57,7 @@ public class RoomController implements TimerListener {
   @FXML
   public void initialize() {
     if (isFirstTimeInit) {
-      FreeTextToSpeech.speak("Chat with the three customers, and guess who is the thief?");
+      FreeTextToSpeech.speak("Chat with the three suspects, and guess who is the thief?");
       canGuess.setVisible(false);
       isFirstTimeInit = false;
     }
@@ -125,7 +133,8 @@ public class RoomController implements TimerListener {
         && GuessCondition.INSTANCE.isThiefClicked()) {
       context.handleGuessClick();
 
-     App.openGuess(event, "AI");
+      Stage currentStage = (Stage) btnGuess.getScene().getWindow();
+      App.openGuess(currentStage);
 
     } else {
       // Show guess condition

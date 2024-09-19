@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -51,7 +52,14 @@ public class ChatController {
     sharedTimer.setTimerListener(
         new TimerListener() {
           @Override
-          public void onTimerFinished() {}
+          public void onTimerFinished() {
+            try {
+              Stage currentStage = (Stage) timerLabel.getScene().getWindow();
+              App.openGuess(currentStage);
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
         });
     sharedTimer.start();
   }

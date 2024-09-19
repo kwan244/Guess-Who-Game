@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
@@ -38,7 +39,14 @@ public class ComputerController implements TimerListener {
   private int wireCount = 0;
 
   @Override
-  public void onTimerFinished() {}
+  public void onTimerFinished() {
+    try {
+      Stage currentStage = (Stage) timerLabel.getScene().getWindow();
+      App.openGuess(currentStage);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   public void initialize() throws ApiProxyException {
     //

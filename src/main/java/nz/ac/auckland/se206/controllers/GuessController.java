@@ -42,7 +42,6 @@ public class GuessController implements TimerListener {
   @FXML private Button btnSend;
 
   private ChatCompletionRequest chatCompletionRequest;
-  private String profession;
   private boolean isGuessed = false;
   private String currentGuess;
 
@@ -132,8 +131,7 @@ public class GuessController implements TimerListener {
    */
   private String getSystemPrompt() {
     Map<String, String> map = new HashMap<>();
-    map.put("profession", profession);
-    return PromptEngineering.getPrompt("prompts/" + profession + ".txt", map);
+    return PromptEngineering.getPrompt("prompts/AI.txt", map);
   }
 
   /**
@@ -141,8 +139,7 @@ public class GuessController implements TimerListener {
    *
    * @param profession the profession to set
    */
-  public void setProfession(String profession) {
-    this.profession = profession;
+  public void setProfession() {
     try {
       ApiProxyConfig config = ApiProxyConfig.readConfig();
       chatCompletionRequest =
