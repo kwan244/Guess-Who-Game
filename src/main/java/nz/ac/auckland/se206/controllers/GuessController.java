@@ -20,6 +20,7 @@ import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
@@ -107,7 +108,17 @@ public class GuessController implements TimerListener {
   }
 
   @FXML
-  private void onPlayAgain(ActionEvent event) {}
+  private void onPlayAgain(ActionEvent event) throws IOException {
+    GuessCondition.INSTANCE.setComputerClicked(false);
+    GuessCondition.INSTANCE.setShoeprintClicked(false);
+    GuessCondition.INSTANCE.setPaperClicked(false);
+    GuessCondition.INSTANCE.setManagerClicked(false);
+    GuessCondition.INSTANCE.setThiefClicked(false);
+    GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
+    RoomController.context.setState(RoomController.context.getGameStartedState());
+    RoomController.isFirstTimeInit = true;
+    App.setRoot("CrimeScene");
+  }
 
   private void handleMouseEnterFemale(MouseEvent event) {
     FemaleImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");

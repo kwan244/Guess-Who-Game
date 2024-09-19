@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,8 +36,8 @@ public class RoomController implements TimerListener {
   @FXML private Text guessCondition;
   @FXML private Text canGuess;
 
-  private static boolean isFirstTimeInit = true;
-  private static GameStateContext context = new GameStateContext();
+  public static boolean isFirstTimeInit = true;
+  public static GameStateContext context = new GameStateContext();
 
   @Override
   public void onTimerFinished() {}
@@ -51,6 +50,7 @@ public class RoomController implements TimerListener {
   public void initialize() {
     if (isFirstTimeInit) {
       FreeTextToSpeech.speak("Chat with the three customers, and guess who is the thief?");
+      canGuess.setVisible(false);
       isFirstTimeInit = false;
     }
     lblProfession.setText(context.getProfessionToGuess());
@@ -58,16 +58,16 @@ public class RoomController implements TimerListener {
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
-    
-    //Check if condition is met for guessing
+
+    // Check if condition is met for guessing
     if ((GuessCondition.INSTANCE.isComputerClicked()
-    || GuessCondition.INSTANCE.isShoeprintClicked()
-    || GuessCondition.INSTANCE.isPaperClicked())
-    && GuessCondition.INSTANCE.isFemaleCustomerClicked()
-    && GuessCondition.INSTANCE.isManagerClicked()
-    && GuessCondition.INSTANCE.isThiefClicked()) {
-    canGuess.setVisible(true);
-}
+            || GuessCondition.INSTANCE.isShoeprintClicked()
+            || GuessCondition.INSTANCE.isPaperClicked())
+        && GuessCondition.INSTANCE.isFemaleCustomerClicked()
+        && GuessCondition.INSTANCE.isManagerClicked()
+        && GuessCondition.INSTANCE.isThiefClicked()) {
+      canGuess.setVisible(true);
+    }
   }
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
@@ -125,15 +125,14 @@ public class RoomController implements TimerListener {
         && GuessCondition.INSTANCE.isThiefClicked()) {
       context.handleGuessClick();
       App.setRoot("GuessScene");
-    }
-    else {
-      //Show guess condition
+    } else {
+      // Show guess condition
       guessCondition.setVisible(true);
       // 2.5 second delay for the user to read guess condition
       PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
       pause.setOnFinished(e -> guessCondition.setVisible(false));
 
-      //Start delay
+      // Start delay
       pause.play();
     }
   }
