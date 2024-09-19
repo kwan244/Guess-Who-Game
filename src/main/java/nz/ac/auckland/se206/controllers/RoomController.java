@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.SharedTimer;
@@ -30,6 +34,8 @@ public class RoomController implements TimerListener {
   @FXML private Button btnGuess;
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
+  @FXML private Text guessCondition;
+  @FXML private Text canGuess;
 
   private static boolean isFirstTimeInit = true;
   private static GameStateContext context = new GameStateContext();
@@ -52,6 +58,16 @@ public class RoomController implements TimerListener {
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
+    
+    //Check if condition is met for guessing
+    if ((GuessCondition.INSTANCE.isComputerClicked()
+    || GuessCondition.INSTANCE.isShoeprintClicked()
+    || GuessCondition.INSTANCE.isPaperClicked())
+    && GuessCondition.INSTANCE.isFemaleCustomerClicked()
+    && GuessCondition.INSTANCE.isManagerClicked()
+    && GuessCondition.INSTANCE.isThiefClicked()) {
+    canGuess.setVisible(true);
+}
   }
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
@@ -109,6 +125,16 @@ public class RoomController implements TimerListener {
         && GuessCondition.INSTANCE.isThiefClicked()) {
       context.handleGuessClick();
       App.setRoot("GuessScene");
+    }
+    else {
+      //Show guess condition
+      guessCondition.setVisible(true);
+      // 2.5 second delay for the user to read guess condition
+      PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
+      pause.setOnFinished(e -> guessCondition.setVisible(false));
+
+      //Start delay
+      pause.play();
     }
   }
 
