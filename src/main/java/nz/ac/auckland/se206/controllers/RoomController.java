@@ -124,7 +124,9 @@ public class RoomController implements TimerListener {
         && GuessCondition.INSTANCE.isManagerClicked()
         && GuessCondition.INSTANCE.isThiefClicked()) {
       context.handleGuessClick();
-      App.setRoot("GuessScene");
+
+     App.openGuess(event, "AI");
+
     } else {
       // Show guess condition
       guessCondition.setVisible(true);

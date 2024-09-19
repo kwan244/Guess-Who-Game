@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.GuessController;
 import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
@@ -64,6 +66,19 @@ public class App extends Application {
 
     ChatController chatController = loader.getController();
     chatController.setProfession(profession);
+
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  public static void openGuess(ActionEvent event, String profession) throws IOException {
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + profession + ".fxml"));
+    Parent root = loader.load();
+
+    GuessController GuessController = loader.getController();
+    GuessController.setProfession(profession);
 
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
