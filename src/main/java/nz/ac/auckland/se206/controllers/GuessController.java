@@ -30,8 +30,8 @@ public class GuessController implements TimerListener {
 
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
-  @FXML private ImageView Incorrect;
-  @FXML private ImageView Correct;
+  @FXML private ImageView incorrect;
+  @FXML private ImageView correct;
   @FXML private ImageView femaleImageGlow;
   @FXML private ImageView maleImageGlow;
   @FXML private ImageView managerImageGlow;
@@ -249,11 +249,11 @@ public class GuessController implements TimerListener {
       if (currentGuess != null) {
         switch (currentGuess) {
           case "male":
-            Correct.setVisible(true);
+            correct.setVisible(true);
             break;
           case "female":
           case "manager":
-            Incorrect.setVisible(true);
+            incorrect.setVisible(true);
             break;
         }
         isGuessed = true; // Mark that the player has guessed

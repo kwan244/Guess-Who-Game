@@ -22,8 +22,8 @@ public class ShoeprintController implements TimerListener {
   @FXML private ImageView shoeprint;
   @FXML private ImageView magnifier;
   @FXML private ImageView largeMag;
-  @FXML private Labeled Size;
-  private boolean MagnifierClick = false;
+  @FXML private Labeled size;
+  private boolean magnifierClick = false;
 
   @Override
   public void onTimerFinished() {
@@ -65,7 +65,7 @@ public class ShoeprintController implements TimerListener {
 
   @FXML
   private void handleShoeprintClick(MouseEvent event) {
-    if (MagnifierClick) {
+    if (magnifierClick) {
       try {
         // Load the larger shoeprint image
         Image largeShoeprint = new Image("/images/ShoeprintScene.jpg");
@@ -82,7 +82,7 @@ public class ShoeprintController implements TimerListener {
             shoeprint.getLayoutY() - 200); // Move 100 units upward, adjust as necessary
 
         largeMag.setVisible(true);
-        Size.setVisible(true);
+        size.setVisible(true);
 
       } catch (Exception e) {
         System.out.println("Failed to load the large shoeprint image: " + e.getMessage());
@@ -93,7 +93,7 @@ public class ShoeprintController implements TimerListener {
   @FXML
   private void handleMagnifierClick(MouseEvent event) {
     magnifier.setCursor(Cursor.CLOSED_HAND);
-    MagnifierClick = true;
+    magnifierClick = true;
   }
 
   @FXML
@@ -103,7 +103,7 @@ public class ShoeprintController implements TimerListener {
 
   @FXML
   private void onShoeprintHover(MouseEvent event) {
-    if (MagnifierClick) {
+    if (magnifierClick) {
       shoeprint.setCursor(Cursor.OPEN_HAND);
       shoeprint.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
     }
@@ -111,7 +111,7 @@ public class ShoeprintController implements TimerListener {
 
   @FXML
   private void onShoeprintExit(MouseEvent event) {
-    if (MagnifierClick) {
+    if (magnifierClick) {
       shoeprint.setCursor(Cursor.DEFAULT);
       shoeprint.setStyle("-fx-effect: null;");
     }

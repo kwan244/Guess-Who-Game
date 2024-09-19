@@ -22,27 +22,27 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <ImageView fx:id="FemaleImage" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="femaleImage" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/icon_WomanChangingRoom.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="ManagerImage" fitHeight="150.0" fitWidth="200.0" layoutX="285.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="managerImage" fitHeight="150.0" fitWidth="200.0" layoutX="285.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/icon_ManagerOffice.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="MaleImage" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="maleImage" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/icon_MansChangingRoom.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Incorrect" fitHeight="140.0" fitWidth="186.0" layoutX="625.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="incorrect" fitHeight="140.0" fitWidth="186.0" layoutX="625.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/WrongGuess.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Correct" fitHeight="150.0" fitWidth="200.0" layoutX="620.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="correct" fitHeight="150.0" fitWidth="200.0" layoutX="620.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/CorrectGuess.png" />
          </image>
@@ -58,7 +58,7 @@
          </font>
       </Text>
       <Button fx:id="btnPlayAgain" layoutX="586.0" layoutY="534.0" mnemonicParsing="false" onAction="#onPlayAgain" prefHeight="26.0" prefWidth="84.0" text="Play Again" />
-      <ImageView fx:id="FemaleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="53.0" onMouseClicked="#handleGuessFemale" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="femaleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="53.0" onMouseClicked="#handleGuessFemale" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/icon_WomanChangingRoom.jpg" />
          </image>
@@ -70,7 +70,7 @@
             </DropShadow>
          </effect>
       </ImageView>
-      <ImageView fx:id="ManagerImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="285.0" layoutY="53.0" onMouseClicked="#handleGuessManager" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="managerImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="285.0" layoutY="53.0" onMouseClicked="#handleGuessManager" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/icon_ManagerOffice.png" />
          </image>
@@ -82,7 +82,7 @@
             </DropShadow>
          </effect>
       </ImageView>
-      <ImageView fx:id="MaleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" onMouseClicked="#handleGuessMale" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="maleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" onMouseClicked="#handleGuessMale" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/icon_MansChangingRoom.png" />
          </image>

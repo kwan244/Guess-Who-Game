@@ -18,7 +18,7 @@
       <Button layoutX="687.0" layoutY="549.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
       <Pane focusTraversable="true" layoutX="320.0" layoutY="519.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
          <children>
-            <ImageView fx:id="Magnifier" fitHeight="61.0" fitWidth="64.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true">
+            <ImageView fx:id="magnifier" fitHeight="61.0" fitWidth="64.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/magnifier.jpg" />
                </image>
@@ -35,17 +35,17 @@
             </ImageView>
          </children>
       </Pane>
-      <ImageView fx:id="Shoeprint" fitHeight="204.0" fitWidth="95.0" layoutX="327.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="shoeprint" fitHeight="204.0" fitWidth="95.0" layoutX="327.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/ShoeprintScene.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="LargeMag" fitHeight="513.0" fitWidth="574.0" layoutX="124.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="largeMag" fitHeight="513.0" fitWidth="574.0" layoutX="124.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/magnifier.png" />
          </image>
       </ImageView>
-      <Label fx:id="Size" layoutX="240.0" layoutY="156.0" prefHeight="55.0" prefWidth="309.0" text="The Size of shoes is US 13." textFill="#2b0303" visible="false">
+      <Label fx:id="size" layoutX="240.0" layoutY="156.0" prefHeight="55.0" prefWidth="309.0" text="The Size of shoes is US 13." textFill="#2b0303" visible="false">
          <font>
             <Font size="24.0" />
          </font>
