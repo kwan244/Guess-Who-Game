@@ -9,7 +9,7 @@ import javafx.util.Duration;
 public class SharedTimer {
 
   // Static fields
-  private static final int START_TIME = 5; // 2 minutes in seconds
+  private static final int START_TIME = 300; // 2 minutes in seconds
   private static final int GUESS_TIME = 60; // 10 seconds in seconds
   private static SharedTimer instance;
 
@@ -104,7 +104,7 @@ public class SharedTimer {
     }
   }
 
-  public synchronized void resetToTenSeconds() {
+  public synchronized void resetToSixtySeconds() {
     if (hasReset) {
       notifyTimerFinished(); // End the game if timer has already reset once
     } else {
