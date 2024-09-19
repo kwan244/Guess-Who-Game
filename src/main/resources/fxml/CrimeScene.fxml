@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
@@ -16,6 +17,16 @@
             <Image url="@../images/SE206_BETA_JewellryShop.jpg" />
          </image>
       </ImageView>
+      <Text fx:id="guessCondition" fill="RED" layoutX="26.0" layoutY="109.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Guess Condtion: Talk with all suspects and interact with at least one clue" textAlignment="CENTER" visible="false" wrappingWidth="307.7367172241211">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="canGuess" fill="RED" layoutX="77.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You may make a guess now" visible="false" wrappingWidth="209.9999999999999">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
       <Rectangle fx:id="rectComputer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="85.0" layoutX="222.0" layoutY="250.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="126.0">
          <cursor>
             <Cursor fx:constant="HAND" />
