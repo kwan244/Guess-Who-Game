@@ -101,8 +101,15 @@ public class RoomController implements TimerListener {
    */
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException {
-    context.handleGuessClick();
-    App.setRoot("GuessScene");
+    if ((GuessCondition.INSTANCE.isComputerClicked()
+            || GuessCondition.INSTANCE.isShoeprintClicked()
+            || GuessCondition.INSTANCE.isPaperClicked())
+        && GuessCondition.INSTANCE.isFemaleCustomerClicked()
+        && GuessCondition.INSTANCE.isManagerClicked()
+        && GuessCondition.INSTANCE.isThiefClicked()) {
+      context.handleGuessClick();
+      App.setRoot("GuessScene");
+    }
   }
 
   // /**

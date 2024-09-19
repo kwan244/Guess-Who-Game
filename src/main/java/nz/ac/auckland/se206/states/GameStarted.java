@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.controllers.GuessCondition;
 import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
@@ -36,16 +37,32 @@ public class GameStarted implements GameState {
     // Transition to chat view or provide an introduction based on the clicked rectangle
     switch (rectangleId) {
       case "rectComputer":
+        GuessCondition.INSTANCE.setComputerClicked(true);
         App.openClue(event, "ComputerScene");
         return;
       case "rectShoeprint":
+        GuessCondition.INSTANCE.setShoeprintClicked(true);
         App.openClue(event, "ShoeprintScene");
         return;
       case "rectPaper":
+        GuessCondition.INSTANCE.setPaperClicked(true);
         App.openClue(event, "PaperScene");
         return;
+      case "rectPerson1":
+        GuessCondition.INSTANCE.setFemaleCustomerClicked(true);
+        App.openChat(event, context.getProfession(rectangleId));
+        return;
+      case "rectPerson2":
+        GuessCondition.INSTANCE.setThiefClicked(true);
+        App.openChat(event, context.getProfession(rectangleId));
+        return;
+      case "rectPerson3":
+        GuessCondition.INSTANCE.setManagerClicked(true);
+        App.openChat(event, context.getProfession(rectangleId));
+        return;
+      default:
+        throw new IllegalArgumentException("Unknown rectangle ID: " + rectangleId);
     }
-    App.openChat(event, context.getProfession(rectangleId));
   }
 
   /**
