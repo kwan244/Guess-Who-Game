@@ -123,6 +123,16 @@ public class GuessController implements TimerListener {
     RoomController.context.setState(RoomController.context.getGameStartedState());
     RoomController.isFirstTimeInit = true;
     App.setRoot("CrimeScene");
+        // Reset and start the timer
+        SharedTimer sharedTimer = SharedTimer.getInstance();
+        sharedTimer.stop(); // Ensure the timer is stopped
+        sharedTimer.resetToFiveMins(); // Reset the timer to 10 seconds
+        sharedTimer.start(); // Start the timer again
+    
+        // Update state and navigate to the "CrimeScene" view
+        RoomController.context.setState(RoomController.context.getGameStartedState());
+        RoomController.isFirstTimeInit = true;
+        App.setRoot("CrimeScene");
   }
 
   /**
