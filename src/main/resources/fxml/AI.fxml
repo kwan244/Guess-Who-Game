@@ -94,5 +94,10 @@
             </DropShadow>
          </effect>
       </ImageView>
+      <Text fx:id="txtChooseFirst" fill="#f54e00" layoutX="449.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You need to choose the theif first.">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
   </children>
 </AnchorPane>

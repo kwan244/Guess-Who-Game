@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javazoom.jl.player.Player;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
@@ -24,6 +25,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
+
 
 public class GuessController implements TimerListener {
 
@@ -40,6 +42,7 @@ public class GuessController implements TimerListener {
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
+  @FXML private Text txtChooseFirst;
 
   private ChatCompletionRequest chatCompletionRequest;
   private String profession;
@@ -51,6 +54,9 @@ public class GuessController implements TimerListener {
 
   @FXML
   public void initialize() {
+    GuessCondition.INSTANCE.setManagerClicked(false);
+    GuessCondition.INSTANCE.setThiefClicked(false);
+    GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
     ManagerImage.setOnMouseClicked(this::handleGuessManager);
     FemaleImage.setOnMouseClicked(this::handleGuessFemale);
     MaleImage.setOnMouseClicked(this::handleGuessMale);
@@ -58,6 +64,7 @@ public class GuessController implements TimerListener {
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
+    txtChooseFirst.setVisible(false);
   }
 
   public void stopTimer() {
@@ -83,6 +90,7 @@ public class GuessController implements TimerListener {
       MaleImageGlow.setVisible(true);
       ManagerImageGlow.setVisible(false);
       FemaleImageGlow.setVisible(false);
+      GuessCondition.INSTANCE.setThiefClicked(true);
     } else {
       playAudio("Guessed");
     }
@@ -95,6 +103,7 @@ public class GuessController implements TimerListener {
       MaleImageGlow.setVisible(false);
       ManagerImageGlow.setVisible(true);
       FemaleImageGlow.setVisible(false);
+      GuessCondition.INSTANCE.setManagerClicked(true);
     } else {
       playAudio("Guessed");
     }
@@ -107,6 +116,7 @@ public class GuessController implements TimerListener {
       MaleImageGlow.setVisible(false);
       ManagerImageGlow.setVisible(false);
       FemaleImageGlow.setVisible(true);
+      GuessCondition.INSTANCE.setFemaleCustomerClicked(true);
     } else {
       playAudio("Guessed");
     }
@@ -216,7 +226,11 @@ public class GuessController implements TimerListener {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    if (GuessCondition.INSTANCE.isFemaleCustomerClicked()
+        || GuessCondition.INSTANCE.isManagerClicked()
+        || GuessCondition.INSTANCE.isThiefClicked()) {
     String message = txtInput.getText().trim();
+    txtChooseFirst.setVisible(false);
     if (message.isEmpty()) {
       return;
     }
@@ -236,7 +250,10 @@ public class GuessController implements TimerListener {
       }
       isGuessed = true; // Mark that the player has guessed
     }
+  } else {
+    txtChooseFirst.setVisible(true);
   }
+}
 
   private void playAudio(String mp3FilePath) {
     try {
