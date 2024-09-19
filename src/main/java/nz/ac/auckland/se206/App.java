@@ -79,9 +79,10 @@ public class App extends Application {
     GuessController GuessController = loader.getController();
     GuessController.setProfession();
 
-    Scene newScene = new Scene(root);
-    currentStage.setScene(newScene);
-    currentStage.show();
+    Stage stage = currentStage;
+    scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
   }
 
   /**
