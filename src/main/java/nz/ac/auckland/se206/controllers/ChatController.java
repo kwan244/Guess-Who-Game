@@ -168,6 +168,7 @@ public class ChatController {
   @FXML
   private void HandleFemaleRoomClicked(MouseEvent event) {
     try {
+      GuessCondition.INSTANCE.setFemaleCustomerClicked(true);
       App.openChat(event, "FemaleCustomer");
     } catch (IOException e) {
       e.printStackTrace();
@@ -177,6 +178,7 @@ public class ChatController {
   @FXML
   private void HandleMaleRoomClicked(MouseEvent event) {
     try {
+      GuessCondition.INSTANCE.setThiefClicked(true);
       App.openChat(event, "thief");
     } catch (IOException e) {
       e.printStackTrace();
@@ -186,6 +188,7 @@ public class ChatController {
   @FXML
   private void HandleManagerOfficeClicked(MouseEvent event) {
     try {
+      GuessCondition.INSTANCE.setManagerClicked(true);
       App.openChat(event, "Manager");
     } catch (IOException e) {
       e.printStackTrace();
