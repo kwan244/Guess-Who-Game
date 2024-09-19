@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,16 +57,16 @@ public class RoomController implements TimerListener {
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
-    
-    //Check if condition is met for guessing
+
+    // Check if condition is met for guessing
     if ((GuessCondition.INSTANCE.isComputerClicked()
-    || GuessCondition.INSTANCE.isShoeprintClicked()
-    || GuessCondition.INSTANCE.isPaperClicked())
-    && GuessCondition.INSTANCE.isFemaleCustomerClicked()
-    && GuessCondition.INSTANCE.isManagerClicked()
-    && GuessCondition.INSTANCE.isThiefClicked()) {
-    canGuess.setVisible(true);
-}
+            || GuessCondition.INSTANCE.isShoeprintClicked()
+            || GuessCondition.INSTANCE.isPaperClicked())
+        && GuessCondition.INSTANCE.isFemaleCustomerClicked()
+        && GuessCondition.INSTANCE.isManagerClicked()
+        && GuessCondition.INSTANCE.isThiefClicked()) {
+      canGuess.setVisible(true);
+    }
   }
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
@@ -124,16 +123,15 @@ public class RoomController implements TimerListener {
         && GuessCondition.INSTANCE.isManagerClicked()
         && GuessCondition.INSTANCE.isThiefClicked()) {
       context.handleGuessClick();
-      App.setRoot("GuessScene");
-    }
-    else {
-      //Show guess condition
+      App.openGuess(event, "AI");
+    } else {
+      // Show guess condition
       guessCondition.setVisible(true);
       // 2.5 second delay for the user to read guess condition
       PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
       pause.setOnFinished(e -> guessCondition.setVisible(false));
 
-      //Start delay
+      // Start delay
       pause.play();
     }
   }
