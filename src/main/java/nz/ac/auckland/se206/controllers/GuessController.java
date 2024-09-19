@@ -46,7 +46,10 @@ public class GuessController implements TimerListener {
   private String currentGuess;
 
   @Override
-  public void onTimerFinished() {}
+  public void onTimerFinished() {
+    // Reset timer to sixty seconds
+    sharedTimer.resetToSixtySeconds();
+  }
 
   @FXML
   public void initialize() {
