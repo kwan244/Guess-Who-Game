@@ -42,8 +42,6 @@ public class PaperController implements TimerListener {
     }
   }
 
-  // DraggableMaker draggableMaker = new DraggableMaker();
-
   @FXML
   public void initialize() {
     intializePaper();
@@ -122,41 +120,6 @@ public class PaperController implements TimerListener {
     draggableGlasses.setCursor(Cursor.CLOSED_HAND);
     glassesClick++;
   }
-
-  // private void handleMouseDragGlasses(MouseEvent event) {
-  //   // Handle dragging of the glasses
-  //   draggableGlasses.setLayoutX(event.getSceneX() - draggableGlasses.getFitWidth() / 2);
-  //   draggableGlasses.setLayoutY(event.getSceneY() - draggableGlasses.getFitHeight() / 2);
-
-  //   // // System.out.println(
-  //   // //     "Dragging glasses" + draggableGlasses.getLayoutX() + " " +
-  //   // // draggableGlasses.getLayoutY());
-  //   // // Check if glasses are inside the paper
-  //   if (isInside(draggableGlasses, paperWithWords)) {
-  //     paperWithWords.setOpacity(1.0);
-  //   } else {
-  //     paperWithWords.setOpacity(0.0);
-  //   }
-  // }
-
-  // private boolean isInside(ImageView glasses, ImageView paper) {
-  //   // Get the bounds of the glasses and paper
-  //   double glassesX = glasses.getLayoutX();
-  //   double glassesY = glasses.getLayoutY();
-  //   double glassesWidth = glasses.getFitWidth();
-  //   double glassesHeight = glasses.getFitHeight();
-
-  //   double paperX = paper.getLayoutX();
-  //   double paperY = paper.getLayoutY();
-  //   double paperWidth = paper.getFitWidth();
-  //   double paperHeight = paper.getFitHeight();
-
-  //   // Check if glasses are inside the paper
-  //   return glassesX + glassesWidth > paperX
-  //       && glassesX < paperX + paperWidth
-  //       && glassesY + glassesHeight > paperY
-  //       && glassesY < paperY + paperHeight;
-  // }
 
   /**
    * Navigates back to the previous view.

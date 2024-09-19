@@ -73,12 +73,14 @@ public class App extends Application {
   }
 
   public static void openGuess(Stage currentStage) throws IOException {
+    // Open the guess view
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/AI.fxml"));
     Parent root = loader.load();
 
-    GuessController GuessController = loader.getController();
-    GuessController.setProfession();
+    GuessController guessController = loader.getController();
+    guessController.setProfession();
 
+    // Set the root of the scene to the guess view
     Stage stage = currentStage;
     scene = new Scene(root);
     stage.setScene(scene);

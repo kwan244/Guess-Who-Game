@@ -15,17 +15,17 @@ import nz.ac.auckland.se206.TimerListener;
 public class ComputerController implements TimerListener {
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
-  @FXML private ImageView VistorLog;
-  @FXML private ImageView LeftRedGlow;
-  @FXML private ImageView RightRedGlow;
-  @FXML private ImageView LeftBlackGlow;
-  @FXML private ImageView RightBlackGlow;
-  @FXML private ImageView LeftYellowGlow;
-  @FXML private ImageView RightYellowGlow;
+  @FXML private ImageView vistorLog;
+  @FXML private ImageView leftRedGlow;
+  @FXML private ImageView rightRedGlow;
+  @FXML private ImageView leftBlackGlow;
+  @FXML private ImageView rightBlackGlow;
+  @FXML private ImageView leftYellowGlow;
+  @FXML private ImageView rightYellowGlow;
   @FXML private ImageView glove;
-  @FXML private ImageView YellowConnect;
-  @FXML private ImageView RedConnect;
-  @FXML private ImageView BlackConnect;
+  @FXML private ImageView yellowConnect;
+  @FXML private ImageView redConnect;
+  @FXML private ImageView blackConnect;
   private boolean glovewearing = false;
   private boolean wireR1 = false;
   private boolean wireR2 = false;
@@ -54,18 +54,18 @@ public class ComputerController implements TimerListener {
   public void initialize() throws ApiProxyException {
     //
     glove.setOnMouseClicked(this::handleGloveClick);
-    LeftBlackGlow.setOnMouseClicked(this::handleWireClick);
-    RightBlackGlow.setOnMouseClicked(this::handleWireClick);
-    LeftRedGlow.setOnMouseClicked(this::handleWireClick);
-    RightRedGlow.setOnMouseClicked(this::handleWireClick);
-    LeftYellowGlow.setOnMouseClicked(this::handleWireClick);
-    RightYellowGlow.setOnMouseClicked(this::handleWireClick);
-    LeftRedGlow.setVisible(false);
-    RightRedGlow.setVisible(false);
-    LeftBlackGlow.setVisible(false);
-    RightBlackGlow.setVisible(false);
-    LeftYellowGlow.setVisible(false);
-    RightYellowGlow.setVisible(false);
+    leftBlackGlow.setOnMouseClicked(this::handleWireClick);
+    rightBlackGlow.setOnMouseClicked(this::handleWireClick);
+    leftRedGlow.setOnMouseClicked(this::handleWireClick);
+    rightRedGlow.setOnMouseClicked(this::handleWireClick);
+    leftYellowGlow.setOnMouseClicked(this::handleWireClick);
+    rightYellowGlow.setOnMouseClicked(this::handleWireClick);
+    leftRedGlow.setVisible(false);
+    rightRedGlow.setVisible(false);
+    leftBlackGlow.setVisible(false);
+    rightBlackGlow.setVisible(false);
+    leftYellowGlow.setVisible(false);
+    rightYellowGlow.setVisible(false);
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
@@ -79,31 +79,38 @@ public class ComputerController implements TimerListener {
     }
   }
 
+  /**
+   * Handles the click event on the glove icon.
+   *
+   * @param event the mouse event that triggered the method
+   */
   private void handleGloveClick(MouseEvent event) {
+    // if glove is clicked
     glovewearing = true;
+    // show glow effect
     glove.setStyle("-fx-effect:null;");
-    LeftRedGlow.setVisible(true);
-    RightRedGlow.setVisible(true);
-    LeftBlackGlow.setVisible(true);
-    RightBlackGlow.setVisible(true);
-    LeftYellowGlow.setVisible(true);
-    RightYellowGlow.setVisible(true);
+    leftRedGlow.setVisible(true);
+    rightRedGlow.setVisible(true);
+    leftBlackGlow.setVisible(true);
+    rightBlackGlow.setVisible(true);
+    leftYellowGlow.setVisible(true);
+    rightYellowGlow.setVisible(true);
   }
 
   private void handleWireClick(MouseEvent event) {
     // if glove is clicked and wires are not connected
     if (glovewearing && wireCount < 2) {
       // Each action for each colour wire
-      if (event.getSource().equals(LeftRedGlow) && redConnected == false) {
+      if (event.getSource().equals(leftRedGlow) && redConnected == false) {
         wireR1 = true;
-        LeftRedGlow.setVisible(false);
+        leftRedGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireR1 && wireR2) {
           // correct wire connection
           // show correct wire connection
           redConnected = true;
-          RedConnect.setVisible(true);
+          redConnect.setVisible(true);
           wireCount = 0;
           checkAllConnected();
         }
@@ -111,18 +118,18 @@ public class ComputerController implements TimerListener {
         if (checkWireCount()) {
           // reset image, wire count and wire status
           wireR1 = false;
-          LeftRedGlow.setVisible(true);
+          leftRedGlow.setVisible(true);
         }
-      } else if (event.getSource().equals(RightRedGlow) && redConnected == false) {
+      } else if (event.getSource().equals(rightRedGlow) && redConnected == false) {
         wireR2 = true;
-        RightRedGlow.setVisible(false);
+        rightRedGlow.setVisible(false);
         wireCount++;
         // Check same colour wires is connected
         if (wireR1 && wireR2) {
           // correct wire connection
           // show correct wire connection
           redConnected = true;
-          RedConnect.setVisible(true);
+          redConnect.setVisible(true);
           wireCount = 0;
           checkAllConnected();
         }
@@ -130,19 +137,19 @@ public class ComputerController implements TimerListener {
         if (checkWireCount()) {
           // reset image, wire count and wire status
           wireR2 = false;
-          RightRedGlow.setVisible(true);
+          rightRedGlow.setVisible(true);
         }
 
-      } else if (event.getSource().equals(LeftBlackGlow) && blackConnected == false) {
+      } else if (event.getSource().equals(leftBlackGlow) && blackConnected == false) {
         wireB1 = true;
-        LeftBlackGlow.setVisible(false);
+        leftBlackGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireB1 && wireB2) {
           // correct wire connection
           // show correct wire connection
           blackConnected = true;
-          BlackConnect.setVisible(true);
+          blackConnect.setVisible(true);
           wireCount = 0;
           checkAllConnected();
         }
@@ -150,18 +157,18 @@ public class ComputerController implements TimerListener {
         if (checkWireCount()) {
           // reset image, wire count and wire status
           wireB1 = false;
-          LeftBlackGlow.setVisible(true);
+          leftBlackGlow.setVisible(true);
         }
-      } else if (event.getSource().equals(RightBlackGlow) && blackConnected == false) {
+      } else if (event.getSource().equals(rightBlackGlow) && blackConnected == false) {
         wireB2 = true;
-        RightBlackGlow.setVisible(false);
+        rightBlackGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireB1 && wireB2) {
           // correct wire connection
           // show correct wire connection
           blackConnected = true;
-          BlackConnect.setVisible(true);
+          blackConnect.setVisible(true);
           wireCount = 0;
           checkAllConnected();
         }
@@ -169,18 +176,18 @@ public class ComputerController implements TimerListener {
         if (checkWireCount()) {
           // reset image, wire count and wire status
           wireB2 = false;
-          RightBlackGlow.setVisible(true);
+          rightBlackGlow.setVisible(true);
         }
-      } else if (event.getSource().equals(LeftYellowGlow) && yellowConnected == false) {
+      } else if (event.getSource().equals(leftYellowGlow) && yellowConnected == false) {
         wireY1 = true;
-        LeftYellowGlow.setVisible(false);
+        leftYellowGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireY1 && wireY2) {
           // correct wire connection
           // show correct wire connection
           yellowConnected = true;
-          YellowConnect.setVisible(true);
+          yellowConnect.setVisible(true);
           wireCount = 0;
           checkAllConnected();
         }
@@ -188,18 +195,18 @@ public class ComputerController implements TimerListener {
         if (checkWireCount()) {
           // reset image, wire count and wire status
           wireY1 = false;
-          LeftYellowGlow.setVisible(true);
+          leftYellowGlow.setVisible(true);
         }
-      } else if (event.getSource().equals(RightYellowGlow) && yellowConnected == false) {
+      } else if (event.getSource().equals(rightYellowGlow) && yellowConnected == false) {
         wireY2 = true;
-        RightYellowGlow.setVisible(false);
+        rightYellowGlow.setVisible(false);
         wireCount++;
         // check same colour wires is connected
         if (wireY1 && wireY2) {
           // correct wire connection
           // show correct wire connection
           yellowConnected = true;
-          YellowConnect.setVisible(true);
+          yellowConnect.setVisible(true);
           wireCount = 0;
           checkAllConnected();
         }
@@ -207,7 +214,7 @@ public class ComputerController implements TimerListener {
         if (checkWireCount()) {
           // reset image, wire count and wire status
           wireY2 = false;
-          RightYellowGlow.setVisible(true);
+          rightYellowGlow.setVisible(true);
         }
       }
     }
@@ -217,7 +224,7 @@ public class ComputerController implements TimerListener {
     if (redConnected && blackConnected && yellowConnected) {
       // all wires connected
       // show clue
-      VistorLog.setVisible(true);
+      vistorLog.setVisible(true);
     }
   }
 
