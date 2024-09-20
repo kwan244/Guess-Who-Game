@@ -14,6 +14,8 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javazoom.jl.player.Player;
@@ -43,6 +45,7 @@ public class GuessController implements TimerListener {
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
   @FXML private Text txtChooseFirst;
+  @FXML private ChatController chatController;
   @FXML private Text TimeLose;
   @FXML private ProgressIndicator progressIndicator;
 
@@ -84,11 +87,33 @@ public class GuessController implements TimerListener {
 
     // Set the visibliity of the images
     txtChooseFirst.setVisible(false);
+
   }
 
   public void stopTimer() {
     if (sharedTimer != null) {
       sharedTimer.stop();
+    }
+  }
+
+  /**
+   * Handles the key pressed event.
+   *
+   * @param event the key event
+   */
+  @FXML
+  public void onKeyPressed(KeyEvent event) {
+  }
+
+  /**
+   * Handles the key released event.
+   *
+   * @param event the key event
+   */
+  @FXML
+  public void onKeyReleased(KeyEvent event) throws ApiProxyException, IOException {
+      if (event.getCode() == KeyCode.ENTER ){
+      onSendMessage(null);
     }
   }
 

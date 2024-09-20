@@ -6,12 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.SharedTimer;
@@ -33,7 +35,6 @@ public class RoomController implements TimerListener {
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectPaper;
   @FXML private Rectangle rectShoeprint;
-  // @FXML private Label lblProfession;
   @FXML private Button btnGuess;
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
@@ -93,7 +94,6 @@ public class RoomController implements TimerListener {
    */
   @FXML
   public void onKeyPressed(KeyEvent event) {
-    System.out.println("Key " + event.getCode() + " pressed");
   }
 
   /**
@@ -102,8 +102,7 @@ public class RoomController implements TimerListener {
    * @param event the key event
    */
   @FXML
-  public void onKeyReleased(KeyEvent event) {
-    System.out.println("Key " + event.getCode() + " released");
+  public void onKeyReleased(KeyEvent event){
   }
 
   /**
