@@ -56,7 +56,7 @@
             <Font size="15.0" />
          </font>ie
       </Text>
-      <Text layoutX="122.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write down who is the theif and why:">
+      <Text layoutX="122.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write down who is the thief and why:">
          <font>
             <Font size="15.0" />
          </font>
