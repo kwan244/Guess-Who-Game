@@ -33,7 +33,7 @@ public class RoomController implements TimerListener {
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectPaper;
   @FXML private Rectangle rectShoeprint;
-  @FXML private Label lblProfession;
+  // @FXML private Label lblProfession;
   @FXML private Button btnGuess;
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
@@ -64,7 +64,7 @@ public class RoomController implements TimerListener {
       canGuess.setVisible(false);
       isFirstTimeInit = false;
     }
-    lblProfession.setText(context.getProfessionToGuess());
+    // lblProfession.setText(context.getProfessionToGuess());
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
