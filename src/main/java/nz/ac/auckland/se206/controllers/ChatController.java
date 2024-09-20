@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
-import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
@@ -93,7 +93,7 @@ public class ChatController {
               .setTemperature(0.2)
               .setTopP(0.5)
               .setMaxTokens(100);
-      runGpt(new ChatMessage("system", getSystemPrompt()));
+      runGptAsync(new ChatMessage("system", getSystemPrompt()));
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
@@ -121,28 +121,37 @@ public class ChatController {
   }
 
   /**
-   * Runs the GPT model with a given chat message.
+   * Runs the GPT model asynchronously with a given chat message using CompletableFuture.
    *
    * @param msg the chat message to process
-   * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-    if (chatCompletionRequest == null) {
-      throw new IllegalStateException(
-          "ChatCompletionRequest is not initialized. Make sure to call setProfession first.");
-    }
+  private void runGptAsync(ChatMessage msg) {
+    // Add the message to the request
     chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage());
-      return result.getChatMessage();
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
-      return null;
-    }
+
+    // Run the request asynchronously to avoid blocking the UI thread
+    CompletableFuture.supplyAsync(
+            () -> {
+              try {
+                // Execute the request and get the result
+                ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+                return chatCompletionResult.getChoices().iterator().next();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+                return null;
+              }
+            })
+        .thenAccept(
+            choice -> {
+              if (choice != null) {
+                // Append chat message on the UI thread
+                Platform.runLater(
+                    () -> {
+                      chatCompletionRequest.addMessage(choice.getChatMessage());
+                      appendChatMessage(choice.getChatMessage());
+                    });
+              }
+            });
   }
 
   /**
@@ -161,7 +170,7 @@ public class ChatController {
     txtInput.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-    runGpt(msg);
+    runGptAsync(msg);
   }
 
   /**
