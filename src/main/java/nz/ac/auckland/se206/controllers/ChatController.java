@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -173,6 +175,10 @@ public class ChatController {
     runGptAsync(msg);
   }
 
+  public void sendMessage() throws ApiProxyException, IOException {
+    onSendMessage(null);
+  }
+
   /**
    * Navigates back to the previous view.
    *
@@ -212,6 +218,27 @@ public class ChatController {
       App.openChat(event, "Manager");
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  /**
+   * Handles the key pressed event.
+   *
+   * @param event the key event
+   */
+  @FXML
+  public void onKeyPressed(KeyEvent event) {
+  }
+
+  /**
+   * Handles the key released event.
+   *
+   * @param event the key event
+   */
+  @FXML
+  public void onKeyReleased(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER ){
+      sendMessage();
     }
   }
 }
