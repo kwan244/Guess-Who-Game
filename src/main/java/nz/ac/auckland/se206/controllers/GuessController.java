@@ -42,15 +42,26 @@ public class GuessController implements TimerListener {
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
   @FXML private Text txtChooseFirst;
+  @FXML private Text TimeLose;
 
   private ChatCompletionRequest chatCompletionRequest;
   private boolean isGuessed = false;
+  private boolean gameEnded = false;
   private String currentGuess;
 
   @Override
   public void onTimerFinished() {
     // Reset timer to sixty seconds
-    sharedTimer.resetToSixtySeconds();
+    if (sharedTimer.getHasReset() == false) {
+      sharedTimer.resetToSixtySeconds();
+    } else if (sharedTimer.getHasReset() == true) {
+      // Show incorrect message and lose image
+      incorrect.setVisible(true);
+      correct.setVisible(false);
+      TimeLose.setVisible(true);
+      // Set the game as ended
+      gameEnded = true;
+    }
   }
 
   @FXML
@@ -138,6 +149,7 @@ public class GuessController implements TimerListener {
     GuessCondition.INSTANCE.setManagerClicked(false);
     GuessCondition.INSTANCE.setThiefClicked(false);
     GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
+    gameEnded = false;
 
     RoomController.context.setState(RoomController.context.getGameStartedState());
     RoomController.isFirstTimeInit = true;
@@ -245,7 +257,9 @@ public class GuessController implements TimerListener {
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     // Check if the player has guessed
-    if (GuessCondition.INSTANCE.isFemaleCustomerClicked()
+    if (gameEnded) {
+      return;
+    } else if (GuessCondition.INSTANCE.isFemaleCustomerClicked()
         || GuessCondition.INSTANCE.isManagerClicked()
         || GuessCondition.INSTANCE.isThiefClicked()) {
       String message = txtInput.getText().trim();
