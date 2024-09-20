@@ -94,6 +94,11 @@
             </DropShadow>
          </effect>
       </ImageView>
+      <Text fx:id="TimeLose" fill="RED" layoutX="197.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Lose! Timer ended! Press play again to play again" visible="false" wrappingWidth="420.5367660522461">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
       <Text fx:id="txtChooseFirst" fill="#f54e00" layoutX="449.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You need to choose the theif first.">
          <font>
             <Font size="15.0" />

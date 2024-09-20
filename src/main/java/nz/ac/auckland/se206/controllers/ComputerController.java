@@ -40,8 +40,6 @@ public class ComputerController implements TimerListener {
 
   @Override
   public void onTimerFinished() {
-    // Reset timer to sixty seconds
-    sharedTimer.resetToSixtySeconds();
     // Open the guess view
     try {
       Stage currentStage = (Stage) timerLabel.getScene().getWindow();
