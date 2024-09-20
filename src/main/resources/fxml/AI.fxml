@@ -51,10 +51,10 @@
             <Image url="@../images/CorrectGuess.png" />
          </image>
       </ImageView>
-      <Text layoutX="122.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click to choose the theif.">
+      <Text layoutX="122.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click to choose the thief.">
          <font>
             <Font size="15.0" />
-         </font>
+         </font>ie
       </Text>
       <Text layoutX="122.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write down who is the theif and why:">
          <font>
