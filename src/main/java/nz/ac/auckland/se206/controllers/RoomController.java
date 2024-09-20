@@ -43,8 +43,6 @@ public class RoomController implements TimerListener {
 
   @Override
   public void onTimerFinished() {
-    // Reset the timer to sixty seconds
-    sharedTimer.resetToSixtySeconds();
     // Open the guess view
     try {
       Stage currentStage = (Stage) timerLabel.getScene().getWindow();

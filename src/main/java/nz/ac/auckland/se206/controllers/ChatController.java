@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -35,6 +36,7 @@ public class ChatController {
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
   @FXML private Label timerLabel;
+  @FXML private ProgressIndicator progressIndicator;
 
   private SharedTimer sharedTimer;
 
@@ -55,8 +57,6 @@ public class ChatController {
         new TimerListener() {
           @Override
           public void onTimerFinished() {
-            // Reset timer to sixty seconds
-            sharedTimer.resetToSixtySeconds();
             // Open the guess view
             try {
               Stage currentStage = (Stage) timerLabel.getScene().getWindow();
@@ -128,6 +128,7 @@ public class ChatController {
    * @param msg the chat message to process
    */
   private void runGptAsync(ChatMessage msg) {
+    progressIndicator.setVisible(true); // Show the loading indicator
     // Add the message to the request
     chatCompletionRequest.addMessage(msg);
 
@@ -151,6 +152,7 @@ public class ChatController {
                     () -> {
                       chatCompletionRequest.addMessage(choice.getChatMessage());
                       appendChatMessage(choice.getChatMessage());
+                      progressIndicator.setVisible(false); // Hide the loading indicator
                     });
               }
             });

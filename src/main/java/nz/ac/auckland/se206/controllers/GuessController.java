@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -45,15 +46,27 @@ public class GuessController implements TimerListener {
   @FXML private Button btnSend;
   @FXML private Text txtChooseFirst;
   @FXML private ChatController chatController;
+  @FXML private Text TimeLose;
+  @FXML private ProgressIndicator progressIndicator;
 
   private ChatCompletionRequest chatCompletionRequest;
   private boolean isGuessed = false;
+  private boolean gameEnded = false;
   private String currentGuess;
 
   @Override
   public void onTimerFinished() {
     // Reset timer to sixty seconds
-    sharedTimer.resetToSixtySeconds();
+    if (sharedTimer.getHasReset() == false) {
+      sharedTimer.resetToSixtySeconds();
+    } else if (sharedTimer.getHasReset() == true) {
+      // Show incorrect message and lose image
+      incorrect.setVisible(true);
+      correct.setVisible(false);
+      TimeLose.setVisible(true);
+      // Set the game as ended
+      gameEnded = true;
+    }
   }
 
   @FXML
@@ -163,6 +176,7 @@ public class GuessController implements TimerListener {
     GuessCondition.INSTANCE.setManagerClicked(false);
     GuessCondition.INSTANCE.setThiefClicked(false);
     GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
+    gameEnded = false;
 
     RoomController.context.setState(RoomController.context.getGameStartedState());
     RoomController.isFirstTimeInit = true;
@@ -232,6 +246,8 @@ public class GuessController implements TimerListener {
    * @param msg the chat message to process
    */
   private void runGptAsync(ChatMessage msg) {
+    // Set progress indicator to visible
+    progressIndicator.setVisible(true);
     // Add the message to the request
     chatCompletionRequest.addMessage(msg);
 
@@ -255,6 +271,7 @@ public class GuessController implements TimerListener {
                     () -> {
                       chatCompletionRequest.addMessage(choice.getChatMessage());
                       appendChatMessage(choice.getChatMessage());
+                      progressIndicator.setVisible(false); // Hide the loading indicator
                     });
               }
             });
@@ -270,9 +287,13 @@ public class GuessController implements TimerListener {
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     // Check if the player has guessed
-    if (GuessCondition.INSTANCE.isFemaleCustomerClicked()
+    if (gameEnded) {
+      return;
+    } else if (GuessCondition.INSTANCE.isFemaleCustomerClicked()
         || GuessCondition.INSTANCE.isManagerClicked()
         || GuessCondition.INSTANCE.isThiefClicked()) {
+      // Stop the timer
+      stopTimer();
       String message = txtInput.getText().trim();
       txtChooseFirst.setVisible(false);
       if (message.isEmpty()) {
