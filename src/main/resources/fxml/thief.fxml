@@ -16,7 +16,10 @@
             <Image url="@../images/MansChangingRoom.png" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="119.0" layoutY="28.0" opacity="0.4" prefHeight="308.0" prefWidth="546.0" wrapText="true" />
+    <TextArea fx:id="txtaChat" editable="false" layoutX="119.0" layoutY="28.0" opacity="0.4" prefHeight="308.0" prefWidth="546.0" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font></TextArea>
     <TextField fx:id="txtInput" layoutX="119.0" layoutY="381.0" opacity="0.4" prefHeight="26.0" prefWidth="435.0" />
     <Button fx:id="btnSend" layoutX="561.0" layoutY="379.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="25.0" prefWidth="104.0" text="Send" />
       <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
