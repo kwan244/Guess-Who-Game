@@ -10,19 +10,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
       <ImageView fitHeight="631.0" fitWidth="1049.0" layoutX="-173.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/WomanChangingRoom.jpg" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="119.0" layoutY="27.0" opacity="0.4" prefHeight="308.0" prefWidth="546.0" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font></TextArea>
-    <TextField fx:id="txtInput" layoutX="119.0" layoutY="380.0" opacity="0.4" prefHeight="26.0" prefWidth="435.0" />
-    <Button fx:id="btnSend" layoutX="561.0" layoutY="378.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="25.0" prefWidth="78.0" text="Send" />
       <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
          <font>
             <Font size="32.0" />
@@ -32,5 +26,12 @@
       <Button fx:id="btnManagerRoom" layoutX="218.0" layoutY="521.0" mnemonicParsing="false" onMouseClicked="#handleManagerOfficeClicked" text="Manager Office" />
       <Button fx:id="btnMaleRoom1" layoutX="325.0" layoutY="521.0" mnemonicParsing="false" onMouseClicked="#handleMaleRoomClicked" text="Male Change Room" />
       <ProgressIndicator fx:id="progressIndicator" layoutX="76.0" layoutY="27.0" prefHeight="47.0" prefWidth="42.0" visible="false" />
+      <TextArea fx:id="txtaChat" editable="false" layoutX="133.0" layoutY="338.0" opacity="0.9" prefHeight="86.0" prefWidth="545.0" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TextArea>
+      <TextField fx:id="txtInput" layoutX="132.0" layoutY="436.0" opacity="0.9" prefHeight="26.0" prefWidth="435.0" />
+      <Button fx:id="btnSend" layoutX="574.0" layoutY="434.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="25.0" prefWidth="103.0" text="Send" />
   </children>
 </AnchorPane>
