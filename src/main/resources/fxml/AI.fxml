@@ -89,7 +89,7 @@
       </ImageView>
       <ImageView fx:id="maleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" onMouseClicked="#handleGuessMale" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../images/icon_MansChangingRoom.png" />
+            <Image url="@../images/icon_thief.jpg"  />
          </image>
          <effect>
             <DropShadow spread="0.5">

@@ -344,6 +344,9 @@ public class GuessController implements TimerListener {
    * @param mp3FilePath
    */
   private void playAudio(String mp3FilePath) {
+    if(isMuted){
+      return;
+    }
     // Play the audio file
     try {
       FileInputStream fileInputStream =
