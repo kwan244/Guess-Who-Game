@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -39,7 +40,11 @@ public class RoomController implements TimerListener {
   @FXML private SharedTimer sharedTimer;
   @FXML private Text guessCondition;
   @FXML private Text canGuess;
-  @FXML private ImageView backgroundStory;
+  @FXML private ImageView audioImage;
+
+  private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
+  private final Image soundOffImage =
+      new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
   @Override
   public void onTimerFinished() {
@@ -59,7 +64,7 @@ public class RoomController implements TimerListener {
   @FXML
   public void initialize() {
     if (isFirstTimeInit) {
-      FreeTextToSpeech.speak("Chat with the suspects and guess who is the thief.");
+      FreeTextToSpeech.speak("Chat with the three suspects, and guess who is the thief?");
       canGuess.setVisible(false);
       isFirstTimeInit = false;
       updateMuteImage();
@@ -132,20 +137,6 @@ public class RoomController implements TimerListener {
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
     context.handleRectangleClick(event, clickedRectangle.getId());
-  }
-
-  @FXML
-  private void handleIntroClick(ActionEvent event) throws IOException {
-    FreeTextToSpeech.speak(
-        "You are a detective solving a case of a stolen ring inside this jewlery store. There are"
-            + " three suspects to chat with and three clues to interact with.");
-    backgroundStory.setVisible(true);
-    // 8 second delay for the user to read guess condition
-    PauseTransition pause = new PauseTransition(Duration.seconds(8.5));
-    pause.setOnFinished(e -> backgroundStory.setVisible(false));
-
-    // Start delay
-    pause.play();
   }
 
   /**
