@@ -68,20 +68,34 @@
             <Font size="21.0" />
          </font>
       </Label>
+      <Pane focusTraversable="true" layoutX="310.0" layoutY="509.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
+         <children>
+            <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/magnifier.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="61.0" layoutX="74.0" layoutY="4.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/gloves.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="141.0" layoutY="4.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/Red_Blue_glasses.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <ImageView fx:id="backgroundStory" fitHeight="55.0" fitWidth="745.0" layoutX="23.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="audioImage" fitHeight="62.0" fitWidth="52.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech">
          <image>
-            <Image url="@../images/background_story.png" />
+            <Image url="@../images/muteaudio.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnIntro" layoutX="611.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleIntroClick" style="-fx-background-color: #ADD8E6;" text="Listen to background story">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-      </Button>
    </children>
 </Pane>
