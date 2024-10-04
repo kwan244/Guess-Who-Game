@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -41,6 +42,8 @@ public class GuessController implements TimerListener {
   @FXML private ImageView femaleImage;
   @FXML private ImageView maleImage;
   @FXML private ImageView managerImage;
+  @FXML private ImageView audioImage;
+  
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
@@ -52,6 +55,7 @@ public class GuessController implements TimerListener {
   private ChatCompletionRequest chatCompletionRequest;
   private boolean isGuessed = false;
   private boolean gameEnded = false;
+  private boolean isMuted = false;
   private String currentGuess;
 
   @Override
@@ -80,6 +84,7 @@ public class GuessController implements TimerListener {
     managerImage.setOnMouseClicked(this::handleGuessManager);
     femaleImage.setOnMouseClicked(this::handleGuessFemale);
     maleImage.setOnMouseClicked(this::handleGuessMale);
+    audioImage.setOnMouseClicked(this::toggleAudio);
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
@@ -114,6 +119,17 @@ public class GuessController implements TimerListener {
   public void onKeyReleased(KeyEvent event) throws ApiProxyException, IOException {
       if (event.getCode() == KeyCode.ENTER ){
       onSendMessage(null);
+    }
+  }
+
+  @FXML
+  private void toggleAudio(MouseEvent event){
+    isMuted = !isMuted;
+
+    if (isMuted){
+      audioImage.setImage(new Image("/images/audio.png"));
+    } else {
+      audioImage.setImage(new Image("/images/muteaudio.png"));
     }
   }
 
