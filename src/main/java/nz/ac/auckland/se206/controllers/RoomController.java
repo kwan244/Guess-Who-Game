@@ -63,11 +63,13 @@ public class RoomController implements TimerListener {
    */
   @FXML
   public void initialize() {
+
+    updateMuteImage();
+
     if (isFirstTimeInit) {
       FreeTextToSpeech.speak("Chat with the three suspects, and guess who is the thief?");
       canGuess.setVisible(false);
       isFirstTimeInit = false;
-      updateMuteImage();
     }
     // lblProfession.setText(context.getProfessionToGuess());
     sharedTimer = SharedTimer.getInstance();
@@ -115,10 +117,7 @@ public class RoomController implements TimerListener {
     updateMuteImage(); // Update Image
   }
 
-  /** 
-   * Update the image in ImageView according to the speech status
-   * 
-   * */
+  /** Update the image in ImageView according to the speech status */
   private void updateMuteImage() {
     if (FreeTextToSpeech.isEnabled()) {
       audioImage.setImage(soundOnImage); // Show Speaker Icon

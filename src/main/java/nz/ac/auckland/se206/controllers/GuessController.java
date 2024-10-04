@@ -56,7 +56,6 @@ public class GuessController implements TimerListener {
   private ChatCompletionRequest chatCompletionRequest;
   private boolean isGuessed = false;
   private boolean gameEnded = false;
-  private boolean isMuted = false;
   private boolean isAudioPlaying = false;
   private String currentGuess;
 
@@ -134,10 +133,7 @@ public class GuessController implements TimerListener {
     updateMuteImage(); // Update Image
   }
 
-  /** 
-   * Update the image in ImageView according to the speech status
-   * 
-   * */
+  /** Update the image in ImageView according to the speech status */
   private void updateMuteImage() {
     if (FreeTextToSpeech.isEnabled()) {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
@@ -357,7 +353,7 @@ public class GuessController implements TimerListener {
    * @param mp3FilePath
    */
   private void playAudio(String mp3FilePath) {
-    if(isMuted || isAudioPlaying){
+    if (!FreeTextToSpeech.isEnabled() || isAudioPlaying) {
       return;
     }
 
@@ -369,15 +365,17 @@ public class GuessController implements TimerListener {
           new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
       // Create a new player
       Player player = new Player(fileInputStream);
-      new Thread(() -> {
-        try{
-          player.play();
-        }catch (Exception e){
-          e.printStackTrace();
-        } finally {
-          isAudioPlaying = false;
-        }
-      }).start();
+      new Thread(
+              () -> {
+                try {
+                  player.play();
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } finally {
+                  isAudioPlaying = false;
+                }
+              })
+          .start();
     } catch (Exception e) {
       e.printStackTrace();
       isAudioPlaying = false;
