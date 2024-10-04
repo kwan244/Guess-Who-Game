@@ -92,5 +92,10 @@
             <Font size="32.0" />
          </font>
       </Label>
+      <ImageView fx:id="audioImage" fitHeight="62.0" fitWidth="52.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech">
+         <image>
+            <Image url="@../images/muteaudio.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
