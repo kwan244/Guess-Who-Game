@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fitHeight="452.0" fitWidth="789.0" layoutY="148.0" preserveRatio="true">
          <image>
@@ -51,12 +51,18 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Label layoutX="155.0" layoutY="14.0" text="SOFTENG206 - Guess Who ?">
+      <Label layoutX="155.0" layoutY="14.0" text="SOFTENG206 - Guess Who?">
          <font>
             <Font size="38.0" />
          </font>
       </Label>
-      <Button fx:id="btnGuess" layoutX="340.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleGuessClick" text="Make a Guess" />
+      <Button fx:id="btnGuess" layoutX="340.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleGuessClick" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Make a Guess">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font></Button>
       <Label layoutX="133.0" layoutY="62.0" text="Chat with the three suspects, and guess who is the Thief.">
          <font>
             <Font size="21.0" />
