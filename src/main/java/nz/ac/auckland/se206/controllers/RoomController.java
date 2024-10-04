@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -38,6 +40,11 @@ public class RoomController implements TimerListener {
   @FXML private SharedTimer sharedTimer;
   @FXML private Text guessCondition;
   @FXML private Text canGuess;
+  @FXML private ImageView audioImage;
+
+  private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
+  private final Image soundOffImage =
+      new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
   @Override
   public void onTimerFinished() {
@@ -60,6 +67,7 @@ public class RoomController implements TimerListener {
       FreeTextToSpeech.speak("Chat with the three suspects, and guess who is the thief?");
       canGuess.setVisible(false);
       isFirstTimeInit = false;
+      updateMuteImage();
     }
     // lblProfession.setText(context.getProfessionToGuess());
     sharedTimer = SharedTimer.getInstance();
@@ -100,6 +108,24 @@ public class RoomController implements TimerListener {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {}
+
+  @FXML
+  private void handleToggleSpeech(MouseEvent event) {
+    FreeTextToSpeech.toggleEnabled(); // Toggle voice status
+    updateMuteImage(); // Update Image
+  }
+
+  /** 
+   * Update the image in ImageView according to the speech status
+   * 
+   * */
+  private void updateMuteImage() {
+    if (FreeTextToSpeech.isEnabled()) {
+      audioImage.setImage(soundOnImage); // Show Speaker Icon
+    } else {
+      audioImage.setImage(soundOffImage); // Show Mute icon
+    }
+  }
 
   /**
    * Handles mouse clicks on rectangles representing people in the room.

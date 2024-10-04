@@ -147,7 +147,7 @@
             </Text>
          </children>
       </Pane>
-      <ImageView fx:id="audioImage" fitHeight="62.0" fitWidth="52.0" layoutX="26.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="audioImage" fitHeight="62.0" fitWidth="52.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech">
          <image>
             <Image url="@../images/muteaudio.png" />
          </image>
