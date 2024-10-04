@@ -65,11 +65,13 @@ public class RoomController implements TimerListener {
    */
   @FXML
   public void initialize() {
+
+    updateMuteImage();
+
     if (isFirstTimeInit) {
       FreeTextToSpeech.speak("Chat with the suspects, and guess who is the thief");
       canGuess.setVisible(false);
       isFirstTimeInit = false;
-      updateMuteImage();
     }
     // lblProfession.setText(context.getProfessionToGuess());
     sharedTimer = SharedTimer.getInstance();
