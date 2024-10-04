@@ -97,5 +97,18 @@
             <Image url="@../images/muteaudio.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnBackground" layoutX="620.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleIntroClick" style="-fx-background-color: #ADD8E6;" text="Background intro">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fx:id="backgroundImg" fitHeight="112.0" fitWidth="789.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/Background_story.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

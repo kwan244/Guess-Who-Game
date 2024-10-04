@@ -36,11 +36,13 @@ public class RoomController implements TimerListener {
   @FXML private Rectangle rectPaper;
   @FXML private Rectangle rectShoeprint;
   @FXML private Button btnGuess;
+  @FXML private Button btnBackground;
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
   @FXML private Text guessCondition;
   @FXML private Text canGuess;
   @FXML private ImageView audioImage;
+  @FXML private ImageView backgroundImg;
 
   private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
   private final Image soundOffImage =
@@ -64,7 +66,7 @@ public class RoomController implements TimerListener {
   @FXML
   public void initialize() {
     if (isFirstTimeInit) {
-      FreeTextToSpeech.speak("Chat with the three suspects, and guess who is the thief?");
+      FreeTextToSpeech.speak("Chat with the suspects, and guess who is the thief");
       canGuess.setVisible(false);
       isFirstTimeInit = false;
       updateMuteImage();
@@ -115,10 +117,7 @@ public class RoomController implements TimerListener {
     updateMuteImage(); // Update Image
   }
 
-  /** 
-   * Update the image in ImageView according to the speech status
-   * 
-   * */
+  /** Update the image in ImageView according to the speech status */
   private void updateMuteImage() {
     if (FreeTextToSpeech.isEnabled()) {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
@@ -137,6 +136,20 @@ public class RoomController implements TimerListener {
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
     context.handleRectangleClick(event, clickedRectangle.getId());
+  }
+
+  @FXML
+  private void handleIntroClick(ActionEvent event) throws IOException {
+    FreeTextToSpeech.speak(
+        "You are a  detective solving a case of a stolen ring inside this jewelry store. There are"
+            + " three suspects to chat with and three clues to interact with.");
+    backgroundImg.setVisible(true);
+    // 8.5 second delay for the user to read guess condition
+    PauseTransition pause = new PauseTransition(Duration.seconds(8.5));
+    pause.setOnFinished(e -> backgroundImg.setVisible(false));
+
+    // Start delay
+    pause.play();
   }
 
   /**
