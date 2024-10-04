@@ -51,12 +51,18 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Label layoutX="155.0" layoutY="14.0" text="SOFTENG206 - Guess Who ?">
+      <Label layoutX="155.0" layoutY="14.0" text="SOFTENG206 - Guess Who?">
          <font>
             <Font size="38.0" />
          </font>
       </Label>
-      <Button fx:id="btnGuess" layoutX="340.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleGuessClick" text="Make a Guess" />
+      <Button fx:id="btnGuess" layoutX="340.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleGuessClick" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Make a Guess">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font></Button>
       <Label layoutX="133.0" layoutY="62.0" text="Chat with the three suspects, and guess who is the Thief.">
          <font>
             <Font size="21.0" />

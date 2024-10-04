@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -9,18 +10,25 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessController">
   <children>
     <TextArea fx:id="txtaChat" editable="false" layoutX="122.0" layoutY="246.0" opacity="0.4" prefHeight="277.0" prefWidth="546.0" wrapText="true">
          <font>
             <Font size="15.0" />
          </font></TextArea>
     <TextField fx:id="txtInput" layoutX="122.0" layoutY="534.0" opacity="0.4" prefHeight="26.0" prefWidth="405.0" />
-    <Button fx:id="btnSend" layoutX="531.0" layoutY="534.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="51.0" text="Send" />
+    <Button fx:id="btnSend" layoutX="531.0" layoutY="534.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: #FFB6C1; -fx-text-fill: black; -fx-border-radius: 5px;" text="Send">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
          <font>
             <Font size="32.0" />
@@ -36,9 +44,9 @@
             <Image url="@../images/icon_ManagerOffice.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="maleImage" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="maleImage" fitHeight="150.0" fitWidth="150.0" layoutX="449.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/icon_MansChangingRoom.png" />
+            <Image url="@../images/icon_thief.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="incorrect" fitHeight="140.0" fitWidth="186.0" layoutX="625.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -61,7 +69,13 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="btnPlayAgain" layoutX="586.0" layoutY="534.0" mnemonicParsing="false" onAction="#onPlayAgain" prefHeight="26.0" prefWidth="84.0" text="Play Again" />
+      <Button fx:id="btnPlayAgain" layoutX="586.0" layoutY="534.0" mnemonicParsing="false" onAction="#onPlayAgain" prefHeight="26.0" prefWidth="84.0" style="-fx-background-color: #FF6347; -fx-text-fill: white; -fx-border-radius: 5px;" text="Play Again">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <ImageView fx:id="femaleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="53.0" onMouseClicked="#handleGuessFemale" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/icon_WomanChangingRoom.jpg" />
@@ -69,7 +83,7 @@
          <effect>
             <DropShadow spread="0.5">
                <color>
-                  <Color green="1.0" blue="0.10000000149011612" />
+                  <Color blue="0.10000000149011612" green="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -81,19 +95,19 @@
          <effect>
             <DropShadow spread="0.5">
                <color>
-                  <Color green="1.0" blue="0.10000000149011612" />
+                  <Color blue="0.10000000149011612" green="1.0" />
                </color>
             </DropShadow>
          </effect>
       </ImageView>
       <ImageView fx:id="maleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" onMouseClicked="#handleGuessMale" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../images/icon_MansChangingRoom.png" />
+            <Image url="@../images/icon_thief.jpg"  />
          </image>
          <effect>
             <DropShadow spread="0.5">
                <color>
-                  <Color green="1.0" blue="0.10000000149011612" />
+                  <Color blue="0.10000000149011612" green="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -109,5 +123,34 @@
          </font>
       </Text>
       <ProgressIndicator fx:id="progressIndicator" layoutX="70.0" layoutY="246.0" visible="false" />
+      <Pane layoutX="299.0" layoutY="140.0" prefHeight="34.0" prefWidth="122.0" style="-fx-background-color: #ffffff;" />
+      <Text layoutX="309.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sophie Bennett" textAlignment="JUSTIFY">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Pane layoutX="136.0" layoutY="141.0" prefHeight="34.0" prefWidth="122.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Text layoutX="-1.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kamala Harris" textAlignment="CENTER" wrappingWidth="122.00000270828605">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="466.0" layoutY="140.0" prefHeight="34.0" prefWidth="122.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Text layoutX="-1.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Donald Trump" textAlignment="CENTER" wrappingWidth="122.00000564754009">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <ImageView fx:id="audioImage" fitHeight="62.0" fitWidth="52.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech">
+         <image>
+            <Image url="@../images/muteaudio.png" />
+         </image>
+      </ImageView>
   </children>
 </AnchorPane>

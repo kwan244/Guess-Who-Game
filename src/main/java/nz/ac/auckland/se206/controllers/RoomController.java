@@ -62,6 +62,7 @@ public class RoomController implements TimerListener {
       FreeTextToSpeech.speak("Chat with the suspects and guess who is the thief.");
       canGuess.setVisible(false);
       isFirstTimeInit = false;
+      updateMuteImage();
     }
     // lblProfession.setText(context.getProfessionToGuess());
     sharedTimer = SharedTimer.getInstance();
@@ -102,6 +103,24 @@ public class RoomController implements TimerListener {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {}
+
+  @FXML
+  private void handleToggleSpeech(MouseEvent event) {
+    FreeTextToSpeech.toggleEnabled(); // Toggle voice status
+    updateMuteImage(); // Update Image
+  }
+
+  /** 
+   * Update the image in ImageView according to the speech status
+   * 
+   * */
+  private void updateMuteImage() {
+    if (FreeTextToSpeech.isEnabled()) {
+      audioImage.setImage(soundOnImage); // Show Speaker Icon
+    } else {
+      audioImage.setImage(soundOffImage); // Show Mute icon
+    }
+  }
 
   /**
    * Handles mouse clicks on rectangles representing people in the room.
