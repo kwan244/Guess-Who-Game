@@ -130,6 +130,8 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
+    isMuted = !isMuted;
+    
     FreeTextToSpeech.toggleEnabled(); // Toggle voice status
     updateMuteImage(); // Update Image
   }
