@@ -128,7 +128,13 @@
             <Image url="@../images/Screenshot_20240918_045505.png" />
          </image>
       </ImageView>
-      <Button layoutX="687.0" layoutY="549.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
+      <Button layoutX="670.0" layoutY="541.0" mnemonicParsing="false" onAction="#onGoBack" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Go Back">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Pane focusTraversable="true" layoutX="320.0" layoutY="519.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
          <children>
             <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
@@ -148,7 +154,7 @@
                   </DropShadow>
                </effect>
                <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
             <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="141.0" layoutY="4.0" pickOnBounds="true">
