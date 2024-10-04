@@ -29,6 +29,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
+import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 public class GuessController implements TimerListener {
 
@@ -43,7 +44,7 @@ public class GuessController implements TimerListener {
   @FXML private ImageView maleImage;
   @FXML private ImageView managerImage;
   @FXML private ImageView audioImage;
-  
+
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
@@ -58,6 +59,10 @@ public class GuessController implements TimerListener {
   private boolean isMuted = false;
   private boolean isAudioPlaying = false;
   private String currentGuess;
+
+  private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
+  private final Image soundOffImage =
+      new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
   @Override
   public void onTimerFinished() {
@@ -81,11 +86,13 @@ public class GuessController implements TimerListener {
     GuessCondition.INSTANCE.setThiefClicked(false);
     GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
 
+    updateMuteImage();
+
     // Start the timer
     managerImage.setOnMouseClicked(this::handleGuessManager);
     femaleImage.setOnMouseClicked(this::handleGuessFemale);
     maleImage.setOnMouseClicked(this::handleGuessMale);
-    audioImage.setOnMouseClicked(this::toggleAudio);
+    audioImage.setOnMouseClicked(this::handleToggleSpeech);
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
@@ -93,7 +100,6 @@ public class GuessController implements TimerListener {
 
     // Set the visibliity of the images
     txtChooseFirst.setVisible(false);
-
   }
 
   public void stopTimer() {
@@ -108,8 +114,7 @@ public class GuessController implements TimerListener {
    * @param event the key event
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) {
-  }
+  public void onKeyPressed(KeyEvent event) {}
 
   /**
    * Handles the key released event.
@@ -118,19 +123,26 @@ public class GuessController implements TimerListener {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) throws ApiProxyException, IOException {
-      if (event.getCode() == KeyCode.ENTER ){
+    if (event.getCode() == KeyCode.ENTER) {
       onSendMessage(null);
     }
   }
 
   @FXML
-  private void toggleAudio(MouseEvent event){
-    isMuted = !isMuted;
+  private void handleToggleSpeech(MouseEvent event) {
+    FreeTextToSpeech.toggleEnabled(); // Toggle voice status
+    updateMuteImage(); // Update Image
+  }
 
-    if (isMuted){
-      audioImage.setImage(new Image("/images/audio.png"));
+  /** 
+   * Update the image in ImageView according to the speech status
+   * 
+   * */
+  private void updateMuteImage() {
+    if (FreeTextToSpeech.isEnabled()) {
+      audioImage.setImage(soundOnImage); // Show Speaker Icon
     } else {
-      audioImage.setImage(new Image("/images/muteaudio.png"));
+      audioImage.setImage(soundOffImage); // Show Mute icon
     }
   }
 

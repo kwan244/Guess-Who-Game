@@ -6,16 +6,9 @@ import javax.speech.EngineException;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 
-/** Text-to-speech API using the JavaX speech library. */
 public class FreeTextToSpeech {
-  /** Custom unchecked exception for Text-to-speech issues. */
-  static class TextToSpeechException extends RuntimeException {
-    public TextToSpeechException(final String message) {
-      super(message);
-    }
-  }
-
   private static final Synthesizer synthesizer;
+  private static boolean enabled = true;
 
   static {
     try {
@@ -24,21 +17,15 @@ public class FreeTextToSpeech {
       Central.registerEngineCentral("com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
 
       synthesizer = Central.createSynthesizer(new SynthesizerModeDesc(java.util.Locale.ENGLISH));
-
       synthesizer.allocate();
     } catch (final EngineException e) {
       throw new TextToSpeechException(e.getMessage());
     }
   }
 
-  /**
-   * Speaks the given sentence in input.
-   *
-   * @param text A string to speak.
-   */
   public static void speak(final String text) {
-    if (text == null) {
-      throw new IllegalArgumentException("Text cannot be null.");
+    if (!enabled) {
+      return;
     }
 
     new Thread(
@@ -54,15 +41,27 @@ public class FreeTextToSpeech {
         .start();
   }
 
-  /**
-   * It deallocates the speech synthesizer. If you are experiencing an IllegalThreadStateException,
-   * avoid using this method and run the speak method without terminating.
-   */
+  public static void toggleEnabled() {
+    enabled = !enabled;
+  }
+
+  public static boolean isEnabled() {
+    return enabled;
+  }
+
   public static void deallocateSynthesizer() {
     try {
-      synthesizer.deallocate();
+      if (synthesizer != null && synthesizer.testEngineState(Synthesizer.ALLOCATED)) {
+        synthesizer.deallocate();
+      }
     } catch (final EngineException e) {
-      throw new TextToSpeechException(e.getMessage());
+      throw new TextToSpeechException("Error deallocating the synthesizer: " + e.getMessage());
+    }
+  }
+
+  static class TextToSpeechException extends RuntimeException {
+    public TextToSpeechException(final String message) {
+      super(message);
     }
   }
 }
