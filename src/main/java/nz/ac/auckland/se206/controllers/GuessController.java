@@ -56,6 +56,7 @@ public class GuessController implements TimerListener {
   private boolean isGuessed = false;
   private boolean gameEnded = false;
   private boolean isMuted = false;
+  private boolean isAudioPlaying = false;
   private String currentGuess;
 
   @Override
@@ -344,18 +345,30 @@ public class GuessController implements TimerListener {
    * @param mp3FilePath
    */
   private void playAudio(String mp3FilePath) {
-    if(isMuted){
+    if(isMuted || isAudioPlaying){
       return;
     }
+
+    isAudioPlaying = true;
+
     // Play the audio file
     try {
       FileInputStream fileInputStream =
           new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
       // Create a new player
       Player player = new Player(fileInputStream);
-      player.play();
+      new Thread(() -> {
+        try{
+          player.play();
+        }catch (Exception e){
+          e.printStackTrace();
+        } finally {
+          isAudioPlaying = false;
+        }
+      }).start();
     } catch (Exception e) {
       e.printStackTrace();
+      isAudioPlaying = false;
     }
   }
 }
