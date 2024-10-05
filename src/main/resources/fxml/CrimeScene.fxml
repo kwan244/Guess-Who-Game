@@ -12,7 +12,7 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="452.0" fitWidth="789.0" layoutY="148.0" preserveRatio="true">
+      <ImageView fitHeight="655.0" fitWidth="1063.0" layoutX="-216.0" layoutY="-4.0" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_JewellryShop.jpg" />
          </image>
@@ -27,27 +27,27 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Rectangle fx:id="rectComputer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="85.0" layoutX="222.0" layoutY="250.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="126.0">
+      <Rectangle fx:id="rectComputer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="121.0" layoutX="79.0" layoutY="124.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="165.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="251.0" layoutX="367.0" layoutY="187.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0">
+      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="309.0" layoutX="268.0" layoutY="77.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="251.0" layoutX="481.0" layoutY="214.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0">
+      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="341.0" layoutX="438.0" layoutY="85.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="158.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectShoeprint" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="529.0" layoutY="528.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0">
+      <Rectangle fx:id="rectShoeprint" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="76.0" layoutX="493.0" layoutY="507.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="118.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="289.0" layoutX="630.0" layoutY="207.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="138.0">
+      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="397.0" layoutX="632.0" layoutY="69.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="174.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectPaper" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="37.0" layoutX="315.0" layoutY="472.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="37.0">
+      <Rectangle fx:id="rectPaper" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="42.0" layoutX="213.0" layoutY="435.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="43.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
@@ -63,7 +63,7 @@
             <Font name="Technology Bold" size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="audioImage" fitHeight="62.0" fitWidth="52.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech">
+      <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
          <image>
             <Image url="@../images/audio.png" />
          </image>
