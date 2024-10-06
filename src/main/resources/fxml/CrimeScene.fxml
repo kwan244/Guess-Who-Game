@@ -58,12 +58,17 @@
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font></Button>
-      <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/clockBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#9a7d47">
          <font>
-            <Font name="Technology Bold" size="45.0" />
+            <Font name="Digital Dismay" size="42.0" />
          </font>
       </Label>
-      <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
+      <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="26.0" layoutY="24.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
          <image>
             <Image url="@../images/audio.png" />
          </image>
