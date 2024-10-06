@@ -51,13 +51,6 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Button fx:id="btnGuess" layoutX="340.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleGuessClick" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Make a Guess">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font></Button>
       <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
          <image>
             <Image url="@../images/clockBackground.png" />
@@ -68,7 +61,7 @@
             <Font name="Digital Dismay" size="42.0" />
          </font>
       </Label>
-      <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="26.0" layoutY="24.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
+      <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="12.0" layoutY="18.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
          <image>
             <Image url="@../images/audio.png" />
          </image>
@@ -86,5 +79,17 @@
             <Image url="@../images/Background_story.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_guessButton.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnGuess" layoutX="649.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleGuessClick" opacity="0.0" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Make a Guess">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font></Button>
    </children>
 </Pane>
