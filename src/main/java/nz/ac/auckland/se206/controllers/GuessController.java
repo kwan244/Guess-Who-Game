@@ -29,7 +29,6 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
-import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 public class GuessController implements TimerListener {
 
@@ -56,7 +55,6 @@ public class GuessController implements TimerListener {
   private ChatCompletionRequest chatCompletionRequest;
   private boolean isGuessed = false;
   private boolean gameEnded = false;
-  private boolean isMuted = false;
   private boolean isAudioPlaying = false;
   private String currentGuess;
 
@@ -92,7 +90,8 @@ public class GuessController implements TimerListener {
 
   @FXML
   public void initialize() {
-    // Set the smaller shoeprint image
+    playAudio("GuessStarted");
+    // Reset the guess condition
     GuessCondition.INSTANCE.setManagerClicked(false);
     GuessCondition.INSTANCE.setThiefClicked(false);
     GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
@@ -111,6 +110,10 @@ public class GuessController implements TimerListener {
 
     // Set the visibliity of the images
     txtChooseFirst.setVisible(false);
+
+    if (!GuessCondition.INSTANCE.isConditionMet()) {
+      endGame(true);
+    }
   }
 
   public void stopTimer() {
@@ -141,15 +144,16 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
-    isMuted = !isMuted;
+    
+    boolean currentStatus = AudioStatus.INSTANCE.isMuted();
+    AudioStatus.INSTANCE.setMuted(!currentStatus);
 
-    FreeTextToSpeech.toggleEnabled(); // Toggle voice status
     updateMuteImage(); // Update Image
   }
 
   /** Update the image in ImageView according to the speech status */
   private void updateMuteImage() {
-    if (FreeTextToSpeech.isEnabled()) {
+    if (!AudioStatus.INSTANCE.isMuted()) {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
     } else {
       audioImage.setImage(soundOffImage); // Show Mute icon
@@ -170,6 +174,8 @@ public class GuessController implements TimerListener {
       managerImageGlow.setVisible(false);
       femaleImageGlow.setVisible(false);
       GuessCondition.INSTANCE.setThiefClicked(true);
+    } else if (!GuessCondition.INSTANCE.isConditionMet()) {
+      playAudio("ConditionNotMetGuessing");
     } else {
       playAudio("Guessed");
     }
@@ -189,6 +195,8 @@ public class GuessController implements TimerListener {
       managerImageGlow.setVisible(true);
       femaleImageGlow.setVisible(false);
       GuessCondition.INSTANCE.setManagerClicked(true);
+    } else if (!GuessCondition.INSTANCE.isConditionMet()) {
+      playAudio("ConditionNotMetGuessing");
     } else {
       playAudio("Guessed");
     }
@@ -202,6 +210,8 @@ public class GuessController implements TimerListener {
       managerImageGlow.setVisible(false);
       femaleImageGlow.setVisible(true);
       GuessCondition.INSTANCE.setFemaleCustomerClicked(true);
+    } else if (!GuessCondition.INSTANCE.isConditionMet()) {
+      playAudio("ConditionNotMetGuessing");
     } else {
       playAudio("Guessed");
     }
@@ -367,7 +377,7 @@ public class GuessController implements TimerListener {
    * @param mp3FilePath
    */
   private void playAudio(String mp3FilePath) {
-    if (isMuted || isAudioPlaying) {
+    if (AudioStatus.INSTANCE.isMuted() || isAudioPlaying) {
       return;
     }
 
@@ -394,5 +404,25 @@ public class GuessController implements TimerListener {
       e.printStackTrace();
       isAudioPlaying = false;
     }
+  }
+
+  private void endGame(boolean won) {
+    // Stop timer
+    stopTimer();
+
+    // Mark the game as finished
+    gameEnded = true;
+    isGuessed = true;
+
+    // Displays an image and message when the game is over
+    incorrect.setVisible(true); // Show wrong guess icon
+    TimeLose.setVisible(true); // Display failure message
+
+    // Disable the input box and send button to prevent subsequent interactions
+    txtInput.setDisable(true);
+    btnSend.setDisable(true);
+
+    // You can add other logic here, such as recording game results, switching to other scenes, etc.
+    System.out.println("Game Over!");
   }
 }

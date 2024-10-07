@@ -9,6 +9,7 @@ public enum GuessCondition {
   private boolean isThiefClicked = false;
   private boolean isManagerClicked = false;
   private boolean isFemaleCustomerClicked = false;
+  private boolean isConditionMet = false;
 
   public boolean isComputerClicked() {
     return isComputerClicked;
@@ -34,6 +35,10 @@ public enum GuessCondition {
     return isManagerClicked;
   }
 
+  public boolean isConditionMet() {
+    return isConditionMet;
+  }
+
   public void setComputerClicked(boolean isComputerClicked) {
     this.isComputerClicked = isComputerClicked;
   }
@@ -56,5 +61,9 @@ public enum GuessCondition {
 
   public void setFemaleCustomerClicked(boolean isFeatureEnabled) {
     this.isFemaleCustomerClicked = isFeatureEnabled;
+  }
+
+  public void setConditionMet(boolean isConditionMet) {
+    this.isConditionMet = isConditionMet;
   }
 }

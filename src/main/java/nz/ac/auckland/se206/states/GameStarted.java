@@ -5,7 +5,6 @@ import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.controllers.GuessCondition;
-import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
  * The GameStarted state of the game. Handles the initial interactions when the game starts,
@@ -73,7 +72,6 @@ public class GameStarted implements GameState {
    */
   @Override
   public void handleGuessClick() throws IOException {
-    FreeTextToSpeech.speak("Make a guess, click on the " + context.getProfessionToGuess());
     context.setState(context.getGuessingState());
   }
 }
