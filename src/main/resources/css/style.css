@@ -8,3 +8,9 @@
   -fx-font-family: 'Digital Dismay';
   -fx-text-fill: "#9a7d47";
 }
+
+.promptText {
+  -fx-font-size: 21;
+  -fx-font-family: 'Sweet Gothic Serif';
+  -fx-text-fill: "#d9bf86";
+}

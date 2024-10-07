@@ -56,7 +56,7 @@
             <Image url="@../images/clockBackground.png" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="0:00">
       </Label>
       <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="12.0" layoutY="18.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
          <image>

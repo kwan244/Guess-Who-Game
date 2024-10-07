@@ -18,6 +18,11 @@
             <Image url="@../images/WomanChangingRoom.jpg" />
          </image>
       </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/clockBackground.png" />
+         </image>
+      </ImageView>
       <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
       <Button layoutX="553.0" layoutY="521.0" mnemonicParsing="false" onAction="#onGoBack" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Go to Crime Scene">

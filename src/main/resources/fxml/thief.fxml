@@ -18,6 +18,11 @@
             <Image url="@../images/00-holding-hermes-jewelry.jpg" />
          </image>
       </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/clockBackground.png" />
+         </image>
+      </ImageView>
       <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
       <Button layoutX="546.0" layoutY="520.0" mnemonicParsing="false" onAction="#onGoBack" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Go to Crime Scene">
