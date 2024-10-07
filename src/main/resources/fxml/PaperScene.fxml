@@ -55,7 +55,7 @@
             <Image url="@../images/se206_backButton.png" />
          </image>
       </ImageView>
-      <Button layoutX="649.0" layoutY="546.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #ADD8E6; -fx-text-fill: BLACK; -fx-border-radius: 5px;" text="Go Back">
+      <Button layoutX="649.0" layoutY="534.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #ADD8E6; -fx-text-fill: BLACK; -fx-border-radius: 5px;" text="Go Back">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>

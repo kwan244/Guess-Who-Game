@@ -66,7 +66,7 @@
             <Image url="@../images/audio.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnBackground" layoutX="620.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleIntroClick" style="-fx-background-color: #ADD8E6;" text="Background intro">
+      <Button fx:id="btnBackground" layoutX="662.0" layoutY="534.0" mnemonicParsing="false" onAction="#handleIntroClick" style="-fx-background-color: #ADD8E6;" text="Background intro">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
