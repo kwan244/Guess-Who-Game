@@ -15,3 +15,4 @@ Instructions:
 * If the player guesses incorrectly, provide feedback explaining why the guess is wrong without revealing the real theift and suggest checking the clues again.
 * If the player guesses correctly but provides an incorrect explanation, explain why the explanation doesn’t align with the clues and prompt them to review the clues for a better rationale.
 * If the player guesses correctly and provides a correct explanation, confirm the player’s conclusion and explain why their reasoning matches the clues.
+* If the player doesn't specify the name of their guess and uses she or he, make sure to tell the player to type that in, then guess.

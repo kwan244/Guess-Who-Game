@@ -70,12 +70,23 @@ public class GuessController implements TimerListener {
     if (sharedTimer.getHasReset() == false) {
       sharedTimer.resetToSixtySeconds();
     } else if (sharedTimer.getHasReset() == true) {
-      // Show incorrect message and lose image
-      incorrect.setVisible(true);
-      correct.setVisible(false);
-      TimeLose.setVisible(true);
-      // Set the game as ended
-      gameEnded = true;
+      // Check if message if empty
+      String message = txtInput.getText().trim();
+      // If the player has chosen a guess, automatically send the message
+      if (currentGuess != null && !message.isEmpty()) {
+        try {
+          onSendMessage(null);
+        } catch (ApiProxyException | IOException e) {
+          e.printStackTrace();
+        }
+      } else {
+        // Show incorrect message and lose image
+        incorrect.setVisible(true);
+        correct.setVisible(false);
+        TimeLose.setVisible(true);
+        // Set the game as ended
+        gameEnded = true;
+      }
     }
   }
 
@@ -131,15 +142,12 @@ public class GuessController implements TimerListener {
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
     isMuted = !isMuted;
-    
+
     FreeTextToSpeech.toggleEnabled(); // Toggle voice status
     updateMuteImage(); // Update Image
   }
 
-  /** 
-   * Update the image in ImageView according to the speech status
-   * 
-   * */
+  /** Update the image in ImageView according to the speech status */
   private void updateMuteImage() {
     if (FreeTextToSpeech.isEnabled()) {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
@@ -359,7 +367,7 @@ public class GuessController implements TimerListener {
    * @param mp3FilePath
    */
   private void playAudio(String mp3FilePath) {
-    if(isMuted || isAudioPlaying){
+    if (isMuted || isAudioPlaying) {
       return;
     }
 
@@ -371,15 +379,17 @@ public class GuessController implements TimerListener {
           new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
       // Create a new player
       Player player = new Player(fileInputStream);
-      new Thread(() -> {
-        try{
-          player.play();
-        }catch (Exception e){
-          e.printStackTrace();
-        } finally {
-          isAudioPlaying = false;
-        }
-      }).start();
+      new Thread(
+              () -> {
+                try {
+                  player.play();
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } finally {
+                  isAudioPlaying = false;
+                }
+              })
+          .start();
     } catch (Exception e) {
       e.printStackTrace();
       isAudioPlaying = false;
