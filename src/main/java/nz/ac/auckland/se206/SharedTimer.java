@@ -9,8 +9,8 @@ import javafx.util.Duration;
 public class SharedTimer {
 
   // Static fields
-  private static final int START_TIME = 3; // 2 minutes in seconds
-  private static final int GUESS_TIME = 60; // 10 seconds in seconds
+  private static final int START_TIME = 300; // 5 minutes in seconds
+  private static final int GUESS_TIME = 60; // 60 seconds in seconds
   private static SharedTimer instance;
 
   /**

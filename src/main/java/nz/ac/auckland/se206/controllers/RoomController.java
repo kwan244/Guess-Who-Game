@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -14,11 +15,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javazoom.jl.player.Player;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
-import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
  * Controller class for the room view. Handles user interactions within the room where the user can
@@ -28,6 +29,8 @@ public class RoomController implements TimerListener {
 
   public static boolean isFirstTimeInit = true;
   public static GameStateContext context = new GameStateContext();
+
+  private boolean isAudioPlaying = false;
 
   @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
@@ -69,7 +72,7 @@ public class RoomController implements TimerListener {
     updateMuteImage();
 
     if (isFirstTimeInit) {
-      FreeTextToSpeech.speak("Chat with the suspects, and guess who is the thief");
+      playAudio("GameStarted");
       canGuess.setVisible(false);
       isFirstTimeInit = false;
     }
@@ -116,13 +119,14 @@ public class RoomController implements TimerListener {
 
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
-    FreeTextToSpeech.toggleEnabled(); // Toggle voice status
+    boolean currentStatus = AudioStatus.INSTANCE.isMuted();
+    AudioStatus.INSTANCE.setMuted(!currentStatus);
     updateMuteImage(); // Update Image
   }
 
   /** Update the image in ImageView according to the speech status */
   private void updateMuteImage() {
-    if (FreeTextToSpeech.isEnabled()) {
+    if (!AudioStatus.INSTANCE.isMuted()) {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
     } else {
       audioImage.setImage(soundOffImage); // Show Mute icon
@@ -143,12 +147,10 @@ public class RoomController implements TimerListener {
 
   @FXML
   private void handleIntroClick(ActionEvent event) throws IOException {
-    FreeTextToSpeech.speak(
-        "You are a  detective solving a case of a stolen ring inside this jewelry store. There are"
-            + " three suspects to chat with and three clues to interact with.");
+    playAudio("GameIntro");
     backgroundImg.setVisible(true);
     // 8.5 second delay for the user to read guess condition
-    PauseTransition pause = new PauseTransition(Duration.seconds(8.5));
+    PauseTransition pause = new PauseTransition(Duration.seconds(9.5));
     pause.setOnFinished(e -> backgroundImg.setVisible(false));
 
     // Start delay
@@ -183,6 +185,36 @@ public class RoomController implements TimerListener {
 
       // Start delay
       pause.play();
+    }
+  }
+
+  private void playAudio(String mp3FilePath) {
+    if (AudioStatus.INSTANCE.isMuted() || isAudioPlaying) {
+      return;
+    }
+
+    isAudioPlaying = true;
+
+    // Play the audio file
+    try {
+      FileInputStream fileInputStream =
+          new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
+      // Create a new player
+      Player player = new Player(fileInputStream);
+      new Thread(
+              () -> {
+                try {
+                  player.play();
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } finally {
+                  isAudioPlaying = false;
+                }
+              })
+          .start();
+    } catch (Exception e) {
+      e.printStackTrace();
+      isAudioPlaying = false;
     }
   }
 }
