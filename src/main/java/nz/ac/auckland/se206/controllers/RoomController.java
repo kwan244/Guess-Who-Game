@@ -87,6 +87,7 @@ public class RoomController implements TimerListener {
         && GuessCondition.INSTANCE.isManagerClicked()
         && GuessCondition.INSTANCE.isThiefClicked()) {
       canGuess.setVisible(true);
+      GuessCondition.INSTANCE.setConditionMet(true);
     }
   }
 

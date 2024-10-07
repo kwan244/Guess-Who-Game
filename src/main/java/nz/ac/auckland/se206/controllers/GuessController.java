@@ -81,7 +81,7 @@ public class GuessController implements TimerListener {
 
   @FXML
   public void initialize() {
-    // Set the smaller shoeprint image
+    // Reset the guess condition
     GuessCondition.INSTANCE.setManagerClicked(false);
     GuessCondition.INSTANCE.setThiefClicked(false);
     GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
@@ -100,6 +100,10 @@ public class GuessController implements TimerListener {
 
     // Set the visibliity of the images
     txtChooseFirst.setVisible(false);
+
+    if (!GuessCondition.INSTANCE.isConditionMet()) {
+      endGame(true);
+    }
   }
 
   public void stopTimer() {
@@ -131,15 +135,12 @@ public class GuessController implements TimerListener {
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
     isMuted = !isMuted;
-    
+
     FreeTextToSpeech.toggleEnabled(); // Toggle voice status
     updateMuteImage(); // Update Image
   }
 
-  /** 
-   * Update the image in ImageView according to the speech status
-   * 
-   * */
+  /** Update the image in ImageView according to the speech status */
   private void updateMuteImage() {
     if (FreeTextToSpeech.isEnabled()) {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
@@ -359,7 +360,7 @@ public class GuessController implements TimerListener {
    * @param mp3FilePath
    */
   private void playAudio(String mp3FilePath) {
-    if(isMuted || isAudioPlaying){
+    if (isMuted || isAudioPlaying) {
       return;
     }
 
@@ -371,18 +372,40 @@ public class GuessController implements TimerListener {
           new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
       // Create a new player
       Player player = new Player(fileInputStream);
-      new Thread(() -> {
-        try{
-          player.play();
-        }catch (Exception e){
-          e.printStackTrace();
-        } finally {
-          isAudioPlaying = false;
-        }
-      }).start();
+      new Thread(
+              () -> {
+                try {
+                  player.play();
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } finally {
+                  isAudioPlaying = false;
+                }
+              })
+          .start();
     } catch (Exception e) {
       e.printStackTrace();
       isAudioPlaying = false;
     }
+  }
+
+  private void endGame(boolean won) {
+    // Stop timer
+    stopTimer();
+
+    // Mark the game as finished
+    gameEnded = true;
+    isGuessed = true;
+
+    // Displays an image and message when the game is over
+    incorrect.setVisible(true); // Show wrong guess icon
+    TimeLose.setVisible(true); // Display failure message
+
+    // Disable the input box and send button to prevent subsequent interactions
+    txtInput.setDisable(true);
+    btnSend.setDisable(true);
+
+    // You can add other logic here, such as recording game results, switching to other scenes, etc.
+    System.out.println("Game Over!");
   }
 }
