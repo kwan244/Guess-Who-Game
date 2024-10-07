@@ -68,12 +68,23 @@ public class GuessController implements TimerListener {
     if (sharedTimer.getHasReset() == false) {
       sharedTimer.resetToSixtySeconds();
     } else if (sharedTimer.getHasReset() == true) {
-      // Show incorrect message and lose image
-      incorrect.setVisible(true);
-      correct.setVisible(false);
-      TimeLose.setVisible(true);
-      // Set the game as ended
-      gameEnded = true;
+      // Check if message if empty
+      String message = txtInput.getText().trim();
+      // If the player has chosen a guess, automatically send the message
+      if (currentGuess != null && !message.isEmpty()) {
+        try {
+          onSendMessage(null);
+        } catch (ApiProxyException | IOException e) {
+          e.printStackTrace();
+        }
+      } else {
+        // Show incorrect message and lose image
+        incorrect.setVisible(true);
+        correct.setVisible(false);
+        TimeLose.setVisible(true);
+        // Set the game as ended
+        gameEnded = true;
+      }
     }
   }
 
@@ -133,8 +144,10 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
+    
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
+
     updateMuteImage(); // Update Image
   }
 
