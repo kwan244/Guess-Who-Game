@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Digital Dismay';
+  src: url('/fonts/DigitalDismay.otf');
+}
+
+.timerLabel {
+  -fx-font-size: 42;
+  -fx-font-family: 'Digital Dismay';
+  -fx-text-fill: "#9a7d47";
+}

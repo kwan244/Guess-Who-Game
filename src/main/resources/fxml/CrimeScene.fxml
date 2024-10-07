@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fitHeight="655.0" fitWidth="1063.0" layoutX="-216.0" layoutY="-4.0" preserveRatio="true">
          <image>
@@ -56,10 +56,7 @@
             <Image url="@../images/clockBackground.png" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#9a7d47">
-         <font>
-            <Font name="Digital Dismay" size="42.0" />
-         </font>
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
       <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="12.0" layoutY="18.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
          <image>

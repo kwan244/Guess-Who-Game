@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import nz.ac.auckland.se206.controllers.ChatController;
@@ -61,6 +62,9 @@ public class App extends Application {
    */
   public static void openChat(MouseEvent event, String profession) throws IOException {
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + profession + ".fxml"));
+    //Initial font
+    Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    
     Parent root = loader.load();
 
     ChatController chatController = loader.getController();
@@ -69,12 +73,15 @@ public class App extends Application {
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
     stage.setScene(scene);
+    scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
     stage.show();
   }
 
   public static void openGuess(Stage currentStage) throws IOException {
     // Open the guess view
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/AI.fxml"));
+    //Initial font
+    Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
     Parent root = loader.load();
 
     GuessController guessController = loader.getController();
@@ -84,6 +91,7 @@ public class App extends Application {
     Stage stage = currentStage;
     scene = new Scene(root);
     stage.setScene(scene);
+    scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
     stage.show();
   }
 
@@ -96,11 +104,14 @@ public class App extends Application {
    */
   public static void openClue(MouseEvent event, String clueName) throws IOException {
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + clueName + ".fxml"));
+    //Initial font
+    Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
     Parent root = loader.load();
 
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
     stage.setScene(scene);
+    scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
     stage.show();
   }
 
@@ -112,9 +123,15 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
+
+    //Initial font
+    Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+
+    //Load scene
     Parent root = loadFxml("CrimeScene");
     scene = new Scene(root);
     stage.setScene(scene);
+    scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
     stage.show();
     stage.setOnCloseRequest(event -> handleWindowClose(event));
     root.requestFocus();

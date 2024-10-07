@@ -35,10 +35,7 @@
             <Image url="@../images/clockBackground.png" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#9a7d47">
-         <font>
-            <Font name="Digital Dismay" size="42.0" />
-         </font>
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
       <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
          <image>

@@ -37,10 +37,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
-         <font>
-            <Font size="32.0" />
-         </font>
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
       <Button fx:id="btnFemaleRoom" layoutX="189.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#handleFemaleRoomClicked" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5px;" text="VIP Room(Kamala)">
          <font>

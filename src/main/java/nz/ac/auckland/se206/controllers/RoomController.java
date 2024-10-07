@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
@@ -67,6 +68,9 @@ public class RoomController implements TimerListener {
   public void initialize() {
 
     updateMuteImage();
+    //Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    // timerLabel.getScene().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
 
     if (isFirstTimeInit) {
       FreeTextToSpeech.speak("Chat with the suspects, and guess who is the thief");
