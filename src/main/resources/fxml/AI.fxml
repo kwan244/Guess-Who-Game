@@ -10,43 +10,52 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessController">
   <children>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="122.0" layoutY="246.0" opacity="0.4" prefHeight="277.0" prefWidth="546.0" wrapText="true">
+      <ImageView fitHeight="655.0" fitWidth="1063.0" layoutX="-216.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/SE206_BETA_JewellryShopBlur.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="309.0" fitWidth="494.0" layoutX="105.0" layoutY="232.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/SE206_textBoard.png" />
+         </image>
+      </ImageView>
+    <TextArea fx:id="txtaChat" blendMode="MULTIPLY" editable="false" layoutX="122.0" layoutY="246.0" opacity="0.69" prefHeight="277.0" prefWidth="458.0" wrapText="true">
          <font>
             <Font size="15.0" />
          </font></TextArea>
-    <TextField fx:id="txtInput" layoutX="122.0" layoutY="534.0" opacity="0.4" prefHeight="26.0" prefWidth="405.0" />
-    <Button fx:id="btnSend" layoutX="531.0" layoutY="534.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: #FFB6C1; -fx-text-fill: black; -fx-border-radius: 5px;" text="Send">
+    <TextField fx:id="txtInput" layoutX="122.0" layoutY="541.0" opacity="0.69" prefHeight="26.0" prefWidth="322.0" />
+      <ImageView fitHeight="62.0" fitWidth="141.0" layoutX="444.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_enterButton.png" />
+         </image>
+      </ImageView>
+    <Button fx:id="btnSend" layoutX="451.0" layoutY="536.0" mnemonicParsing="false" onAction="#onSendMessage" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #FFB6C1; -fx-text-fill: black; -fx-border-radius: 5px;" text="Send">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
-         <font>
-            <Font size="32.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="femaleImage" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="femaleImage" fitHeight="150.0" fitWidth="200.0" layoutX="112.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/icon_WomanChangingRoom.jpg" />
+            <Image url="@../images/icon_WomanChangingRoom.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="managerImage" fitHeight="150.0" fitWidth="200.0" layoutX="285.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="managerImage" fitHeight="150.0" fitWidth="200.0" layoutX="275.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/icon_ManagerOffice.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="maleImage" fitHeight="150.0" fitWidth="150.0" layoutX="449.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="maleImage" fitHeight="150.0" fitWidth="150.0" layoutX="439.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/icon_thief.jpg" />
+            <Image url="@../images/icon_MansChangingRoom.png" />
          </image>
       </ImageView>
       <ImageView fx:id="incorrect" fitHeight="140.0" fitWidth="186.0" layoutX="625.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -59,17 +68,22 @@
             <Image url="@../images/CorrectGuess.png" />
          </image>
       </ImageView>
-      <Text layoutX="122.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click to choose the thief.">
+      <Text fill="#d9bf86" layoutX="122.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click to choose the thief.">
          <font>
-            <Font size="15.0" />
+            <Font name="Copperplate" size="23.0" />
          </font>ie
       </Text>
-      <Text layoutX="122.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write down who is the thief and why:">
+      <Text fill="#d9bf86" layoutX="122.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write down who is the thief and why:">
          <font>
-            <Font size="15.0" />
+            <Font name="Copperplate" size="23.0" />
          </font>
       </Text>
-      <Button fx:id="btnPlayAgain" layoutX="586.0" layoutY="534.0" mnemonicParsing="false" onAction="#onPlayAgain" prefHeight="26.0" prefWidth="84.0" style="-fx-background-color: #FF6347; -fx-text-fill: white; -fx-border-radius: 5px;" text="Play Again">
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_replayButton.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnPlayAgain" layoutX="649.0" layoutY="534.0" mnemonicParsing="false" onAction="#onPlayAgain" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #FF6347; -fx-text-fill: white; -fx-border-radius: 5px;" text="Play Again">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
@@ -83,7 +97,7 @@
          <effect>
             <DropShadow spread="0.5">
                <color>
-                  <Color blue="0.10000000149011612" green="1.0" />
+                  <Color green="1.0" blue="0.10000000149011612" />
                </color>
             </DropShadow>
          </effect>
@@ -95,19 +109,19 @@
          <effect>
             <DropShadow spread="0.5">
                <color>
-                  <Color blue="0.10000000149011612" green="1.0" />
+                  <Color green="1.0" blue="0.10000000149011612" />
                </color>
             </DropShadow>
          </effect>
       </ImageView>
       <ImageView fx:id="maleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" onMouseClicked="#handleGuessMale" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../images/icon_thief.jpg"  />
+            <Image url="@../images/icon_thief.jpg" />
          </image>
          <effect>
             <DropShadow spread="0.5">
                <color>
-                  <Color blue="0.10000000149011612" green="1.0" />
+                  <Color green="1.0" blue="0.10000000149011612" />
                </color>
             </DropShadow>
          </effect>
@@ -117,40 +131,23 @@
             <Font size="31.0" />
          </font>
       </Text>
-      <Text fx:id="txtChooseFirst" fill="#f54e00" layoutX="449.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You need to choose the thief first.">
+      <Text fx:id="txtChooseFirst" fill="#f54e00" layoutX="373.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You need to choose the thief first.">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
       <ProgressIndicator fx:id="progressIndicator" layoutX="70.0" layoutY="246.0" visible="false" />
-      <Pane layoutX="299.0" layoutY="140.0" prefHeight="34.0" prefWidth="122.0" style="-fx-background-color: #ffffff;" />
-      <Text layoutX="309.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sophie Bennett" textAlignment="JUSTIFY">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Pane layoutX="136.0" layoutY="141.0" prefHeight="34.0" prefWidth="122.0" style="-fx-background-color: #ffffff;">
-         <children>
-            <Text layoutX="-1.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kamala Harris" textAlignment="CENTER" wrappingWidth="122.00000270828605">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
-      <Pane layoutX="466.0" layoutY="140.0" prefHeight="34.0" prefWidth="122.0" style="-fx-background-color: #ffffff;">
-         <children>
-            <Text layoutX="-1.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Donald Trump" textAlignment="CENTER" wrappingWidth="122.00000564754009">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
-      <ImageView fx:id="audioImage" fitHeight="62.0" fitWidth="52.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech">
+      <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="12.0" layoutY="18.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
          <image>
             <Image url="@../images/audio.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/clockBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
+      </Label>
   </children>
 </AnchorPane>

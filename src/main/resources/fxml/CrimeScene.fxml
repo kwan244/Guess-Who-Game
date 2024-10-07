@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="452.0" fitWidth="789.0" layoutY="148.0" preserveRatio="true">
+      <ImageView fitHeight="655.0" fitWidth="1063.0" layoutX="-216.0" layoutY="-4.0" preserveRatio="true">
          <image>
             <Image url="@../images/SE206_BETA_JewellryShop.jpg" />
          </image>
@@ -27,77 +27,43 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Rectangle fx:id="rectComputer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="85.0" layoutX="222.0" layoutY="250.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="126.0">
+      <Rectangle fx:id="rectComputer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="121.0" layoutX="79.0" layoutY="124.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="165.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="251.0" layoutX="367.0" layoutY="187.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0">
+      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="309.0" layoutX="268.0" layoutY="77.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="251.0" layoutX="481.0" layoutY="214.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0">
+      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="341.0" layoutX="438.0" layoutY="85.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="158.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectShoeprint" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="529.0" layoutY="528.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0">
+      <Rectangle fx:id="rectShoeprint" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="76.0" layoutX="493.0" layoutY="507.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="118.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="289.0" layoutX="630.0" layoutY="207.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="138.0">
+      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="397.0" layoutX="632.0" layoutY="69.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="174.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectPaper" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="37.0" layoutX="315.0" layoutY="472.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="37.0">
+      <Rectangle fx:id="rectPaper" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="42.0" layoutX="213.0" layoutY="435.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="43.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Label layoutX="155.0" layoutY="14.0" text="SOFTENG206 - Guess Who?">
-         <font>
-            <Font size="38.0" />
-         </font>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/clockBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
-      <Button fx:id="btnGuess" layoutX="340.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleGuessClick" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Make a Guess">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font></Button>
-      <Label layoutX="133.0" layoutY="62.0" text="Chat with the three suspects, and guess who is the Thief.">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Pane focusTraversable="true" layoutX="310.0" layoutY="509.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
-         <children>
-            <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/magnifier.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="61.0" layoutX="74.0" layoutY="4.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/gloves.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="141.0" layoutY="4.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/Red_Blue_glasses.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
-         <font>
-            <Font size="32.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="audioImage" fitHeight="62.0" fitWidth="52.0" layoutX="26.0" layoutY="27.0" onMouseClicked="#handleToggleSpeech">
+      <ImageView fx:id="audioImage" fitHeight="42.0" fitWidth="37.0" layoutX="12.0" layoutY="18.0" onMouseClicked="#handleToggleSpeech" preserveRatio="true">
          <image>
             <Image url="@../images/audio.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnBackground" layoutX="620.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleIntroClick" style="-fx-background-color: #ADD8E6;" text="Background intro">
+      <Button fx:id="btnBackground" layoutX="662.0" layoutY="534.0" mnemonicParsing="false" onAction="#handleIntroClick" style="-fx-background-color: #ADD8E6;" text="Background intro">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
@@ -110,5 +76,17 @@
             <Image url="@../images/Background_story.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_guessButton.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnGuess" layoutX="649.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleGuessClick" opacity="0.0" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Make a Guess">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font></Button>
    </children>
 </Pane>

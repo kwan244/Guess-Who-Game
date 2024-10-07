@@ -7,7 +7,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
@@ -135,39 +134,45 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Pane focusTraversable="true" layoutX="320.0" layoutY="519.0" prefHeight="69.0" prefWidth="210.0" style="-fx-background-color: #A9A9A9;">
-         <children>
-            <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/magnifier.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="glove" fitHeight="61.0" fitWidth="61.0" layoutX="74.0" layoutY="4.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/gloves.jpg" />
-               </image>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.06666667014360428" green="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="141.0" layoutY="4.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/Red_Blue_glasses.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Label fx:id="timerLabel" layoutX="670.0" layoutY="15.0" prefHeight="45.0" prefWidth="96.0" text="00:00" textFill="#ffc815">
-         <font>
-            <Font size="32.0" />
-         </font>
+      <ImageView fitHeight="107.0" fitWidth="285.0" layoutX="285.0" layoutY="481.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_toolKit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="61.0" fitWidth="55.0" layoutX="317.0" layoutY="507.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/vecteezy_realistic-magnifying-glass-clip-art_9876396.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="glove" fitHeight="61.0" fitWidth="61.0" layoutX="394.0" layoutY="504.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/gloves.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="draggableGlasses" fitHeight="61.0" fitWidth="64.0" layoutX="471.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Red_Blue_glasses.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/clockBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_backButton.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="649.0" layoutY="536.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #ADD8E6; -fx-text-fill: BLACK; -fx-border-radius: 5px;" text="Go Back">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
