@@ -3,6 +3,11 @@
   src: url('/fonts/DigitalDismay.otf');
 }
 
+@font-face {
+  font-family: 'Digital Dismay';
+  src: url('/fonts/SweetGothicMed.otf');
+}
+
 .timerLabel {
   -fx-font-size: 42;
   -fx-font-family: 'Digital Dismay';
@@ -11,12 +16,12 @@
 
 .promptText {
   -fx-font-size: 21;
-  -fx-font-family: 'Sweet Gothic Serif';
+  -fx-font-family: 'SweetGothicSerif-Medium';
   -fx-text-fill: "#d9bf86";
 }
 
 .promptTextSmall {
   -fx-font-size: 12;
-  -fx-font-family: 'Sweet Gothic Serif';
+  -fx-font-family: 'SweetGothicSerif-Medium';
   -fx-text-fill: "#d9bf86";
 }
