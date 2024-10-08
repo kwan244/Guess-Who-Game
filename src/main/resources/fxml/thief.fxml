@@ -18,37 +18,65 @@
             <Image url="@../images/00-holding-hermes-jewelry.jpg" />
          </image>
       </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/clockBackground.png" />
+         </image>
+      </ImageView>
       <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
-      <Button layoutX="546.0" layoutY="520.0" mnemonicParsing="false" onAction="#onGoBack" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Go to Crime Scene">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="btnFemaleRoom" layoutX="237.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#handleFemaleRoomClicked" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5px;" text="VIP Room(Kamala)">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="btnManagerRoom" layoutX="378.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#handleManagerOfficeClicked" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5px;" text="Manager Office(Sophia)">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
       <ProgressIndicator fx:id="progressIndicator" layoutX="67.0" layoutY="28.0" visible="false" />
-      <TextArea fx:id="txtaChat" editable="false" layoutX="133.0" layoutY="338.0" opacity="0.9" prefHeight="86.0" prefWidth="545.0" wrapText="true">
+      <TextArea fx:id="txtaChat" editable="false" layoutX="123.0" layoutY="328.0" opacity="0.9" prefHeight="86.0" prefWidth="545.0" wrapText="true">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </TextArea>
-      <TextField fx:id="txtInput" layoutX="132.0" layoutY="436.0" opacity="0.9" prefHeight="26.0" prefWidth="435.0" />
-      <Button fx:id="btnSend" layoutX="574.0" layoutY="434.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FFB6C1; -fx-text-fill: black; -fx-border-radius: 5px;" text="Send">
+      <TextField fx:id="txtInput" layoutX="122.0" layoutY="426.0" opacity="0.9" prefHeight="26.0" prefWidth="410.0" />
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_backButton.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="649.0" layoutY="534.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.0" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Go to Crime Scene">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="62.0" fitWidth="141.0" layoutX="532.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_enterButton.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnSend" layoutX="539.0" layoutY="421.0" mnemonicParsing="false" onAction="#onSendMessage" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #FFB6C1; -fx-text-fill: black; -fx-border-radius: 5px;" text="Send">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="127.0" layoutX="192.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_KamalaNameTag.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnFemaleRoom" layoutX="189.0" layoutY="535.0" mnemonicParsing="false" onMouseClicked="#handleFemaleRoomClicked" opacity="0.0" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5px;" text="VIP Room(Kamala)">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="127.0" layoutX="335.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_SophieNameTag.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnManagerRoom" layoutX="329.0" layoutY="535.0" mnemonicParsing="false" onMouseClicked="#handleManagerOfficeClicked" opacity="0.0" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5px;" text="Manager Office(Sophia)">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>

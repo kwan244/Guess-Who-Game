@@ -68,15 +68,9 @@
             <Image url="@../images/CorrectGuess.png" />
          </image>
       </ImageView>
-      <Text fill="#d9bf86" layoutX="122.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click to choose the thief.">
-         <font>
-            <Font name="Copperplate" size="23.0" />
-         </font>ie
+      <Text fill="#d9bf86" layoutX="122.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptText" text="Click to choose the thief.">
       </Text>
-      <Text fill="#d9bf86" layoutX="122.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write down who is the thief and why:">
-         <font>
-            <Font name="Copperplate" size="23.0" />
-         </font>
+      <Text fill="#d9bf86" layoutX="122.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptText" text="Write down who is the thief and why:">
       </Text>
       <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -90,9 +84,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <ImageView fx:id="femaleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="53.0" onMouseClicked="#handleGuessFemale" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="femaleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="112.0" layoutY="60.0" onMouseClicked="#handleGuessFemale" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../images/icon_WomanChangingRoom.jpg" />
+            <Image url="@../images/icon_WomanChangingRoom.png" />
          </image>
          <effect>
             <DropShadow spread="0.5">
@@ -102,7 +96,7 @@
             </DropShadow>
          </effect>
       </ImageView>
-      <ImageView fx:id="managerImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="285.0" layoutY="53.0" onMouseClicked="#handleGuessManager" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="managerImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="275.0" layoutY="60.0" onMouseClicked="#handleGuessManager" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/icon_ManagerOffice.png" />
          </image>
@@ -114,9 +108,9 @@
             </DropShadow>
          </effect>
       </ImageView>
-      <ImageView fx:id="maleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="449.0" layoutY="53.0" onMouseClicked="#handleGuessMale" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="maleImageGlow" fitHeight="150.0" fitWidth="200.0" layoutX="439.0" layoutY="60.0" onMouseClicked="#handleGuessMale" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../images/icon_thief.jpg" />
+            <Image url="@../images/icon_MansChangingRoom.png" />
          </image>
          <effect>
             <DropShadow spread="0.5">

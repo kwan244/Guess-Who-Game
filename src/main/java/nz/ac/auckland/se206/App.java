@@ -62,9 +62,9 @@ public class App extends Application {
    */
   public static void openChat(MouseEvent event, String profession) throws IOException {
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + profession + ".fxml"));
-    //Initial font
+    // Initial font
     Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
-    
+
     Parent root = loader.load();
 
     ChatController chatController = loader.getController();
@@ -80,8 +80,9 @@ public class App extends Application {
   public static void openGuess(Stage currentStage) throws IOException {
     // Open the guess view
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/AI.fxml"));
-    //Initial font
+    // Initial font
     Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    Font.loadFont(App.class.getResource("/fonts/SweetGothicMed.otf").toExternalForm(), 24.0);
     Parent root = loader.load();
 
     GuessController guessController = loader.getController();
@@ -104,7 +105,7 @@ public class App extends Application {
    */
   public static void openClue(MouseEvent event, String clueName) throws IOException {
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + clueName + ".fxml"));
-    //Initial font
+    // Initial font
     Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
     Parent root = loader.load();
 
@@ -124,10 +125,10 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
 
-    //Initial font
+    // Initial font
     Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
 
-    //Load scene
+    // Load scene
     Parent root = loadFxml("CrimeScene");
     scene = new Scene(root);
     stage.setScene(scene);
