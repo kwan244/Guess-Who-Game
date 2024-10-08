@@ -17,16 +17,6 @@
             <Image url="@../images/SE206_BETA_JewellryShop.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="guessCondition" fill="RED" layoutX="26.0" layoutY="109.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Guess Condtion: Talk with all suspects and interact with at least one clue" textAlignment="CENTER" visible="false" wrappingWidth="307.7367172241211">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
-      <Text fx:id="canGuess" fill="RED" layoutX="77.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You may make a guess now" visible="false" wrappingWidth="209.9999999999999">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
       <Rectangle fx:id="rectComputer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="121.0" layoutX="79.0" layoutY="124.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="165.0">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -63,19 +53,6 @@
             <Image url="@../images/audio.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnBackground" layoutX="662.0" layoutY="534.0" mnemonicParsing="false" onAction="#handleIntroClick" style="-fx-background-color: #ADD8E6;" text="Background intro">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <ImageView fx:id="backgroundImg" fitHeight="112.0" fitWidth="789.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/Background_story.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/se206_guessButton.png" />
@@ -88,37 +65,39 @@
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font></Button>
-      <ImageView fitHeight="62.0" fitWidth="37.0" layoutX="42.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="firstClue" fitHeight="62.0" fitWidth="37.0" layoutX="42.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/se206_lightsBlue.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="37.0" layoutX="79.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="secondClue" fitHeight="62.0" fitWidth="37.0" layoutX="79.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/se206_lightsBlue.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="37.0" layoutX="116.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="thirdClue" fitHeight="62.0" fitWidth="37.0" layoutX="116.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/se206_lightsBlue.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="37.0" layoutX="260.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="firstSuspect" fitHeight="62.0" fitWidth="37.0" layoutX="260.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/se206_lightsBlue.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="37.0" layoutX="297.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="secondSuspect" fitHeight="62.0" fitWidth="37.0" layoutX="297.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/se206_lightsBlue.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="37.0" layoutX="334.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="thirdSuspect" fitHeight="62.0" fitWidth="37.0" layoutX="334.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/se206_lightsBlue.png" />
          </image>
       </ImageView>
       <Text fill="#161739" layoutX="54.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="Clue Found" />
       <Text fill="#d9bf86" layoutX="225.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="Suspect Interrogated" />
+      <Text fx:id="clueProgression" fill="WHITE" layoutX="162.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/1" wrappingWidth="43.0" />
+      <Text fx:id="suspectProgression" fill="WHITE" layoutX="379.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/3" wrappingWidth="43.0" />
    </children>
 </Pane>
