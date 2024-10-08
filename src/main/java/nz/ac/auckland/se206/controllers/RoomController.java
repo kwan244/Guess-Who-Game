@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javazoom.jl.player.Player;
@@ -39,13 +38,15 @@ public class RoomController implements TimerListener {
   @FXML private Rectangle rectPaper;
   @FXML private Rectangle rectShoeprint;
   @FXML private Button btnGuess;
-  @FXML private Button btnBackground;
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
-  @FXML private Text guessCondition;
-  @FXML private Text canGuess;
   @FXML private ImageView audioImage;
-  @FXML private ImageView backgroundImg;
+  @FXML private ImageView firstClue;
+  @FXML private ImageView secondClue;
+  @FXML private ImageView thirdClue;
+  @FXML private ImageView firstSuspect;
+  @FXML private ImageView secondSuspect;
+  @FXML private ImageView thirdSuspect;
 
   private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
   private final Image soundOffImage =
@@ -70,12 +71,34 @@ public class RoomController implements TimerListener {
   public void initialize() {
 
     updateMuteImage();
-    // Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
-    // timerLabel.getScene().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+    // Check if clue has been interacted with and update the image
+    if (GuessCondition.INSTANCE.isComputerClicked()) {
+      firstClue.setImage(
+          new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+    }
+    if (GuessCondition.INSTANCE.isShoeprintClicked()) {
+      secondClue.setImage(
+          new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+    }
+    if (GuessCondition.INSTANCE.isPaperClicked()) {
+      thirdClue.setImage(
+          new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+    }
+    if (GuessCondition.INSTANCE.isFemaleCustomerClicked()) {
+      firstSuspect.setImage(
+          new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+    }
+    if (GuessCondition.INSTANCE.isManagerClicked()) {
+      secondSuspect.setImage(
+          new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+    }
+    if (GuessCondition.INSTANCE.isThiefClicked()) {
+      thirdSuspect.setImage(
+          new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+    }
 
     if (isFirstTimeInit) {
       playAudio("GameStarted");
-      canGuess.setVisible(false);
       isFirstTimeInit = false;
     }
     // lblProfession.setText(context.getProfessionToGuess());
@@ -91,7 +114,6 @@ public class RoomController implements TimerListener {
         && GuessCondition.INSTANCE.isFemaleCustomerClicked()
         && GuessCondition.INSTANCE.isManagerClicked()
         && GuessCondition.INSTANCE.isThiefClicked()) {
-      canGuess.setVisible(true);
       GuessCondition.INSTANCE.setConditionMet(true);
     }
   }
@@ -147,18 +169,6 @@ public class RoomController implements TimerListener {
     context.handleRectangleClick(event, clickedRectangle.getId());
   }
 
-  @FXML
-  private void handleIntroClick(ActionEvent event) throws IOException {
-    playAudio("GameIntro");
-    backgroundImg.setVisible(true);
-    // 8.5 second delay for the user to read guess condition
-    PauseTransition pause = new PauseTransition(Duration.seconds(9.5));
-    pause.setOnFinished(e -> backgroundImg.setVisible(false));
-
-    // Start delay
-    pause.play();
-  }
-
   /**
    * Handles the guess button click event.
    *
@@ -167,26 +177,43 @@ public class RoomController implements TimerListener {
    */
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException {
+    // Save the original images for clues and suspects
+    Image originalFirstClue =
+        new Image(getClass().getResourceAsStream("/images/se206_lightsBlue.png"));
+    Image originalSecondClue =
+        new Image(getClass().getResourceAsStream("/images/se206_lightsBlue.png"));
+    Image originalThirdClue =
+        new Image(getClass().getResourceAsStream("/images/se206_lightsBlue.png"));
+
     if ((GuessCondition.INSTANCE.isComputerClicked()
             || GuessCondition.INSTANCE.isShoeprintClicked()
             || GuessCondition.INSTANCE.isPaperClicked())
         && GuessCondition.INSTANCE.isFemaleCustomerClicked()
         && GuessCondition.INSTANCE.isManagerClicked()
         && GuessCondition.INSTANCE.isThiefClicked()) {
-      context.handleGuessClick();
 
+      // If the condition is met, handle the guess
+      context.handleGuessClick();
       Stage currentStage = (Stage) btnGuess.getScene().getWindow();
       App.openGuess(currentStage);
 
     } else {
-      // Show guess condition
-      guessCondition.setVisible(true);
-      // 2.5 second delay for the user to read guess condition
-      PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
-      pause.setOnFinished(e -> guessCondition.setVisible(false));
 
-      // Start delay
-      pause.play();
+      // Condition is not met, show red image for the corresponding suspect or clue
+      if (!GuessCondition.INSTANCE.isFemaleCustomerClicked()) {
+        flashRedThenReset(firstSuspect, originalFirstClue);
+      } else if (!GuessCondition.INSTANCE.isManagerClicked()) {
+        flashRedThenReset(secondSuspect, originalSecondClue);
+      } else if (!GuessCondition.INSTANCE.isThiefClicked()) {
+        flashRedThenReset(thirdSuspect, originalThirdClue);
+      } else if (!GuessCondition.INSTANCE.isComputerClicked()
+          || !GuessCondition.INSTANCE.isShoeprintClicked()
+          || !GuessCondition.INSTANCE.isPaperClicked()) {
+
+        flashRedThenReset(firstClue, originalFirstClue);
+        flashRedThenReset(secondClue, originalSecondClue);
+        flashRedThenReset(thirdClue, originalThirdClue);
+      }
     }
   }
 
@@ -218,5 +245,19 @@ public class RoomController implements TimerListener {
       e.printStackTrace();
       isAudioPlaying = false;
     }
+  }
+
+  private void flashRedThenReset(ImageView imageView, Image originalImage) {
+    // Set the image to red (or the "lightsRed.png" version)
+    imageView.setImage(new Image(getClass().getResourceAsStream("/images/se206_lightsRed.png")));
+
+    // Create a PauseTransition for 1 second
+    PauseTransition pause = new PauseTransition(Duration.seconds(1));
+
+    // After 1 second, revert back to the original image
+    pause.setOnFinished(event -> imageView.setImage(originalImage));
+
+    // Start the pause timer
+    pause.play();
   }
 }
