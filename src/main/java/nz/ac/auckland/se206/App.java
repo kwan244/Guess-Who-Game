@@ -127,7 +127,7 @@ public class App extends Application {
 
     // Initial font
     Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
-
+    Font.loadFont(getClass().getResource("/fonts/SweetGothicMed.otf").toExternalForm(), 24.0);
     // Load scene
     Parent root = loadFxml("CrimeScene");
     scene = new Scene(root);
