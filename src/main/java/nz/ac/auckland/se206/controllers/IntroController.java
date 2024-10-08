@@ -1,54 +1,57 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
-import java.io.File;
 import javazoom.jl.player.Player;
+import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 
 public class IntroController {
-    private boolean isAudioPlaying = false;
+  private boolean isAudioPlaying = false;
 
-    @FXML private Pane videoContainer; // The Pane you added in Scene Builder
-    @FXML private ImageView audioImage;
+  @FXML private Pane videoContainer; // The Pane you added in Scene Builder
+  @FXML private ImageView audioImage;
 
-    private MediaPlayer mediaPlayer;
-    private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
-    private final Image soundOffImage =
+  private MediaPlayer mediaPlayer;
+  private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
+  private final Image soundOffImage =
       new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
-    @FXML
-    public void initialize() {
-        // Load the video file (replace "path/to/your/video.mp4" with your video file path)
-        String videoPath = new File("src/main/resources/videos/intro_noButton.mp4").toURI().toString();
-        Media media = new Media(videoPath);
+  @FXML
+  public void initialize() {
+    // Load the video file (replace "path/to/your/video.mp4" with your video file path)
+    String videoPath =
+        new File("src/main/resources/videos/intro_noButtonNoSounds.mp4").toURI().toString();
+    Media media = new Media(videoPath);
 
-        // Create a MediaPlayer
-        mediaPlayer = new MediaPlayer(media);
+    // Create a MediaPlayer
+    mediaPlayer = new MediaPlayer(media);
 
-        // Create a MediaView and add it to the Pane
-        MediaView mediaView = new MediaView(mediaPlayer);
-        mediaView.setFitWidth(videoContainer.getWidth()); // Adjust video to fit container
-        mediaView.setFitHeight(videoContainer.getHeight());
+    // Create a MediaView and add it to the Pane
+    MediaView mediaView = new MediaView(mediaPlayer);
+    mediaView.setFitWidth(videoContainer.getWidth()); // Adjust video to fit container
+    mediaView.setFitHeight(videoContainer.getHeight());
 
-        videoContainer.getChildren().add(mediaView); // Add MediaView to Pane
+    videoContainer.getChildren().add(mediaView); // Add MediaView to Pane
 
-        // Play the video
-        mediaPlayer.play();
-    }
+    // Play the video
+    mediaPlayer.play();
 
-      /**
+    // play audio for intro video
+    playAudio("introSounds");
+  }
+
+  /**
    * Navigates back to the previous view.
    *
    * @param event the action event triggered by the go back button
@@ -66,8 +69,8 @@ public class IntroController {
     AudioStatus.INSTANCE.setMuted(!currentStatus);
     updateMuteImage(); // Update Image
   }
-  
-    /** Update the image in ImageView according to the speech status */
+
+  /** Update the image in ImageView according to the speech status */
   private void updateMuteImage() {
     if (!AudioStatus.INSTANCE.isMuted()) {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
