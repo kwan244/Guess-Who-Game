@@ -26,7 +26,7 @@
             <Image url="@../images/SE206_textBoard.png" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" blendMode="MULTIPLY" editable="false" layoutX="122.0" layoutY="246.0" opacity="0.69" prefHeight="277.0" prefWidth="458.0" wrapText="true">
+    <TextArea fx:id="txtaChat" editable="false" layoutX="133.0" layoutY="250.0" prefHeight="274.0" prefWidth="435.0" wrapText="true" style = "-fx-text-fill: black; -fx-control-inner-background: rgba(0, 0, 0, 0);">
          <font>
             <Font size="15.0" />
          </font></TextArea>
