@@ -97,5 +97,7 @@
       </ImageView>
       <Text fill="#161739" layoutX="54.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="Clue Found" />
       <Text fill="#d9bf86" layoutX="225.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="Suspect Interrogated" />
+      <Text fx:id="clueProgression" fill="WHITE" layoutX="162.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/1" wrappingWidth="43.0" />
+      <Text fx:id="suspectProgression" fill="WHITE" layoutX="379.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/3" wrappingWidth="43.0" />
    </children>
 </Pane>

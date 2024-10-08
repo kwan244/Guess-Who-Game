@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javazoom.jl.player.Player;
@@ -47,7 +48,11 @@ public class RoomController implements TimerListener {
   @FXML private ImageView firstSuspect;
   @FXML private ImageView secondSuspect;
   @FXML private ImageView thirdSuspect;
+  @FXML private Text clueProgression;
+  @FXML private Text suspectProgression;
 
+  private int suspectcount = 0;
+  private int cluecount = 0;
   private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
   private final Image soundOffImage =
       new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
@@ -75,26 +80,38 @@ public class RoomController implements TimerListener {
     if (GuessCondition.INSTANCE.isComputerClicked()) {
       firstClue.setImage(
           new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+      cluecount++;
+      clueProgression.setText(cluecount + "/1");
     }
     if (GuessCondition.INSTANCE.isShoeprintClicked()) {
       secondClue.setImage(
           new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+      cluecount++;
+      clueProgression.setText(cluecount + "/1");
     }
     if (GuessCondition.INSTANCE.isPaperClicked()) {
       thirdClue.setImage(
           new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+      cluecount++;
+      clueProgression.setText(cluecount + "/1");
     }
     if (GuessCondition.INSTANCE.isFemaleCustomerClicked()) {
       firstSuspect.setImage(
           new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+      suspectcount++;
+      suspectProgression.setText(suspectcount + "/3");
     }
     if (GuessCondition.INSTANCE.isManagerClicked()) {
       secondSuspect.setImage(
           new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+      suspectcount++;
+      suspectProgression.setText(suspectcount + "/3");
     }
     if (GuessCondition.INSTANCE.isThiefClicked()) {
       thirdSuspect.setImage(
           new Image(getClass().getResourceAsStream("/images/se206_lightsGreen.png")));
+      suspectcount++;
+      suspectProgression.setText(suspectcount + "/3");
     }
 
     if (isFirstTimeInit) {
@@ -199,20 +216,53 @@ public class RoomController implements TimerListener {
 
     } else {
 
-      // Condition is not met, show red image for the corresponding suspect or clue
-      if (!GuessCondition.INSTANCE.isFemaleCustomerClicked()) {
+      // If all condition are not met, flash red image for all suspects and one clue
+      if (!GuessCondition.INSTANCE.isFemaleCustomerClicked()
+          && !GuessCondition.INSTANCE.isManagerClicked()
+          && !GuessCondition.INSTANCE.isThiefClicked()
+          && !GuessCondition.INSTANCE.isComputerClicked()
+          && !GuessCondition.INSTANCE.isShoeprintClicked()
+          && !GuessCondition.INSTANCE.isPaperClicked()) {
+        flashRedThenReset(firstSuspect, originalFirstClue);
+        flashRedThenReset(secondSuspect, originalSecondClue);
+        flashRedThenReset(thirdSuspect, originalThirdClue);
+        flashRedThenReset(firstClue, originalFirstClue);
+      } else if (!GuessCondition.INSTANCE.isFemaleCustomerClicked()) {
+        if (!GuessCondition.INSTANCE.isManagerClicked()) {
+          flashRedThenReset(secondSuspect, originalFirstClue);
+        }
+        if (!GuessCondition.INSTANCE.isThiefClicked()) {
+          flashRedThenReset(thirdSuspect, originalSecondClue);
+        }
         flashRedThenReset(firstSuspect, originalFirstClue);
       } else if (!GuessCondition.INSTANCE.isManagerClicked()) {
+        if (!GuessCondition.INSTANCE.isThiefClicked()) {
+          flashRedThenReset(thirdSuspect, originalSecondClue);
+        }
+        if (!GuessCondition.INSTANCE.isFemaleCustomerClicked()) {
+          flashRedThenReset(firstSuspect, originalFirstClue);
+        }
         flashRedThenReset(secondSuspect, originalSecondClue);
       } else if (!GuessCondition.INSTANCE.isThiefClicked()) {
+        if (!GuessCondition.INSTANCE.isFemaleCustomerClicked()) {
+          flashRedThenReset(firstSuspect, originalFirstClue);
+        }
+        if (!GuessCondition.INSTANCE.isManagerClicked()) {
+          flashRedThenReset(secondSuspect, originalSecondClue);
+        }
         flashRedThenReset(thirdSuspect, originalThirdClue);
-      } else if (!GuessCondition.INSTANCE.isComputerClicked()
-          || !GuessCondition.INSTANCE.isShoeprintClicked()
-          || !GuessCondition.INSTANCE.isPaperClicked()) {
-
-        flashRedThenReset(firstClue, originalFirstClue);
-        flashRedThenReset(secondClue, originalSecondClue);
-        flashRedThenReset(thirdClue, originalThirdClue);
+      }
+      if (!GuessCondition.INSTANCE.isComputerClicked()
+          && !GuessCondition.INSTANCE.isShoeprintClicked()
+          && !GuessCondition.INSTANCE.isPaperClicked()) {
+        // flash unchecked clue
+        if (!GuessCondition.INSTANCE.isShoeprintClicked()) {
+          flashRedThenReset(firstClue, originalSecondClue);
+        } else if (!GuessCondition.INSTANCE.isPaperClicked()) {
+          flashRedThenReset(secondClue, originalThirdClue);
+        } else if (!GuessCondition.INSTANCE.isComputerClicked()) {
+          flashRedThenReset(thirdClue, originalFirstClue);
+        }
       }
     }
   }
