@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.GuessController;
+import nz.ac.auckland.se206.controllers.IntroController;
 import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
@@ -93,6 +94,22 @@ public class App extends Application {
     scene = new Scene(root);
     stage.setScene(scene);
     scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
+    stage.show();
+  }
+
+    public static void openIntro(Stage currentStage) throws IOException {
+    // Open the guess view
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/IntroScene.fxml"));
+
+    Parent root = loader.load();
+
+    IntroController introController = loader.getController();
+
+    // Set the root of the scene to the guess view
+    Stage stage = currentStage;
+    scene = new Scene(root);
+    stage.setScene(scene);
+
     stage.show();
   }
 

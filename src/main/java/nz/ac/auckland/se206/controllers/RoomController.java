@@ -151,14 +151,16 @@ public class RoomController implements TimerListener {
 
   @FXML
   private void handleIntroClick(ActionEvent event) throws IOException {
-    playAudio("GameIntro");
-    backgroundImg.setVisible(true);
-    // 8.5 second delay for the user to read guess condition
-    PauseTransition pause = new PauseTransition(Duration.seconds(9.5));
-    pause.setOnFinished(e -> backgroundImg.setVisible(false));
+    Stage currentStage = (Stage) btnGuess.getScene().getWindow();
+    App.openIntro(currentStage);
+    // playAudio("GameIntro");
+    // backgroundImg.setVisible(true);
+    // // 8.5 second delay for the user to read guess condition
+    // PauseTransition pause = new PauseTransition(Duration.seconds(9.5));
+    // pause.setOnFinished(e -> backgroundImg.setVisible(false));
 
-    // Start delay
-    pause.play();
+    // // Start delay
+    // pause.play();
   }
 
   /**
