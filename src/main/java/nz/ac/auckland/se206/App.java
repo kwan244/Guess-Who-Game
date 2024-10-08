@@ -101,6 +101,10 @@ public class App extends Application {
     // Open the guess view
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/IntroScene.fxml"));
 
+    // Initial font
+    Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    Font.loadFont(App.class.getResource("/fonts/SweetGothicMed.otf").toExternalForm(), 24.0);
+
     Parent root = loader.load();
 
     IntroController introController = loader.getController();
@@ -109,7 +113,7 @@ public class App extends Application {
     Stage stage = currentStage;
     scene = new Scene(root);
     stage.setScene(scene);
-
+    scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
     stage.show();
   }
 
