@@ -13,7 +13,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javazoom.jl.player.Player;
@@ -71,9 +70,8 @@ public class RoomController implements TimerListener {
   public void initialize() {
 
     updateMuteImage();
-    //Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    // Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
     // timerLabel.getScene().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-
 
     if (isFirstTimeInit) {
       playAudio("GameStarted");
