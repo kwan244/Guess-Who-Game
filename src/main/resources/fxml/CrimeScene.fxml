@@ -52,6 +52,9 @@
          <image>
             <Image url="@../images/audio.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true">
          <image>

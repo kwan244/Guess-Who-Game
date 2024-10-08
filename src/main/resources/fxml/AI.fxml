@@ -26,7 +26,7 @@
             <Image url="@../images/SE206_textBoard.png" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="133.0" layoutY="250.0" prefHeight="274.0" prefWidth="435.0" wrapText="true" style = "-fx-text-fill: black; -fx-control-inner-background: rgba(0, 0, 0, 0);">
+    <TextArea fx:id="txtaChat" editable="false" layoutX="133.0" layoutY="250.0" prefHeight="274.0" prefWidth="435.0" style="-fx-text-fill: black; -fx-control-inner-background: rgba(0, 0, 0, 0);" wrapText="true">
          <font>
             <Font size="15.0" />
          </font></TextArea>
@@ -47,16 +47,25 @@
          <image>
             <Image url="@../images/icon_WomanChangingRoom.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="managerImage" fitHeight="150.0" fitWidth="200.0" layoutX="275.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/icon_ManagerOffice.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="maleImage" fitHeight="150.0" fitWidth="150.0" layoutX="439.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/icon_MansChangingRoom.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="incorrect" fitHeight="140.0" fitWidth="186.0" layoutX="625.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
@@ -135,6 +144,9 @@
          <image>
             <Image url="@../images/audio.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
          <image>
