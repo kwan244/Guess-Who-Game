@@ -14,3 +14,9 @@
   -fx-font-family: 'Sweet Gothic Serif';
   -fx-text-fill: "#d9bf86";
 }
+
+.promptTextSmall {
+  -fx-font-size: 12;
+  -fx-font-family: 'Sweet Gothic Serif';
+  -fx-text-fill: "#d9bf86";
+}
