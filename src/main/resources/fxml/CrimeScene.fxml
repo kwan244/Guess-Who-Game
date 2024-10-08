@@ -63,7 +63,12 @@
             <Image url="@../images/audio.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnBackground" layoutX="662.0" layoutY="534.0" mnemonicParsing="false" onAction="#handleIntroClick" style="-fx-background-color: #ADD8E6;" text="Background intro">
+      <ImageView fitHeight="150.0" fitWidth="127.0" layoutX="649.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_buttonBackStory.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnBackground" layoutX="650.0" layoutY="534.0" mnemonicParsing="false" onAction="#handleIntroClick" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #ADD8E6;" text="Background intro">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
