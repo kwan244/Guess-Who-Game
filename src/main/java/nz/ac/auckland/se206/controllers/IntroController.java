@@ -38,8 +38,12 @@ public class IntroController {
     room.setOpacity(0.0);
     makeFadeInTransition();
     loadVideoAsync();
+
+    updateMuteImage();
     // Play audio for intro video
-    playAudio("introSounds");
+    if (!AudioStatus.INSTANCE.isMuted()) {
+      playAudio("introSounds");
+    }
   }
 
   @FXML
