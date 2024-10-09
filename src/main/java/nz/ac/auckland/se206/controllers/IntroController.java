@@ -23,6 +23,7 @@ import nz.ac.auckland.se206.App;
 public class IntroController {
   private boolean isAudioPlaying = false;
   private MediaPlayer mediaPlayer;
+  private Player mp3Player; // For the introSounds MP3 player
 
   @FXML private Pane videoContainer; // The Pane you added in Scene Builder
   @FXML private Pane room;
@@ -34,37 +35,13 @@ public class IntroController {
 
   @FXML
   public void initialize() {
-    // // Load the video file (replace "path/to/your/video.mp4" with your video file path)
-    // String videoPath =
-    //     new File("src/main/resources/videos/intro_noButtonNoSounds.mp4").toURI().toString();
-    // Media media = new Media(videoPath);
-
-    // // Create a MediaPlayer
-    // mediaPlayer = new MediaPlayer(media);
-
-    // // Create a MediaView and add it to the Pane
-    // MediaView mediaView = new MediaView(mediaPlayer);
-    // // mediaView.setFitWidth(videoContainer.getWidth()); // Adjust video to fit container
-    // // mediaView.setFitHeight(videoContainer.getHeight());
-
-    // videoContainer.getChildren().add(mediaView); // Add MediaView to Pane
-
     room.setOpacity(0.0);
     makeFadeInTransition();
-    // // Play the video
-    // mediaPlayer.play();
     loadVideoAsync();
-    // play audio for intro video
+    // Play audio for intro video
     playAudio("introSounds");
   }
 
-  /**
-   * Navigates back to the previous view.
-   *
-   * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
-   */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     App.setRoot("CrimeScene");
@@ -75,6 +52,7 @@ public class IntroController {
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
     updateMuteImage(); // Update Image
+    toggleAudioMute(); // Mute or unmute the playing audio
   }
 
   /** Update the image in ImageView according to the speech status */
@@ -86,7 +64,20 @@ public class IntroController {
     }
   }
 
-  // Load the video in a background thread using Task
+  private void toggleAudioMute() {
+    if (mediaPlayer != null) {
+      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
+    }
+    if (mp3Player != null) {
+      // Since the Player class doesn't have built-in mute, stop the sound if muted
+      if (AudioStatus.INSTANCE.isMuted()) {
+        mp3Player.close(); // Stop the mp3Player
+      } else {
+        playAudio("introSounds"); // Resume playing the audio
+      }
+    }
+  }
+
   private void loadVideoAsync() {
     Task<Void> loadVideoTask =
         new Task<Void>() {
@@ -117,13 +108,11 @@ public class IntroController {
           }
         };
 
-    // Optionally handle task success/failure
     loadVideoTask.setOnFailed(
         e -> {
           System.err.println("Failed to load video: " + loadVideoTask.getException().getMessage());
         });
 
-    // Start the task in a background thread
     new Thread(loadVideoTask).start();
   }
 
@@ -134,16 +123,15 @@ public class IntroController {
 
     isAudioPlaying = true;
 
-    // Play the audio file
     try {
       FileInputStream fileInputStream =
           new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
       // Create a new player
-      Player player = new Player(fileInputStream);
+      mp3Player = new Player(fileInputStream);
       new Thread(
               () -> {
                 try {
-                  player.play();
+                  mp3Player.play();
                 } catch (Exception e) {
                   e.printStackTrace();
                 } finally {
