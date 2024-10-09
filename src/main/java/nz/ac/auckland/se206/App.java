@@ -97,7 +97,7 @@ public class App extends Application {
     stage.show();
   }
 
-    public static void openIntro(Stage currentStage) throws IOException {
+  public static void openIntro(Stage currentStage) throws IOException {
     // Open the guess view
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/IntroScene.fxml"));
 

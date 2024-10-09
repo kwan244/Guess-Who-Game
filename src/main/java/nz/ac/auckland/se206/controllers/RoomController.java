@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,9 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javazoom.jl.player.Player;
@@ -32,7 +33,7 @@ public class RoomController implements TimerListener {
   public static GameStateContext context = new GameStateContext();
 
   private boolean isAudioPlaying = false;
-
+  @FXML private Pane room;
   @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
@@ -71,9 +72,8 @@ public class RoomController implements TimerListener {
   public void initialize() {
 
     updateMuteImage();
-    //Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    // Font.loadFont(getClass().getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
     // timerLabel.getScene().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-
 
     if (isFirstTimeInit) {
       playAudio("GameStarted");
@@ -151,8 +151,11 @@ public class RoomController implements TimerListener {
 
   @FXML
   private void handleIntroClick(ActionEvent event) throws IOException {
-    Stage currentStage = (Stage) btnGuess.getScene().getWindow();
-    App.openIntro(currentStage);
+    // make fade out
+    makeFadeOut();
+
+    // Stage currentStage = (Stage) btnGuess.getScene().getWindow();
+    // App.openIntro(currentStage);
     // playAudio("GameIntro");
     // backgroundImg.setVisible(true);
     // // 8.5 second delay for the user to read guess condition
@@ -221,6 +224,29 @@ public class RoomController implements TimerListener {
     } catch (Exception e) {
       e.printStackTrace();
       isAudioPlaying = false;
+    }
+  }
+
+  private void makeFadeOut() {
+    FadeTransition fadeTransition = new FadeTransition();
+    fadeTransition.setDuration(Duration.millis(1000));
+    fadeTransition.setNode(room);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          loadIntro();
+        });
+    fadeTransition.play();
+  }
+
+  private void loadIntro() {
+    try {
+      Stage currentStage = (Stage) btnGuess.getScene().getWindow();
+      App.openIntro(currentStage);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 }
