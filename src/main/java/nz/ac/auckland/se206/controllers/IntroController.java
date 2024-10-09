@@ -48,6 +48,9 @@ public class IntroController {
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+    if (mp3Player != null) {
+      mp3Player.close(); // Stop the mp3Player
+    }
     App.setRoot("CrimeScene");
   }
 
