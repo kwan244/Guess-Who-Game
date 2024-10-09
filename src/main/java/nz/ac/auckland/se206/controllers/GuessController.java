@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javazoom.jl.player.Player;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -57,6 +58,8 @@ public class GuessController implements TimerListener {
   private boolean gameEnded = false;
   private boolean isAudioPlaying = false;
   private String currentGuess;
+  private MediaPlayer mediaPlayer;
+  private Player mp3Player; // For the introSounds MP3 player
 
   private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
   private final Image soundOffImage =
@@ -144,11 +147,10 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
-    
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
-
     updateMuteImage(); // Update Image
+    toggleAudioMute(); // Mute or unmute the playing audio
   }
 
   /** Update the image in ImageView according to the speech status */
@@ -157,6 +159,20 @@ public class GuessController implements TimerListener {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
     } else {
       audioImage.setImage(soundOffImage); // Show Mute icon
+    }
+  }
+
+  private void toggleAudioMute() {
+    if (mediaPlayer != null) {
+      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
+    }
+    if (mp3Player != null) {
+      // Since the Player class doesn't have built-in mute, stop the sound if muted
+      if (AudioStatus.INSTANCE.isMuted()) {
+        mp3Player.close(); // Stop the mp3Player
+        // } else {
+        //   playAudio("introSounds"); // Resume playing the audio
+      }
     }
   }
 
@@ -383,16 +399,15 @@ public class GuessController implements TimerListener {
 
     isAudioPlaying = true;
 
-    // Play the audio file
     try {
       FileInputStream fileInputStream =
           new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
       // Create a new player
-      Player player = new Player(fileInputStream);
+      mp3Player = new Player(fileInputStream);
       new Thread(
               () -> {
                 try {
-                  player.play();
+                  mp3Player.play();
                 } catch (Exception e) {
                   e.printStackTrace();
                 } finally {
