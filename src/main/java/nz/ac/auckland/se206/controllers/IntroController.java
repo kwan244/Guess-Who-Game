@@ -72,8 +72,8 @@ public class IntroController {
       // Since the Player class doesn't have built-in mute, stop the sound if muted
       if (AudioStatus.INSTANCE.isMuted()) {
         mp3Player.close(); // Stop the mp3Player
-      } else {
-        playAudio("introSounds"); // Resume playing the audio
+        // } else {
+        //   playAudio("introSounds"); // Resume playing the audio
       }
     }
   }
@@ -94,9 +94,6 @@ public class IntroController {
                   Platform.runLater(
                       () -> {
                         MediaView mediaView = new MediaView(mediaPlayer);
-                        mediaView.setFitWidth(
-                            videoContainer.getWidth()); // Adjust video to fit container
-                        mediaView.setFitHeight(videoContainer.getHeight());
 
                         // Add MediaView to Pane and play the video
                         videoContainer.getChildren().add(mediaView);
