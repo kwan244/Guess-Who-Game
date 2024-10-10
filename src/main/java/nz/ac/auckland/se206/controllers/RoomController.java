@@ -1,6 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -186,13 +187,8 @@ public class RoomController implements TimerListener {
     if (mediaPlayer != null) {
       mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
     }
-    if (mp3Player != null) {
-      // Since the Player class doesn't have built-in mute, stop the sound if muted
-      if (AudioStatus.INSTANCE.isMuted()) {
-        mp3Player.close(); // Stop the mp3Player
-        // } else {
-        //   playAudio("introSounds"); // Resume playing the audio
-      }
+    if (mp3Player != null && AudioStatus.INSTANCE.isMuted()) {
+      mp3Player.close(); // Stop the mp3Player immediately
     }
   }
 
@@ -296,7 +292,7 @@ public class RoomController implements TimerListener {
     }
   }
 
-  private void playAudio(String mp3FilePath) {
+  private void playAudio(String fileName) {
     if (AudioStatus.INSTANCE.isMuted() || isAudioPlaying) {
       return;
     }
@@ -305,21 +301,18 @@ public class RoomController implements TimerListener {
 
     // Play the audio file
     try {
-      FileInputStream fileInputStream =
-          new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
-      // Create a new player
-      Player player = new Player(fileInputStream);
-      new Thread(
-              () -> {
-                try {
-                  player.play();
-                } catch (Exception e) {
-                  e.printStackTrace();
-                } finally {
-                  isAudioPlaying = false;
-                }
-              })
-          .start();
+      // Create a new Media object with the file path
+      Media sound =
+          new Media(new File("src/main/resources/sounds/" + fileName + ".mp3").toURI().toString());
+      mediaPlayer = new MediaPlayer(sound);
+      mediaPlayer.play();
+      isAudioPlaying = true;
+
+      // Handle the audio finishing
+      mediaPlayer.setOnEndOfMedia(
+          () -> {
+            isAudioPlaying = false;
+          });
     } catch (Exception e) {
       e.printStackTrace();
       isAudioPlaying = false;
