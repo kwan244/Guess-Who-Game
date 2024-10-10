@@ -40,6 +40,7 @@ public class PasswordController implements TimerListener {
   @FXML private Text iconSubtitle; // Text field for displaying subtitle information
   @FXML private Text passwordHint; // Text field to display password hints
   @FXML private ImageView visitorLogIcon; // Icon to access visitor log view
+  @FXML private ImageView imcBlur; // Image view for blurred background
   @FXML private Rectangle hintBackground; // Background for the password hint
   @FXML private TableColumn<Visitor, Integer> id; // Table column for visitor ID
   @FXML private TableColumn<Visitor, String> checkinTime; // Table column for check-in time
@@ -60,7 +61,7 @@ public class PasswordController implements TimerListener {
   ObservableList<Visitor> list =
       FXCollections.observableArrayList(
           new Visitor(1, "Donald and Kamala", "09:30", "10:15", "Sophia"),
-          new Visitor(2, "TotalRandomPerson", "10:10", "10;40", "SupernumeraryRole"),
+          new Visitor(2, "TotalRandomPerson", "10:10", "10:40", "SupernumeraryRole"),
           new Visitor(3, "RandomPerson2", "12:10", "12:15", "Sophia"),
           new Visitor(4, "Donald", "13:15", "14:50", "Sophia"));
 
@@ -209,6 +210,7 @@ public class PasswordController implements TimerListener {
         visitorLogIcon.setVisible(true);
         iconSubtitle.setVisible(true);
         hintBackground.setVisible(false);
+        imcBlur.setVisible(false);
       } else {
         // Display incorrect password message
         txtInput.setText("Incorrect Password! Please Try Again!");
