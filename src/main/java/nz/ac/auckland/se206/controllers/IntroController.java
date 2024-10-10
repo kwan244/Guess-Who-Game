@@ -24,6 +24,7 @@ public class IntroController {
   private boolean isAudioPlaying = false;
   private MediaPlayer mediaPlayer;
   private Player mp3Player; // For the introSounds MP3 player
+  private MediaView mediaView;
 
   @FXML private Pane videoContainer; // The Pane you added in Scene Builder
   @FXML private Pane room;
@@ -50,6 +51,11 @@ public class IntroController {
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     if (mp3Player != null) {
       mp3Player.close(); // Stop the mp3Player
+    }
+    if (mediaPlayer != null) {
+      mediaPlayer.stop(); // Stop the video playback
+      mediaPlayer.dispose(); // Dispose of the MediaPlayer
+      videoContainer.getChildren().remove(mediaView); // Remove MediaView from the container
     }
     App.setRoot("CrimeScene");
   }
@@ -94,20 +100,19 @@ public class IntroController {
                 new File("src/main/resources/videos/intro_noButtonNoSounds.mp4").toURI().toString();
             Media media = new Media(videoPath);
             mediaPlayer = new MediaPlayer(media);
+            MediaView mediaView = new MediaView(mediaPlayer);
 
             // Wait for the media to be ready before proceeding
             mediaPlayer.setOnReady(
                 () -> {
                   Platform.runLater(
                       () -> {
-                        MediaView mediaView = new MediaView(mediaPlayer);
 
                         // Add MediaView to Pane and play the video
                         videoContainer.getChildren().add(mediaView);
                         mediaPlayer.play();
                       });
                 });
-
             return null; // Task doesn't need to return a value
           }
         };
