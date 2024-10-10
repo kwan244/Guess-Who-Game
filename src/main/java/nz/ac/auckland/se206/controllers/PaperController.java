@@ -52,6 +52,10 @@ public class PaperController implements TimerListener {
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
+    if (GuessCondition.INSTANCE.isPaperClicked()) {
+      paperClick = 2;
+      updatePaperImage();
+    }
   }
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
@@ -63,7 +67,7 @@ public class PaperController implements TimerListener {
 
   private void intializePaper() {
     if (paperImage != null) {
-      paperImage.setImage(new Image(getClass().getResourceAsStream(paperImages[0])));
+      paperImage.setImage(new Image(getClass().getResourceAsStream(paperImages[paperClick])));
       paperImage.setOnMouseClicked(event -> handlePaperClick(event));
       paperImage.setOnMouseEntered(this::handleMouseEnterPaper);
       paperImage.setOnMouseExited(this::handleMouseExitPaper);
@@ -71,23 +75,23 @@ public class PaperController implements TimerListener {
   }
 
   private void handlePaperClick(MouseEvent event) {
-    paperClick++;
-    if (paperClick < paperImages.length - 1) {
-      paperImage.setImage(new Image(getClass().getResourceAsStream(paperImages[paperClick])));
+    if (paperClick < 2) {
+      paperClick++;
+    } else if (paperClick == 2 && glassesClick >= 1) {
+      GuessCondition.INSTANCE.setPaperClicked(true);
+      paperClick++;
     }
 
-    // glsses icon should be emphasized when paperClick >= paperImages.length
-    if (paperClick >= paperImages.length - 1 && glassesClick == 0) {
+    updatePaperImage();
+
+    if (paperClick == 2 && glassesClick == 0) {
       draggableGlasses.setStyle("-fx-effect: dropshadow(three-pass-box, yellow, 12, 0.5, 0, 0);");
     }
-    if (paperClick >= paperImages.length && glassesClick >= 1) {
-      paperImage.setImage(
-          new Image(getClass().getResourceAsStream(paperImages[paperImages.length - 1])));
-    }
 
-    if (paperClick == paperImages.length) {
+    if (paperClick == 3) {
       paperImage.setStyle("");
       paperImage.setCursor(Cursor.DEFAULT);
+      draggableGlasses.setStyle("-fx-effect: null;");
     }
   }
 
@@ -117,6 +121,10 @@ public class PaperController implements TimerListener {
     // Handle mouse press event for draggable glasses
     draggableGlasses.setCursor(Cursor.CLOSED_HAND);
     glassesClick++;
+  }
+
+  private void updatePaperImage() {
+    paperImage.setImage(new Image(getClass().getResourceAsStream(paperImages[paperClick])));
   }
 
   /**
