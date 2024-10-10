@@ -51,6 +51,7 @@ public class ComputerController implements TimerListener {
 
   public void initialize() throws ApiProxyException {
     //
+    glove.setStyle("-fx-effect: dropshadow(three-pass-box, yellow, 12, 0.5, 0, 0);");
     glove.setOnMouseClicked(this::handleGloveClick);
     leftBlackGlow.setOnMouseClicked(this::handleWireClick);
     rightBlackGlow.setOnMouseClicked(this::handleWireClick);
@@ -87,6 +88,7 @@ public class ComputerController implements TimerListener {
     glovewearing = true;
     // show glow effect
     glove.setStyle("-fx-effect:null;");
+    glove.setDisable(true);
     leftRedGlow.setVisible(true);
     rightRedGlow.setVisible(true);
     leftBlackGlow.setVisible(true);
@@ -98,6 +100,7 @@ public class ComputerController implements TimerListener {
   private void handleWireClick(MouseEvent event) {
     // if glove is clicked and wires are not connected
     if (glovewearing && wireCount < 2) {
+      try {
       // Each action for each colour wire
       if (event.getSource().equals(leftRedGlow) && redConnected == false) {
         wireR1 = true;
@@ -215,14 +218,20 @@ public class ComputerController implements TimerListener {
           rightYellowGlow.setVisible(true);
         }
       }
+
+          } catch (IOException e) {
+      e.printStackTrace();
+    }
     }
   }
 
-  private void checkAllConnected() {
+  private void checkAllConnected() throws IOException {
     if (redConnected && blackConnected && yellowConnected) {
       // all wires connected
       // show clue
-      vistorLog.setVisible(true);
+      // vistorLog.setVisible(true);
+      Stage currentStage = (Stage) leftYellowGlow.getScene().getWindow();
+      App.openComputer(currentStage);
     }
   }
 
