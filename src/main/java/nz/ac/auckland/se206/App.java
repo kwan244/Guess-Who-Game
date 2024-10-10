@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.GuessController;
+import nz.ac.auckland.se206.controllers.IntroController;
 import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
@@ -87,6 +88,26 @@ public class App extends Application {
 
     GuessController guessController = loader.getController();
     guessController.setProfession();
+
+    // Set the root of the scene to the guess view
+    Stage stage = currentStage;
+    scene = new Scene(root);
+    stage.setScene(scene);
+    scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
+    stage.show();
+  }
+
+  public static void openIntro(Stage currentStage) throws IOException {
+    // Open the guess view
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/IntroScene.fxml"));
+
+    // Initial font
+    Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    Font.loadFont(App.class.getResource("/fonts/SweetGothicMed.otf").toExternalForm(), 24.0);
+
+    Parent root = loader.load();
+
+    IntroController introController = loader.getController();
 
     // Set the root of the scene to the guess view
     Stage stage = currentStage;
