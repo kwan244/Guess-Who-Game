@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -29,9 +32,11 @@ public class RoomController implements TimerListener {
 
   public static boolean isFirstTimeInit = true;
   public static GameStateContext context = new GameStateContext();
+  private MediaPlayer mediaPlayer;
+  private Player mp3Player; // For the introSounds MP3 player
 
   private boolean isAudioPlaying = false;
-
+  @FXML private Pane room;
   @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
@@ -76,6 +81,7 @@ public class RoomController implements TimerListener {
   public void initialize() {
 
     updateMuteImage();
+
     // Check if clue has been interacted with and update the image
     if (GuessCondition.INSTANCE.isComputerClicked()) {
       firstClue.setImage(
@@ -163,6 +169,7 @@ public class RoomController implements TimerListener {
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
     updateMuteImage(); // Update Image
+    toggleAudioMute(); // Mute or unmute the playing audio
   }
 
   /** Update the image in ImageView according to the speech status */
@@ -171,6 +178,20 @@ public class RoomController implements TimerListener {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
     } else {
       audioImage.setImage(soundOffImage); // Show Mute icon
+    }
+  }
+
+  private void toggleAudioMute() {
+    if (mediaPlayer != null) {
+      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
+    }
+    if (mp3Player != null) {
+      // Since the Player class doesn't have built-in mute, stop the sound if muted
+      if (AudioStatus.INSTANCE.isMuted()) {
+        mp3Player.close(); // Stop the mp3Player
+        // } else {
+        //   playAudio("introSounds"); // Resume playing the audio
+      }
     }
   }
 
@@ -184,6 +205,12 @@ public class RoomController implements TimerListener {
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
     context.handleRectangleClick(event, clickedRectangle.getId());
+  }
+
+  @FXML
+  private void handleIntroClick(ActionEvent event) throws IOException {
+    // make fade out
+    makeFadeOut();
   }
 
   /**
@@ -297,7 +324,6 @@ public class RoomController implements TimerListener {
     }
   }
 
-
   private void makeFadeOut() {
     FadeTransition fadeTransition = new FadeTransition();
     fadeTransition.setDuration(Duration.millis(1000));
@@ -320,7 +346,6 @@ public class RoomController implements TimerListener {
       e.printStackTrace();
     }
   }
-  
 
   private void flashRedThenReset(ImageView imageView, Image originalImage) {
     // Set the image to red (or the "lightsRed.png" version)

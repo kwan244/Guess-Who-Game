@@ -52,10 +52,25 @@
          <image>
             <Image url="@../images/audio.png" />
          </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="127.0" layoutX="649.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_buttonBackStory.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnBackground" layoutX="650.0" layoutY="534.0" mnemonicParsing="false" onAction="#handleIntroClick" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #ADD8E6;" text="Background intro">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <ImageView fx:id="backgroundImg" fitHeight="112.0" fitWidth="789.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/Background_story.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/se206_guessButton.png" />
@@ -99,8 +114,8 @@
          </image>
       </ImageView>
       <Text fill="#161739" layoutX="54.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="Clue Found" />
+      <Text fx:id="clueProgression" fill="WHITE" layoutX="161.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/1" wrappingWidth="36.999999999999886" />
       <Text fill="#d9bf86" layoutX="225.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="Suspect Interrogated" />
-      <Text fx:id="clueProgression" fill="WHITE" layoutX="162.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/1" wrappingWidth="43.0" />
-      <Text fx:id="suspectProgression" fill="WHITE" layoutX="379.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/3" wrappingWidth="43.0" />
+      <Text fx:id="suspectProgression" fill="WHITE" layoutX="376.0" layoutY="561.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/3" wrappingWidth="36.999999999999886" />
    </children>
 </Pane>
