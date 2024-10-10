@@ -15,6 +15,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -38,17 +39,34 @@ public class PasswordController implements TimerListener {
   @FXML private TextArea secondRow;
   @FXML private TextArea thirdRow;
   @FXML private Rectangle hintBackground;
-  @FXML private TableColumn<Visitor, Integer> checkinTime;
-  @FXML private TableColumn<Visitor, Integer> checkoutTime;
+  @FXML private TableColumn<Visitor, Integer> id;
+  @FXML private TableColumn<Visitor, String> checkinTime;
+  @FXML private TableColumn<Visitor, String> checkoutTime;
   @FXML private TableColumn<Visitor, String> hostName;
-  
   @FXML private TableColumn<Visitor, String> visitorName;
+      @FXML
+    private VBox inputVbox;
+
+    @FXML
+    private TextField inputId;
+
+    @FXML
+    private TextField inputName;
+
+    @FXML
+    private TextField inputCheckinTime;
+
+    @FXML
+    private TextField inputCheckoutTime;
+
+    @FXML
+    private TextField inputHost;
 
   ObservableList<Visitor> list = FXCollections.observableArrayList(
-    new Visitor("Donald and Kamala", 930, 1015, "Sophia"),
-    new Visitor("TotalRandomPerson", 1010, 1040, "SupernumeraryRole"),
-    new Visitor("RandomPerson2", 1210, 1215, "Sophia"),
-    new Visitor("Donald", 1315, 1450, "Sophia")
+    new Visitor(1, "Donald and Kamala", "09:30", "10:15", "Sophia"),
+    new Visitor(2, "TotalRandomPerson", "10:10", "10;40", "SupernumeraryRole"),
+    new Visitor(3, "RandomPerson2", "12:10", "12:15", "Sophia"),
+    new Visitor(4, "Donald", "13:15", "14:50", "Sophia")
   );
 
   @Override
@@ -68,13 +86,27 @@ public class PasswordController implements TimerListener {
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
 
+id.setCellValueFactory(new PropertyValueFactory<Visitor, Integer>("id"));
 visitorName.setCellValueFactory(new PropertyValueFactory<Visitor, String>("name"));
-checkinTime.setCellValueFactory(new PropertyValueFactory<Visitor, Integer>("checkinTime"));
-checkoutTime.setCellValueFactory(new PropertyValueFactory<Visitor, Integer>("checkoutTime"));
+checkinTime.setCellValueFactory(new PropertyValueFactory<Visitor, String>("checkinTime"));
+checkoutTime.setCellValueFactory(new PropertyValueFactory<Visitor, String>("checkoutTime"));
 hostName.setCellValueFactory(new PropertyValueFactory<Visitor, String>("host"));
 
 
     table.setItems(list);
+  }
+
+  @FXML
+  void onSubmit(ActionEvent event) {
+    ObservableList<Visitor> currentTableData = table.getItems();
+    int currentID = Integer.parseInt(inputId.getText());
+
+    for (Visitor visitor : currentTableData){
+      if(visitor.getId() == currentID){
+        visitor.setName(inputName.getText());
+        visitor.setCheckinTime(inputCheckinTime.getText());
+      }
+    }
   }
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
