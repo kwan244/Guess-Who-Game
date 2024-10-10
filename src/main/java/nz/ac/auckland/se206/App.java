@@ -139,7 +139,7 @@ public class App extends Application {
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/PasswordScene.fxml"));
 
     // Initial font
-    // Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
     // Font.loadFont(App.class.getResource("/fonts/SweetGothicMed.otf").toExternalForm(), 24.0);
 
     Parent root = loader.load();
@@ -148,7 +148,7 @@ public class App extends Application {
     Stage stage = currentStage;
     scene = new Scene(root);
     stage.setScene(scene);
-    // scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
+    scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
     stage.show();
   }
 
