@@ -44,6 +44,7 @@ public class RoomController implements TimerListener {
   @FXML private Rectangle rectPaper;
   @FXML private Rectangle rectShoeprint;
   @FXML private Button btnGuess;
+  @FXML private Button btnBackground;
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
   @FXML private ImageView audioImage;
@@ -211,6 +212,7 @@ public class RoomController implements TimerListener {
   private void handleIntroClick(ActionEvent event) throws IOException {
     // make fade out
     makeFadeOut();
+    btnBackground.setDisable(true);
   }
 
   /**
