@@ -354,6 +354,8 @@ public class RoomController implements TimerListener {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+  
   private void flashRedThenReset(ImageView imageView, Image originalImage) {
     // Set the image to red (or the "lightsRed.png" version)
     imageView.setImage(new Image(getClass().getResourceAsStream("/images/se206_lightsRed.png")));
