@@ -96,33 +96,70 @@ hostName.setCellValueFactory(new PropertyValueFactory<Visitor, String>("host"));
     table.setItems(list);
   }
 
-  @FXML
-  void onSubmit(ActionEvent event) {
+@FXML
+void onSubmit(ActionEvent event) {
     ObservableList<Visitor> currentTableData = table.getItems();
-    int currentID = Integer.parseInt(inputId.getText());
+    int currentID;
 
-    for (Visitor visitor : currentTableData){
-      if(visitor.getId() == currentID){
-        visitor.setName(inputName.getText());
-        visitor.setCheckinTime(inputCheckinTime.getText());
-        visitor.setCheckoutTime(inputCheckoutTime.getText());
-        visitor.setHost(inputHost.getText());
+    // Validate input ID
+    try {
+        currentID = Integer.parseInt(inputId.getText());
 
+        // If ID is valid, update existing Visitor
+        for (Visitor visitor : currentTableData) {
+            if (visitor.getId() == currentID) {
+                visitor.setName(inputName.getText());
+                visitor.setCheckinTime(inputCheckinTime.getText());
+                visitor.setCheckoutTime(inputCheckoutTime.getText());
+                visitor.setHost(inputHost.getText());
+                table.setItems(currentTableData);
+                table.refresh();
+                System.out.println("Visitor updated. Total visitors: " + currentTableData.size());
+                return; // Exit after updating
+            }
+        }
+
+    } catch (NumberFormatException e) {
+        // Set new ID to one more than current size
+        int newId = currentTableData.size() + 1; 
+        inputId.setText(String.valueOf(newId)); // Corrected line to set text
+
+        // Create a new Visitor instead
+        Visitor newVisitor = new Visitor(
+            newId, // Using newId directly
+            inputName.getText(),
+            inputCheckinTime.getText(),
+            inputCheckoutTime.getText(),
+            inputHost.getText()
+        );
+
+        currentTableData.add(newVisitor); // Add new Visitor to the list
         table.setItems(currentTableData);
-        table.refresh();
-        break;
-      }
+        System.out.println("New Visitor added. Total visitors: " + currentTableData.size());
+        return; // Exit early
     }
-  }
+}
 
 @FXML
 void onRowClicked(MouseEvent event){
   Visitor clickedVisitor = table.getSelectionModel().getSelectedItem();
+  if (clickedVisitor != null) { // Check if clickedVisitor is not null
   inputId.setText(String.valueOf(clickedVisitor.getId()));
   inputName.setText(String.valueOf(clickedVisitor.getName()));
   inputCheckinTime.setText(String.valueOf(clickedVisitor.getCheckinTime()));
   inputCheckoutTime.setText(String.valueOf(clickedVisitor.getCheckoutTime()));
   inputHost.setText(String.valueOf(clickedVisitor.getHost()));
+  } else {
+    clearInputFields();
+  }
+}
+
+private void clearInputFields() {
+    inputId.clear();
+    inputName.clear();
+    inputCheckinTime.clear();
+    inputCheckoutTime.clear();
+    inputHost.clear();
 }
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
