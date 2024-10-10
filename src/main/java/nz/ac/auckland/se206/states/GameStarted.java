@@ -44,7 +44,7 @@ public class GameStarted implements GameState {
         App.openClue(event, "ShoeprintScene");
         return;
       case "rectPaper":
-        GuessCondition.INSTANCE.setPaperClicked(true);
+        
         App.openClue(event, "PaperScene");
         return;
       case "rectPerson1":

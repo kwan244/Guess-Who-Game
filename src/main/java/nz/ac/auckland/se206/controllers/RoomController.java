@@ -344,7 +344,7 @@ public class RoomController implements TimerListener {
     try {
       Stage currentStage = (Stage) btnGuess.getScene().getWindow();
       App.openIntro(currentStage);
-    } catch (IOException e) {
+    }  catch (IOException e) {
       e.printStackTrace();
     }
   }
