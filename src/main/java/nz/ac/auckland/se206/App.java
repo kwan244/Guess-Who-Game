@@ -134,6 +134,24 @@ public class App extends Application {
     stage.show();
   }
 
+  public static void openComputer(Stage currentStage) throws IOException {
+    // Open the guess view
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/PasswordScene.fxml"));
+
+    // Initial font
+    Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
+    // Font.loadFont(App.class.getResource("/fonts/SweetGothicMed.otf").toExternalForm(), 24.0);
+
+    Parent root = loader.load();
+
+    // Set the root of the scene to the guess view
+    Stage stage = currentStage;
+    scene = new Scene(root);
+    stage.setScene(scene);
+    scene.getStylesheets().add(App.class.getResource("/css/style.css").toExternalForm());
+    stage.show();
+  }
+
   /**
    * This method is invoked when the application starts. It loads and shows the "room" scene.
    *

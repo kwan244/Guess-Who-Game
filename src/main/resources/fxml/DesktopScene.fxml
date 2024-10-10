@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ComputerController">
+   <children>
+      <ImageView fitHeight="882.0" fitWidth="919.0" layoutX="-65.0" layoutY="-102.0" preserveRatio="true">
+         <image>
+            <Image url="@../images/imac-24-blue-selection-hero-202310.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="670.0" layoutY="541.0" mnemonicParsing="false" onAction="#onGoBack" style="-fx-background-color: #ADD8E6; -fx-text-fill: black; -fx-border-radius: 5px;" text="Go Back">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="646.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/clockBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
+      </Label>
+      <ImageView fitHeight="62.0" fitWidth="127.0" layoutX="649.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/se206_backButton.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="649.0" layoutY="536.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.0" prefHeight="35.0" prefWidth="127.0" style="-fx-background-color: #ADD8E6; -fx-text-fill: BLACK; -fx-border-radius: 5px;" text="Go Back">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="112.0" fitWidth="96.0" layoutX="260.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/vistorlogApp.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="handleVistorLogClick" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="112.0" layoutX="260.0" layoutY="185.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0" />
+      <TableView layoutX="123.0" layoutY="100.0" prefHeight="300.0" prefWidth="542.0">
+        <columns>
+          <TableColumn fx:id="CheckInTime" prefWidth="102.0" text="Check In Time" />
+          <TableColumn fx:id="CheckOutTime" prefWidth="103.0" text="CheckOutTime" />
+            <TableColumn fx:id="Name" prefWidth="72.0" text="Name" />
+            <TableColumn fx:id="Host" prefWidth="75.0" text="Host" />
+            <TableColumn fx:id="VisitReason" prefWidth="189.0" text="Visit Reason" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
