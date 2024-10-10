@@ -1,6 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javazoom.jl.player.Player;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -53,11 +55,13 @@ public class GuessController implements TimerListener {
 
   @FXML private ProgressIndicator progressIndicator;
 
+  private MediaPlayer mediaPlayer;
   private ChatCompletionRequest chatCompletionRequest;
   private boolean isGuessed = false;
   private boolean gameEnded = false;
   private boolean isAudioPlaying = false;
   private String currentGuess;
+  private Player mp3Player;
 
   private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
   private final Image soundOffImage =
@@ -145,11 +149,10 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
-
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
-
     updateMuteImage(); // Update Image
+    toggleAudioMute(); // Mute or unmute the playing audio
   }
 
   /** Update the image in ImageView according to the speech status */
@@ -158,6 +161,15 @@ public class GuessController implements TimerListener {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
     } else {
       audioImage.setImage(soundOffImage); // Show Mute icon
+    }
+  }
+
+  private void toggleAudioMute() {
+    if (mediaPlayer != null) {
+      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
+    }
+    if (mp3Player != null && AudioStatus.INSTANCE.isMuted()) {
+      mp3Player.close(); // Stop the mp3Player immediately
     }
   }
 
@@ -381,30 +393,25 @@ public class GuessController implements TimerListener {
    *
    * @param mp3FilePath
    */
-  private void playAudio(String mp3FilePath) {
+  private void playAudio(String fileName) {
     if (AudioStatus.INSTANCE.isMuted() || isAudioPlaying) {
       return;
     }
 
-    isAudioPlaying = true;
-
     // Play the audio file
     try {
-      FileInputStream fileInputStream =
-          new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
-      // Create a new player
-      Player player = new Player(fileInputStream);
-      new Thread(
-              () -> {
-                try {
-                  player.play();
-                } catch (Exception e) {
-                  e.printStackTrace();
-                } finally {
-                  isAudioPlaying = false;
-                }
-              })
-          .start();
+      // Create a new Media object with the file path
+      Media sound =
+          new Media(new File("src/main/resources/sounds/" + fileName + ".mp3").toURI().toString());
+      mediaPlayer = new MediaPlayer(sound);
+      mediaPlayer.play();
+      isAudioPlaying = true;
+
+      // Handle the audio finishing
+      mediaPlayer.setOnEndOfMedia(
+          () -> {
+            isAudioPlaying = false;
+          });
     } catch (Exception e) {
       e.printStackTrace();
       isAudioPlaying = false;
