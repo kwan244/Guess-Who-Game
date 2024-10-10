@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ComputerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ComputerController">
    <children>
       <ImageView fitHeight="624.0" fitWidth="889.0" layoutX="-94.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,7 +24,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color green="1.0" blue="0.15000000596046448" />
+                  <Color blue="0.15000000596046448" green="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -39,7 +39,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color green="1.0" blue="0.15000000596046448" />
+                  <Color blue="0.15000000596046448" green="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -54,7 +54,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color green="1.0" blue="0.20000000298023224" />
+                  <Color blue="0.20000000298023224" green="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -69,7 +69,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color green="1.0" blue="0.13333334028720856" />
+                  <Color blue="0.13333334028720856" green="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -84,7 +84,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color green="1.0" blue="0.06666667014360428" />
+                  <Color blue="0.06666667014360428" green="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -99,7 +99,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color green="1.0" blue="0.01666666753590107" />
+                  <Color blue="0.01666666753590107" green="1.0" />
                </color>
             </DropShadow>
          </effect>
@@ -148,6 +148,9 @@
          <image>
             <Image url="@../images/gloves.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="draggableGlasses" fitHeight="61.0" fitWidth="64.0" layoutX="471.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
          <image>

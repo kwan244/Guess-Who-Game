@@ -35,15 +35,13 @@ public class PasswordController implements TimerListener {
   @FXML private Text iconSubtitle;
   @FXML private Text passwordHint;
   @FXML private ImageView visitorLogIcon;
-  @FXML private TextArea firstRow;
-  @FXML private TextArea secondRow;
-  @FXML private TextArea thirdRow;
   @FXML private Rectangle hintBackground;
   @FXML private TableColumn<Visitor, Integer> id;
   @FXML private TableColumn<Visitor, String> checkinTime;
   @FXML private TableColumn<Visitor, String> checkoutTime;
   @FXML private TableColumn<Visitor, String> hostName;
   @FXML private TableColumn<Visitor, String> visitorName;
+  @FXML private Rectangle window;
       @FXML
     private VBox inputVbox;
 
@@ -114,7 +112,6 @@ void onSubmit(ActionEvent event) {
                 visitor.setHost(inputHost.getText());
                 table.setItems(currentTableData);
                 table.refresh();
-                System.out.println("Visitor updated. Total visitors: " + currentTableData.size());
                 return; // Exit after updating
             }
         }
@@ -198,11 +195,10 @@ private void clearInputFields() {
 
     @FXML
   public void onIconClicked(MouseEvent event) throws ApiProxyException, IOException {
-        firstRow.setVisible(true);
-        secondRow.setVisible(true);
-        thirdRow.setVisible(true);
         table.setVisible(true);
         visitorLogIcon.setDisable(true);
+        inputVbox.setVisible(true);
+        window.setVisible(true);
   }
 
 
