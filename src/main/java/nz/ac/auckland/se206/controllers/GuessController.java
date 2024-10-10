@@ -90,7 +90,6 @@ public class GuessController implements TimerListener {
 
   @FXML
   public void initialize() {
-    playAudio("GuessStarted");
     // Reset the guess condition
     GuessCondition.INSTANCE.setManagerClicked(false);
     GuessCondition.INSTANCE.setThiefClicked(false);
@@ -113,7 +112,10 @@ public class GuessController implements TimerListener {
 
     if (!GuessCondition.INSTANCE.isConditionMet()) {
       endGame(true);
+      return;
     }
+
+    playAudio("GuessStarted");
   }
 
   public void stopTimer() {
@@ -144,7 +146,7 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
-    
+
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
 
