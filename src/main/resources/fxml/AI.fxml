@@ -67,16 +67,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="incorrect" fitHeight="140.0" fitWidth="186.0" layoutX="625.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/WrongGuess.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="correct" fitHeight="150.0" fitWidth="200.0" layoutX="620.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/CorrectGuess.png" />
-         </image>
-      </ImageView>
       <Text fill="#d9bf86" layoutX="122.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptText" text="Click to choose the thief.">
       </Text>
       <Text fill="#d9bf86" layoutX="122.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptText" text="Write down who is the thief and why:">
@@ -129,12 +119,22 @@
             </DropShadow>
          </effect>
       </ImageView>
-      <Text fx:id="TimeLose" fill="RED" layoutX="197.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Lose! Timer ended! Press play again to play again" visible="false" wrappingWidth="420.5367660522461">
-         <font>
-            <Font size="31.0" />
-         </font>
-      </Text>
-      <Text fx:id="txtChooseFirst" fill="#f54e00" layoutX="373.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You need to choose the thief first.">
+      <ImageView fx:id="timesUp" fitHeight="218.0" fitWidth="429.0" layoutX="133.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/SE206_guessResultTimeUp.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="incorrect" fitHeight="150.0" fitWidth="554.0" layoutX="109.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/SE206_guessResultWrong.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="correct" fitHeight="150.0" fitWidth="554.0" layoutX="109.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/SE206_guessResultCorrect.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="txtChooseFirst" fill="#d9bf86" layoutX="373.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="You need to choose the thief first.">
          <font>
             <Font size="15.0" />
          </font>
