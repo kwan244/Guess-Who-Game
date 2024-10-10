@@ -20,6 +20,11 @@ import javazoom.jl.player.Player;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 
+/**
+ * This controller manages the introduction screen of the application, including video playback,
+ * audio control, and scene transitions. It handles interactions such as toggling audio, going back
+ * to the previous scene, and playing a fade-in transition for the room element.
+ */
 public class IntroController {
   private boolean isAudioPlaying = false;
   private MediaPlayer mediaPlayer;
@@ -33,6 +38,10 @@ public class IntroController {
   private final Image soundOffImage =
       new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
+  /**
+   * Initializes the introduction screen. It sets up the fade-in transition for the room, loads the
+   * video asynchronously, and starts playing the audio if it's not muted.
+   */
   @FXML
   public void initialize() {
     room.setOpacity(0.0);
@@ -46,6 +55,14 @@ public class IntroController {
     }
   }
 
+  /**
+   * Handles the "Go Back" action. It stops the MP3 player if it's playing and navigates to the
+   * CrimeScene view.
+   *
+   * @param event the event triggered by the "Go Back" button
+   * @throws ApiProxyException if there is an API-related issue
+   * @throws IOException if an I/O error occurs during scene transition
+   */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     if (mp3Player != null) {
@@ -54,6 +71,12 @@ public class IntroController {
     App.setRoot("CrimeScene");
   }
 
+  /**
+   * Handles the mouse click event to toggle the mute status of the audio. It updates the mute
+   * status and the image representing the audio status.
+   *
+   * @param event the mouse click event on the audio icon
+   */
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
@@ -71,6 +94,10 @@ public class IntroController {
     }
   }
 
+  /**
+   * Mute or unmute the audio. If the audio is playing, it will be muted. If the audio is muted, it
+   * will be unmuted.
+   */
   private void toggleAudioMute() {
     if (mediaPlayer != null) {
       mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
@@ -85,6 +112,10 @@ public class IntroController {
     }
   }
 
+  /**
+   * Asynchronously loads the introduction video and plays it. It uses a background task to load the
+   * media file and sets up a MediaPlayer to handle video playback in the videoContainer Pane.
+   */
   private void loadVideoAsync() {
     Task<Void> loadVideoTask =
         new Task<Void>() {
@@ -120,6 +151,12 @@ public class IntroController {
     new Thread(loadVideoTask).start();
   }
 
+  /**
+   * Plays the specified MP3 audio file. The file path should be relative to the resources/sounds
+   * directory.
+   *
+   * @param mp3FilePath the file path of the audio file (without the ".mp3" extension)
+   */
   private void playAudio(String mp3FilePath) {
     if (AudioStatus.INSTANCE.isMuted() || isAudioPlaying) {
       return;
@@ -149,6 +186,7 @@ public class IntroController {
     }
   }
 
+  /** Plays a fade-in transition for the room Pane with a duration of 3.5 seconds. */
   private void makeFadeInTransition() {
     FadeTransition fadeTransition = new FadeTransition();
     fadeTransition.setDuration(Duration.millis(3500));

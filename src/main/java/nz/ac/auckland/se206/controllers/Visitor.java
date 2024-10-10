@@ -8,7 +8,7 @@ public class Visitor {
   private String checkoutTime;
   private String host;
 
-  public Visitor(int id, String name, String checkinTime, String checkoutTime, String host){
+  public Visitor(int id, String name, String checkinTime, String checkoutTime, String host) {
     this.id = id;
     this.name = name;
     this.checkinTime = checkinTime;
@@ -16,44 +16,43 @@ public class Visitor {
     this.host = host;
   }
 
-  public int getId(){
+  public int getId() {
     return id;
   }
 
-  public String getName(){
+  public String getName() {
     return name;
   }
 
-  public String getCheckinTime(){
+  public String getCheckinTime() {
     return checkinTime;
   }
 
-  public String getCheckoutTime(){
+  public String getCheckoutTime() {
     return checkoutTime;
   }
 
-  public String getHost(){
+  public String getHost() {
     return host;
   }
 
-  public void setId(int id){
+  public void setId(int id) {
     this.id = id;
   }
 
-  public void setName(String name){
+  public void setName(String name) {
     this.name = name;
   }
-  
-  public void setCheckinTime(String checkinTime){
+
+  public void setCheckinTime(String checkinTime) {
     this.checkinTime = checkinTime;
   }
 
-  public void setCheckoutTime(String checkoutTime){
+  public void setCheckoutTime(String checkoutTime) {
     this.checkoutTime = checkoutTime;
-  }  
-
-  public void setHost(String host){
-    this.host = host;
   }
 
+  public void setHost(String host) {
+    this.host = host;
+  }
 }

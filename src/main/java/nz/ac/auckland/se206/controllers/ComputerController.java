@@ -101,127 +101,127 @@ public class ComputerController implements TimerListener {
     // if glove is clicked and wires are not connected
     if (glovewearing && wireCount < 2) {
       try {
-      // Each action for each colour wire
-      if (event.getSource().equals(leftRedGlow) && redConnected == false) {
-        wireR1 = true;
-        leftRedGlow.setVisible(false);
-        wireCount++;
-        // check same colour wires is connected
-        if (wireR1 && wireR2) {
-          // correct wire connection
-          // show correct wire connection
-          redConnected = true;
-          redConnect.setVisible(true);
-          wireCount = 0;
-          checkAllConnected();
-        }
-        // Check wire count if there are 2 wires reset
-        if (checkWireCount()) {
-          // reset image, wire count and wire status
-          wireR1 = false;
-          leftRedGlow.setVisible(true);
-        }
-      } else if (event.getSource().equals(rightRedGlow) && redConnected == false) {
-        wireR2 = true;
-        rightRedGlow.setVisible(false);
-        wireCount++;
-        // Check same colour wires is connected
-        if (wireR1 && wireR2) {
-          // correct wire connection
-          // show correct wire connection
-          redConnected = true;
-          redConnect.setVisible(true);
-          wireCount = 0;
-          checkAllConnected();
-        }
-        // Check wire count if there are 2 wires reset
-        if (checkWireCount()) {
-          // reset image, wire count and wire status
-          wireR2 = false;
-          rightRedGlow.setVisible(true);
+        // Each action for each colour wire
+        if (event.getSource().equals(leftRedGlow) && redConnected == false) {
+          wireR1 = true;
+          leftRedGlow.setVisible(false);
+          wireCount++;
+          // check same colour wires is connected
+          if (wireR1 && wireR2) {
+            // correct wire connection
+            // show correct wire connection
+            redConnected = true;
+            redConnect.setVisible(true);
+            wireCount = 0;
+            checkAllConnected();
+          }
+          // Check wire count if there are 2 wires reset
+          if (checkWireCount()) {
+            // reset image, wire count and wire status
+            wireR1 = false;
+            leftRedGlow.setVisible(true);
+          }
+        } else if (event.getSource().equals(rightRedGlow) && redConnected == false) {
+          wireR2 = true;
+          rightRedGlow.setVisible(false);
+          wireCount++;
+          // Check same colour wires is connected
+          if (wireR1 && wireR2) {
+            // correct wire connection
+            // show correct wire connection
+            redConnected = true;
+            redConnect.setVisible(true);
+            wireCount = 0;
+            checkAllConnected();
+          }
+          // Check wire count if there are 2 wires reset
+          if (checkWireCount()) {
+            // reset image, wire count and wire status
+            wireR2 = false;
+            rightRedGlow.setVisible(true);
+          }
+
+        } else if (event.getSource().equals(leftBlackGlow) && blackConnected == false) {
+          wireB1 = true;
+          leftBlackGlow.setVisible(false);
+          wireCount++;
+          // check same colour wires is connected
+          if (wireB1 && wireB2) {
+            // correct wire connection
+            // show correct wire connection
+            blackConnected = true;
+            blackConnect.setVisible(true);
+            wireCount = 0;
+            checkAllConnected();
+          }
+          // Check wire count if there are 2 wires reset
+          if (checkWireCount()) {
+            // reset image, wire count and wire status
+            wireB1 = false;
+            leftBlackGlow.setVisible(true);
+          }
+        } else if (event.getSource().equals(rightBlackGlow) && blackConnected == false) {
+          wireB2 = true;
+          rightBlackGlow.setVisible(false);
+          wireCount++;
+          // check same colour wires is connected
+          if (wireB1 && wireB2) {
+            // correct wire connection
+            // show correct wire connection
+            blackConnected = true;
+            blackConnect.setVisible(true);
+            wireCount = 0;
+            checkAllConnected();
+          }
+          // Check wire count if there are 2 wires reset
+          if (checkWireCount()) {
+            // reset image, wire count and wire status
+            wireB2 = false;
+            rightBlackGlow.setVisible(true);
+          }
+        } else if (event.getSource().equals(leftYellowGlow) && yellowConnected == false) {
+          wireY1 = true;
+          leftYellowGlow.setVisible(false);
+          wireCount++;
+          // check same colour wires is connected
+          if (wireY1 && wireY2) {
+            // correct wire connection
+            // show correct wire connection
+            yellowConnected = true;
+            yellowConnect.setVisible(true);
+            wireCount = 0;
+            checkAllConnected();
+          }
+          // Check wire count if there are 2 wires reset
+          if (checkWireCount()) {
+            // reset image, wire count and wire status
+            wireY1 = false;
+            leftYellowGlow.setVisible(true);
+          }
+        } else if (event.getSource().equals(rightYellowGlow) && yellowConnected == false) {
+          wireY2 = true;
+          rightYellowGlow.setVisible(false);
+          wireCount++;
+          // check same colour wires is connected
+          if (wireY1 && wireY2) {
+            // correct wire connection
+            // show correct wire connection
+            yellowConnected = true;
+            yellowConnect.setVisible(true);
+            wireCount = 0;
+            checkAllConnected();
+          }
+          // Check wire count if there are 2 wires reset
+          if (checkWireCount()) {
+            // reset image, wire count and wire status
+            wireY2 = false;
+            rightYellowGlow.setVisible(true);
+          }
         }
 
-      } else if (event.getSource().equals(leftBlackGlow) && blackConnected == false) {
-        wireB1 = true;
-        leftBlackGlow.setVisible(false);
-        wireCount++;
-        // check same colour wires is connected
-        if (wireB1 && wireB2) {
-          // correct wire connection
-          // show correct wire connection
-          blackConnected = true;
-          blackConnect.setVisible(true);
-          wireCount = 0;
-          checkAllConnected();
-        }
-        // Check wire count if there are 2 wires reset
-        if (checkWireCount()) {
-          // reset image, wire count and wire status
-          wireB1 = false;
-          leftBlackGlow.setVisible(true);
-        }
-      } else if (event.getSource().equals(rightBlackGlow) && blackConnected == false) {
-        wireB2 = true;
-        rightBlackGlow.setVisible(false);
-        wireCount++;
-        // check same colour wires is connected
-        if (wireB1 && wireB2) {
-          // correct wire connection
-          // show correct wire connection
-          blackConnected = true;
-          blackConnect.setVisible(true);
-          wireCount = 0;
-          checkAllConnected();
-        }
-        // Check wire count if there are 2 wires reset
-        if (checkWireCount()) {
-          // reset image, wire count and wire status
-          wireB2 = false;
-          rightBlackGlow.setVisible(true);
-        }
-      } else if (event.getSource().equals(leftYellowGlow) && yellowConnected == false) {
-        wireY1 = true;
-        leftYellowGlow.setVisible(false);
-        wireCount++;
-        // check same colour wires is connected
-        if (wireY1 && wireY2) {
-          // correct wire connection
-          // show correct wire connection
-          yellowConnected = true;
-          yellowConnect.setVisible(true);
-          wireCount = 0;
-          checkAllConnected();
-        }
-        // Check wire count if there are 2 wires reset
-        if (checkWireCount()) {
-          // reset image, wire count and wire status
-          wireY1 = false;
-          leftYellowGlow.setVisible(true);
-        }
-      } else if (event.getSource().equals(rightYellowGlow) && yellowConnected == false) {
-        wireY2 = true;
-        rightYellowGlow.setVisible(false);
-        wireCount++;
-        // check same colour wires is connected
-        if (wireY1 && wireY2) {
-          // correct wire connection
-          // show correct wire connection
-          yellowConnected = true;
-          yellowConnect.setVisible(true);
-          wireCount = 0;
-          checkAllConnected();
-        }
-        // Check wire count if there are 2 wires reset
-        if (checkWireCount()) {
-          // reset image, wire count and wire status
-          wireY2 = false;
-          rightYellowGlow.setVisible(true);
-        }
+      } catch (IOException e) {
+        e.printStackTrace();
       }
-
-          } catch (IOException e) {
-      e.printStackTrace();
-    }
     }
   }
 

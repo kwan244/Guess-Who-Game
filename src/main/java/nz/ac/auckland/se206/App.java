@@ -140,7 +140,6 @@ public class App extends Application {
 
     // Initial font
     Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
-    // Font.loadFont(App.class.getResource("/fonts/SweetGothicMed.otf").toExternalForm(), 24.0);
 
     Parent root = loader.load();
 

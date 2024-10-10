@@ -32,6 +32,23 @@ import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
+/**
+ * Controller class responsible for managing the guessing phase of the game, where players must
+ * select the correct suspect in a theft investigation. The controller handles the user interface
+ * interactions, manages the timer, sends messages to the GPT model for processing, and provides
+ * feedback to the player.
+ *
+ * <p>Implements the {@link TimerListener} interface to respond to timer events.
+ *
+ * <ul>
+ *   <li>Allows the player to select a suspect from three choices: female, male, and manager.
+ *   <li>Displays visual feedback (e.g., correct/incorrect indicators) based on the player's guess.
+ *   <li>Handles audio functionality and provides options to mute/unmute the sound.
+ *   <li>Sends player input to an AI model for chat responses, and processes the returned messages.
+ *   <li>Controls the game state, including whether the player has guessed, if the timer has
+ *       expired, and if the game has ended.
+ * </ul>
+ */
 public class GuessController implements TimerListener {
 
   @FXML private Label timerLabel;
@@ -67,6 +84,10 @@ public class GuessController implements TimerListener {
   private final Image soundOffImage =
       new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
+  /**
+   * This method is triggered when the timer finishes. It checks if the player has made a guess and
+   * either sends the message or disables further actions when the game ends.
+   */
   @Override
   public void onTimerFinished() {
     // Reset timer to sixty seconds
@@ -91,6 +112,10 @@ public class GuessController implements TimerListener {
     }
   }
 
+  /**
+   * Initializes the controller, setting up the initial state of the game, registering event
+   * handlers, and starting the shared timer.
+   */
   @FXML
   public void initialize() {
     // Reset the guess condition
@@ -121,6 +146,7 @@ public class GuessController implements TimerListener {
     playAudio("GuessStarted");
   }
 
+  /** Stops the shared timer when needed. */
   public void stopTimer() {
     if (sharedTimer != null) {
       sharedTimer.stop();
@@ -128,9 +154,9 @@ public class GuessController implements TimerListener {
   }
 
   /**
-   * Handles the key pressed event.
+   * Handles the key pressed event, currently not used.
    *
-   * @param event the key event
+   * @param event the key event that was pressed
    */
   @FXML
   public void onKeyPressed(KeyEvent event) {}
@@ -147,11 +173,16 @@ public class GuessController implements TimerListener {
     }
   }
 
+  /**
+   * Toggles the mute state for the game's audio and updates the UI accordingly.
+   *
+   * @param event the mouse event for clicking the audio toggle button
+   */
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
-    updateMuteImage(); // Update Image
+    updateMuteImage(); // Update the image in ImageView according to the speech status
     toggleAudioMute(); // Mute or unmute the playing audio
   }
 
@@ -419,7 +450,7 @@ public class GuessController implements TimerListener {
   }
 
   private void endGame(boolean won) {
-    // Stop timer
+    // Stop timer if it is running and reset it to 60 seconds
     stopTimer();
 
     // Mark the game as finished
