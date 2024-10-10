@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -32,11 +29,9 @@ public class RoomController implements TimerListener {
 
   public static boolean isFirstTimeInit = true;
   public static GameStateContext context = new GameStateContext();
-  private MediaPlayer mediaPlayer;
-  private Player mp3Player; // For the introSounds MP3 player
 
   private boolean isAudioPlaying = false;
-  @FXML private Pane room;
+
   @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
@@ -168,7 +163,6 @@ public class RoomController implements TimerListener {
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
     updateMuteImage(); // Update Image
-    toggleAudioMute(); // Mute or unmute the playing audio
   }
 
   /** Update the image in ImageView according to the speech status */
@@ -177,20 +171,6 @@ public class RoomController implements TimerListener {
       audioImage.setImage(soundOnImage); // Show Speaker Icon
     } else {
       audioImage.setImage(soundOffImage); // Show Mute icon
-    }
-  }
-
-  private void toggleAudioMute() {
-    if (mediaPlayer != null) {
-      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
-    }
-    if (mp3Player != null) {
-      // Since the Player class doesn't have built-in mute, stop the sound if muted
-      if (AudioStatus.INSTANCE.isMuted()) {
-        mp3Player.close(); // Stop the mp3Player
-        // } else {
-        //   playAudio("introSounds"); // Resume playing the audio
-      }
     }
   }
 
@@ -206,23 +186,6 @@ public class RoomController implements TimerListener {
     context.handleRectangleClick(event, clickedRectangle.getId());
   }
 
-  @FXML
-  private void handleIntroClick(ActionEvent event) throws IOException {
-    // make fade out
-    makeFadeOut();
-
-    // Stage currentStage = (Stage) btnGuess.getScene().getWindow();
-    // App.openIntro(currentStage);
-    // playAudio("GameIntro");
-    // backgroundImg.setVisible(true);
-    // // 8.5 second delay for the user to read guess condition
-    // PauseTransition pause = new PauseTransition(Duration.seconds(9.5));
-    // pause.setOnFinished(e -> backgroundImg.setVisible(false));
-
-    // // Start delay
-    // pause.play();
-  }
-  
   /**
    * Handles the guess button click event.
    *
@@ -311,15 +274,16 @@ public class RoomController implements TimerListener {
 
     isAudioPlaying = true;
 
+    // Play the audio file
     try {
       FileInputStream fileInputStream =
           new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
       // Create a new player
-      mp3Player = new Player(fileInputStream);
+      Player player = new Player(fileInputStream);
       new Thread(
               () -> {
                 try {
-                  mp3Player.play();
+                  player.play();
                 } catch (Exception e) {
                   e.printStackTrace();
                 } finally {
@@ -333,27 +297,6 @@ public class RoomController implements TimerListener {
     }
   }
 
-  private void makeFadeOut() {
-    FadeTransition fadeTransition = new FadeTransition();
-    fadeTransition.setDuration(Duration.millis(1000));
-    fadeTransition.setNode(room);
-    fadeTransition.setFromValue(1);
-    fadeTransition.setToValue(0);
-
-    fadeTransition.setOnFinished(
-        (ActionEvent event) -> {
-          loadIntro();
-        });
-    fadeTransition.play();
-  }
-
-  private void loadIntro() {
-    try {
-      Stage currentStage = (Stage) btnGuess.getScene().getWindow();
-      App.openIntro(currentStage);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   private void flashRedThenReset(ImageView imageView, Image originalImage) {
     // Set the image to red (or the "lightsRed.png" version)
     imageView.setImage(new Image(getClass().getResourceAsStream("/images/se206_lightsRed.png")));
