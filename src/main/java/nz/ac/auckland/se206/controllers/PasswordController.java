@@ -38,18 +38,18 @@ public class PasswordController implements TimerListener {
   @FXML private TextArea secondRow;
   @FXML private TextArea thirdRow;
   @FXML private Rectangle hintBackground;
-  // @FXML private TableColumn<Visitor, Integer> checkinTime;
-  // @FXML private TableColumn<Visitor, Integer> checkoutTime;
-  // @FXML private TableColumn<Visitor, String> hostName;
+  @FXML private TableColumn<Visitor, Integer> checkinTime;
+  @FXML private TableColumn<Visitor, Integer> checkoutTime;
+  @FXML private TableColumn<Visitor, String> hostName;
   
-  // @FXML private TableColumn<Visitor, String> visitorName;
+  @FXML private TableColumn<Visitor, String> visitorName;
 
-  // ObservableList<Visitor> list = FXCollections.observableArrayList(
-  //   new Visitor("Donald and Kamala", 930, 1015, "Sophia"),
-  //   new Visitor("TotalRandomPerson", 1010, 1040, "SupernumeraryRole"),
-  //   new Visitor("RandomPerson2", 1210, 1215, "Sophia"),
-  //   new Visitor("Donald", 1315, 1450, "Sophia")
-  // );
+  ObservableList<Visitor> list = FXCollections.observableArrayList(
+    new Visitor("Donald and Kamala", 930, 1015, "Sophia"),
+    new Visitor("TotalRandomPerson", 1010, 1040, "SupernumeraryRole"),
+    new Visitor("RandomPerson2", 1210, 1215, "Sophia"),
+    new Visitor("Donald", 1315, 1450, "Sophia")
+  );
 
   @Override
   public void onTimerFinished() {
@@ -68,13 +68,13 @@ public class PasswordController implements TimerListener {
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
 
-// visitorName.setCellValueFactory(new PropertyValueFactory<Visitor, String>("visitorName"));
-// checkinTime.setCellValueFactory(new PropertyValueFactory<Visitor, Integer>("checkinTime"));
-// checkoutTime.setCellValueFactory(new PropertyValueFactory<Visitor, Integer>("checkoutTime"));
-// hostName.setCellValueFactory(new PropertyValueFactory<Visitor, String>("hostName"));
+visitorName.setCellValueFactory(new PropertyValueFactory<Visitor, String>("name"));
+checkinTime.setCellValueFactory(new PropertyValueFactory<Visitor, Integer>("checkinTime"));
+checkoutTime.setCellValueFactory(new PropertyValueFactory<Visitor, Integer>("checkoutTime"));
+hostName.setCellValueFactory(new PropertyValueFactory<Visitor, String>("host"));
 
 
-    // table.setItems(list);
+    table.setItems(list);
   }
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
