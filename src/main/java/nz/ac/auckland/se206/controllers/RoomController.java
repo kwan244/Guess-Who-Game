@@ -297,6 +297,31 @@ public class RoomController implements TimerListener {
     }
   }
 
+
+  private void makeFadeOut() {
+    FadeTransition fadeTransition = new FadeTransition();
+    fadeTransition.setDuration(Duration.millis(1000));
+    fadeTransition.setNode(room);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          loadIntro();
+        });
+    fadeTransition.play();
+  }
+
+  private void loadIntro() {
+    try {
+      Stage currentStage = (Stage) btnGuess.getScene().getWindow();
+      App.openIntro(currentStage);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+  
+
   private void flashRedThenReset(ImageView imageView, Image originalImage) {
     // Set the image to red (or the "lightsRed.png" version)
     imageView.setImage(new Image(getClass().getResourceAsStream("/images/se206_lightsRed.png")));
