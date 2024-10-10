@@ -104,6 +104,10 @@ public class SharedTimer {
     }
   }
 
+  /**
+   * Resets the timer to 60 seconds. If the timer has already been reset once, the game will end.
+   * Otherwise, the timer will be reset to 60 seconds.
+   */
   public synchronized void resetToSixtySeconds() {
     if (hasReset) {
       notifyTimerFinished(); // End the game if timer has already reset once

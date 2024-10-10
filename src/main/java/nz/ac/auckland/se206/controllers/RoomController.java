@@ -170,7 +170,7 @@ public class RoomController implements TimerListener {
   private void handleToggleSpeech(MouseEvent event) {
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
-    updateMuteImage(); // Update Image
+    updateMuteImage(); // Update Image according to the status of the audio
     toggleAudioMute(); // Mute or unmute the playing audio
   }
 
@@ -206,7 +206,7 @@ public class RoomController implements TimerListener {
 
   @FXML
   private void handleIntroClick(ActionEvent event) throws IOException {
-    // make fade out
+    // make fade out transition and disable the button to prevent multiple clicks
     makeFadeOut();
     btnBackground.setDisable(true);
   }
@@ -337,7 +337,7 @@ public class RoomController implements TimerListener {
     try {
       Stage currentStage = (Stage) btnGuess.getScene().getWindow();
       App.openIntro(currentStage);
-    }  catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }

@@ -7,8 +7,8 @@ import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 
 public class FreeTextToSpeech {
-  private static final Synthesizer synthesizer;
   private static boolean enabled = true;
+  private static final Synthesizer synthesizer;
 
   static {
     try {

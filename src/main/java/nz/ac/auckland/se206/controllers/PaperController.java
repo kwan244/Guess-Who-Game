@@ -40,18 +40,30 @@ public class PaperController implements TimerListener {
     }
   }
 
+  /**
+   * Initializes the draggable glasses and paper. Sets up event handlers for mouse interactions with
+   * the glasses, initializes the shared timer, and updates the paper image if it has been clicked
+   * before.
+   *
+   * <p>This method is automatically called after the FXML fields are injected and the FXML loader
+   * finishes loading the UI components.
+   */
   @FXML
   public void initialize() {
     intializePaper();
-    // draggableMaker.makeDraggable(draggableGlasses);
+
+    // Set the event handlers for the draggable glasses image.
     draggableGlasses.setOnMouseEntered(this::handleMouseEnterDragGlasses);
     draggableGlasses.setOnMouseExited(this::handleMouseExitDragGlasses);
     draggableGlasses.setOnMousePressed(this::handleMousePressDragGlasses);
-    // draggableGlasses.setOnMouseDragged(this::handleMouseDragGlasses);
+
+    // Start the timer when the view is initialized and set the timer label.
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
+
+    // Update the paper image if it has been clicked before
     if (GuessCondition.INSTANCE.isPaperClicked()) {
       paperClick = 2;
       updatePaperImage();
@@ -74,7 +86,13 @@ public class PaperController implements TimerListener {
     }
   }
 
+  /**
+   * Handles the click event for the paper image.
+   *
+   * @param event
+   */
   private void handlePaperClick(MouseEvent event) {
+    // Handle the click event for the paper image
     if (paperClick < 2) {
       paperClick++;
     } else if (paperClick == 2 && glassesClick >= 1) {
@@ -84,10 +102,12 @@ public class PaperController implements TimerListener {
 
     updatePaperImage();
 
+    // Handle the case where the glasses are clicked before the paper
     if (paperClick == 2 && glassesClick == 0) {
       draggableGlasses.setStyle("-fx-effect: dropshadow(three-pass-box, yellow, 12, 0.5, 0, 0);");
     }
 
+    // Handle the case where the glasses are clicked after the paper
     if (paperClick == 3) {
       paperImage.setStyle("");
       paperImage.setCursor(Cursor.DEFAULT);
