@@ -105,9 +105,25 @@ hostName.setCellValueFactory(new PropertyValueFactory<Visitor, String>("host"));
       if(visitor.getId() == currentID){
         visitor.setName(inputName.getText());
         visitor.setCheckinTime(inputCheckinTime.getText());
+        visitor.setCheckoutTime(inputCheckoutTime.getText());
+        visitor.setHost(inputHost.getText());
+
+        table.setItems(currentTableData);
+        table.refresh();
+        break;
       }
     }
   }
+
+@FXML
+void onRowClicked(MouseEvent event){
+  Visitor clickedVisitor = table.getSelectionModel().getSelectedItem();
+  inputId.setText(String.valueOf(clickedVisitor.getId()));
+  inputName.setText(String.valueOf(clickedVisitor.getName()));
+  inputCheckinTime.setText(String.valueOf(clickedVisitor.getCheckinTime()));
+  inputCheckoutTime.setText(String.valueOf(clickedVisitor.getCheckoutTime()));
+  inputHost.setText(String.valueOf(clickedVisitor.getHost()));
+}
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
   public void stopTimer() {
