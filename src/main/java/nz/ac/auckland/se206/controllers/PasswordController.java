@@ -4,12 +4,12 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.KeyCode;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
@@ -19,7 +19,11 @@ public class PasswordController implements TimerListener {
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
   @FXML private TextField txtInput;
-
+  @FXML private TableColumn<?, ?> checkinTime;
+  @FXML private TableColumn<?, ?> checkoutTime;
+  @FXML private TableColumn<?, ?> hostName;
+  @FXML private ImageView visitorLogIcon;
+  @FXML private TableColumn<?, ?> visitorName;
 
   @Override
   public void onTimerFinished() {
@@ -54,13 +58,13 @@ public class PasswordController implements TimerListener {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) throws ApiProxyException, IOException {
-    if (event.getCode() == KeyCode.ENTER ){
-        String message = txtInput.getText().trim();
-    if (message.isEmpty()) {
-      return;
-    } else if (message.equals("14101994")) {
-      System.out.println("Correct password");
-    }
+    if (event.getCode() == KeyCode.ENTER) {
+      String message = txtInput.getText().trim();
+      if (message.isEmpty()) {
+        return;
+      } else if (message.equals("14101994")) {
+        System.out.println("Correct password");
+      }
     }
   }
 
