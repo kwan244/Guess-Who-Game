@@ -361,11 +361,11 @@ public class GuessController implements TimerListener {
       // Check if the player has guessed
       if (currentGuess != null) {
         switch (currentGuess) {
-          case "male":
+          case "manager":
             correct.setVisible(true);
             break;
           case "female":
-          case "manager":
+          case "male":
             incorrect.setVisible(true);
             break;
         }

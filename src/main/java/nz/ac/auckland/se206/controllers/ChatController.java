@@ -113,10 +113,10 @@ public class ChatController {
     } else {
       if (this.profession.equals("FemaleCustomer")) {
         sender = "FemaleCustomer";
-      } else if (this.profession.equals("Manager")) {
-        sender = "Manager";
-      } else {
+      } else if (this.profession.equals("MaleCustomer")) {
         sender = "MaleCustomer";
+      } else {
+        sender = "Manager";
       }
     }
     Platform.runLater(() -> txtaChat.appendText(sender + ": " + msg.getContent() + "\n\n"));
@@ -207,7 +207,7 @@ public class ChatController {
   private void handleMaleRoomClicked(MouseEvent event) {
     try {
       GuessCondition.INSTANCE.setThiefClicked(true);
-      App.openChat(event, "thief");
+      App.openChat(event, "MaleCustomer");
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -217,7 +217,7 @@ public class ChatController {
   private void handleManagerOfficeClicked(MouseEvent event) {
     try {
       GuessCondition.INSTANCE.setManagerClicked(true);
-      App.openChat(event, "Manager");
+      App.openChat(event, "Thief");
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -229,8 +229,7 @@ public class ChatController {
    * @param event the key event
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) {
-  }
+  public void onKeyPressed(KeyEvent event) {}
 
   /**
    * Handles the key released event.
@@ -239,7 +238,7 @@ public class ChatController {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) throws ApiProxyException, IOException {
-    if (event.getCode() == KeyCode.ENTER ){
+    if (event.getCode() == KeyCode.ENTER) {
       sendMessage();
     }
   }
