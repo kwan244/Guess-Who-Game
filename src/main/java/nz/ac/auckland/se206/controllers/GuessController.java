@@ -43,13 +43,14 @@ public class GuessController implements TimerListener {
   @FXML private ImageView maleImage;
   @FXML private ImageView managerImage;
   @FXML private ImageView audioImage;
+  @FXML private ImageView timesUp;
 
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
   @FXML private Text txtChooseFirst;
   @FXML private ChatController chatController;
-  @FXML private Text TimeLose;
+
   @FXML private ProgressIndicator progressIndicator;
 
   private ChatCompletionRequest chatCompletionRequest;
@@ -78,10 +79,8 @@ public class GuessController implements TimerListener {
           e.printStackTrace();
         }
       } else {
-        // Show incorrect message and lose image
-        incorrect.setVisible(true);
-        correct.setVisible(false);
-        TimeLose.setVisible(true);
+        timesUp.setVisible(true);
+        btnSend.setDisable(true);
         // Set the game as ended
         gameEnded = true;
       }
@@ -144,7 +143,7 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void handleToggleSpeech(MouseEvent event) {
-    
+
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
     AudioStatus.INSTANCE.setMuted(!currentStatus);
 
@@ -260,6 +259,10 @@ public class GuessController implements TimerListener {
               .setTemperature(0.2)
               .setTopP(0.5)
               .setMaxTokens(100);
+      // if time runs out don't run the GPT model
+      if (sharedTimer.hasTimerEnded()) {
+        return;
+      }
       runGptAsync(new ChatMessage("system", getSystemPrompt()));
     } catch (ApiProxyException e) {
       // Handle the exception
@@ -414,15 +417,10 @@ public class GuessController implements TimerListener {
     gameEnded = true;
     isGuessed = true;
 
-    // Displays an image and message when the game is over
-    incorrect.setVisible(true); // Show wrong guess icon
-    TimeLose.setVisible(true); // Display failure message
+    timesUp.setVisible(true); // Display failure message
 
     // Disable the input box and send button to prevent subsequent interactions
     txtInput.setDisable(true);
     btnSend.setDisable(true);
-
-    // You can add other logic here, such as recording game results, switching to other scenes, etc.
-    System.out.println("Game Over!");
   }
 }
