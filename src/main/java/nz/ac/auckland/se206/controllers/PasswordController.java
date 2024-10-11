@@ -60,10 +60,10 @@ public class PasswordController implements TimerListener {
   // Observable list to hold visitor data for TableView
   ObservableList<Visitor> list =
       FXCollections.observableArrayList(
-          new Visitor(1, "Donald and Kamala", "09:30", "10:15", "Sophia"),
+          new Visitor(1, "Donald and Kamala", "09:30", "10:15", "Sophie"),
           new Visitor(2, "TotalRandomPerson", "10:10", "10:40", "SupernumeraryRole"),
-          new Visitor(3, "RandomPerson2", "12:10", "12:15", "Sophia"),
-          new Visitor(4, "Donald", "13:15", "14:50", "Sophia"));
+          new Visitor(3, "RandomPerson2", "12:10", "12:15", "Sophie"),
+          new Visitor(4, "Donald", "13:15", "14:50", "Sophie"));
 
   /**
    * This method is called when the timer finishes. It navigates the application to the guess view
