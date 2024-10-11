@@ -18,12 +18,12 @@
             <Image url="@../images/ManagerOffice.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="98.0" fitWidth="618.0" layoutX="88.0" layoutY="322.0" pickOnBounds="true">
+      <ImageView fitHeight="137.0" fitWidth="618.0" layoutX="88.0" layoutY="283.0" pickOnBounds="true">
          <image>
             <Image url="@../images/SE206_textBoard.png" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="123.0" layoutY="328.0" opacity="0.9" prefHeight="86.0" prefWidth="545.0" style="-fx-control-inner-background: white;" wrapText="true">
+    <TextArea fx:id="txtaChat" editable="false" layoutX="123.0" layoutY="292.0" opacity="0.9" prefHeight="119.0" prefWidth="545.0" style="-fx-control-inner-background: white;" wrapText="true">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></TextArea>

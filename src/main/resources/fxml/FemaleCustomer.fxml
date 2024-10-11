@@ -26,12 +26,12 @@
       <Label fx:id="timerLabel" layoutX="664.0" layoutY="20.0" prefHeight="45.0" prefWidth="96.0" styleClass="timerLabel" text="00:00">
       </Label>
       <ProgressIndicator fx:id="progressIndicator" layoutX="76.0" layoutY="27.0" prefHeight="47.0" prefWidth="42.0" visible="false" />
-      <ImageView fitHeight="96.0" fitWidth="620.0" layoutX="87.0" layoutY="323.0" pickOnBounds="true">
+      <ImageView fitHeight="135.0" fitWidth="620.0" layoutX="87.0" layoutY="284.0" pickOnBounds="true">
          <image>
             <Image url="@../images/SE206_textBoard.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="txtaChat" editable="false" layoutX="123.0" layoutY="328.0" prefHeight="86.0" prefWidth="545.0" style="-fx-control-inner-background: white;" wrapText="true">
+      <TextArea fx:id="txtaChat" editable="false" layoutX="123.0" layoutY="293.0" prefHeight="118.0" prefWidth="545.0" style="-fx-control-inner-background: white;" wrapText="true">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
