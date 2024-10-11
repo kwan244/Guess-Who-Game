@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,11 +22,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javazoom.jl.player.Player;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
-import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GptHelper;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
@@ -263,6 +262,7 @@ public class GuessController implements TimerListener {
 
   @FXML
   private void onPlayAgain(ActionEvent event) throws ApiProxyException, IOException {
+    GuessCondition.INSTANCE.setWireCompleted(false);
     GuessCondition.INSTANCE.setComputerClicked(false);
     GuessCondition.INSTANCE.setShoeprintClicked(false);
     GuessCondition.INSTANCE.setPaperClicked(false);
@@ -308,7 +308,12 @@ public class GuessController implements TimerListener {
       if (sharedTimer.hasTimerEnded()) {
         return;
       }
-      runGptAsync(new ChatMessage("system", getSystemPrompt()));
+      // Prepare the initial system message
+      ChatMessage systemMessage = new ChatMessage("system", getSystemPrompt());
+
+      // Call the new method in GptHelper
+      GptHelper.runInitialGptMessage(
+          systemMessage, chatCompletionRequest, progressIndicator, this::appendChatMessage);
     } catch (ApiProxyException e) {
       // Handle the exception
       e.printStackTrace();
@@ -328,50 +333,6 @@ public class GuessController implements TimerListener {
       sender = "AI";
     }
     Platform.runLater(() -> txtaChat.appendText(sender + ": " + msg.getContent() + "\n\n"));
-  }
-
-  /**
-   * Runs the GPT model with a given chat message.
-   *
-   * @param msg the chat message to process
-   * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   */
-  /**
-   * Runs the GPT model asynchronously with a given chat message using CompletableFuture.
-   *
-   * @param msg the chat message to process
-   */
-  private void runGptAsync(ChatMessage msg) {
-    // Set progress indicator to visible
-    progressIndicator.setVisible(true);
-    // Add the message to the request
-    chatCompletionRequest.addMessage(msg);
-
-    // Run the request asynchronously to avoid blocking the UI thread
-    CompletableFuture.supplyAsync(
-            () -> {
-              try {
-                // Execute the request and get the result
-                ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-                return chatCompletionResult.getChoices().iterator().next();
-              } catch (ApiProxyException e) {
-                e.printStackTrace();
-                return null;
-              }
-            })
-        .thenAccept(
-            choice -> {
-              if (choice != null) {
-                // Append chat message on the UI thread
-                Platform.runLater(
-                    () -> {
-                      chatCompletionRequest.addMessage(choice.getChatMessage());
-                      appendChatMessage(choice.getChatMessage());
-                      progressIndicator.setVisible(false); // Hide the loading indicator
-                    });
-              }
-            });
   }
 
   /**
@@ -400,7 +361,13 @@ public class GuessController implements TimerListener {
       txtInput.clear();
       ChatMessage msg = new ChatMessage("user", message);
       appendChatMessage(msg);
-      runGptAsync(msg);
+      // Use the helper to run GPT asynchronously
+      GptHelper.runGptAsync(
+          msg,
+          chatCompletionRequest,
+          progressIndicator,
+          this::appendChatMessage // Provide the method to append the chat message
+          );
       // Check if the player has guessed
       if (currentGuess != null) {
         switch (currentGuess) {
