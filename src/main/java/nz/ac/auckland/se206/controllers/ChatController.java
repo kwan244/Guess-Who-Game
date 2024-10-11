@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,11 +16,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
-import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GptHelper;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
@@ -95,7 +94,12 @@ public class ChatController {
               .setTemperature(0.2)
               .setTopP(0.5)
               .setMaxTokens(100);
-      runGptAsync(new ChatMessage("system", getSystemPrompt()));
+      // Prepare the initial system message
+      ChatMessage systemMessage = new ChatMessage("system", getSystemPrompt());
+
+      // Call the new method in GptHelper
+      GptHelper.runInitialGptMessage(
+          systemMessage, chatCompletionRequest, progressIndicator, this::appendChatMessage);
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
@@ -123,42 +127,6 @@ public class ChatController {
   }
 
   /**
-   * Runs the GPT model asynchronously with a given chat message using CompletableFuture.
-   *
-   * @param msg the chat message to process
-   */
-  private void runGptAsync(ChatMessage msg) {
-    progressIndicator.setVisible(true); // Show the loading indicator
-    // Add the message to the request
-    chatCompletionRequest.addMessage(msg);
-
-    // Run the request asynchronously to avoid blocking the UI thread
-    CompletableFuture.supplyAsync(
-            () -> {
-              try {
-                // Execute the request and get the result
-                ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-                return chatCompletionResult.getChoices().iterator().next();
-              } catch (ApiProxyException e) {
-                e.printStackTrace();
-                return null;
-              }
-            })
-        .thenAccept(
-            choice -> {
-              if (choice != null) {
-                // Append chat message on the UI thread
-                Platform.runLater(
-                    () -> {
-                      chatCompletionRequest.addMessage(choice.getChatMessage());
-                      appendChatMessage(choice.getChatMessage());
-                      progressIndicator.setVisible(false); // Hide the loading indicator
-                    });
-              }
-            });
-  }
-
-  /**
    * Sends a message to the GPT model.
    *
    * @param event the action event triggered by the send button
@@ -174,7 +142,13 @@ public class ChatController {
     txtInput.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-    runGptAsync(msg);
+    // Use the helper to run GPT asynchronously
+    GptHelper.runGptAsync(
+        msg,
+        chatCompletionRequest,
+        progressIndicator,
+        this::appendChatMessage // Provide the method to append the chat message
+        );
   }
 
   public void sendMessage() throws ApiProxyException, IOException {
