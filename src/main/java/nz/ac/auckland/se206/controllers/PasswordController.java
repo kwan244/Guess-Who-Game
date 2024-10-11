@@ -192,7 +192,6 @@ public class PasswordController implements TimerListener {
    * Handles the key released event. This method is used to validate the password input and unlock
    * features if the correct password is entered.
    *
-   * @param event the key event triggered when a key is released in the input field
    * @throws ApiProxyException if an error occurs with the API proxy
    * @throws IOException if an I/O error occurs
    */
