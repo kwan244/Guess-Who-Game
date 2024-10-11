@@ -105,7 +105,7 @@ public class App extends Application {
    * @throws IOException if the FXML file is not found
    */
   public static void openClue(MouseEvent event, String clueName) throws IOException {
-    if (GuessCondition.INSTANCE.hasWireCompleted()) {
+    if (GuessCondition.INSTANCE.hasWireCompleted() && clueName.equals("ComputerScene")) {
       clueName = "PasswordScene";
     }
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + clueName + ".fxml"));
