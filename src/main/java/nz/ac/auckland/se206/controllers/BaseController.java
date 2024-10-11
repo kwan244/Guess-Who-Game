@@ -7,103 +7,121 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaPlayer;
 import javazoom.jl.player.Player;
 
+/**
+ * An abstract base controller class that provides common functionality for managing audio playback
+ * and UI elements such as audio status icons. This class serves as a superclass for other
+ * controllers that require audio control and icon management.
+ */
 public abstract class BaseController {
 
-  protected MediaPlayer mediaPlayer;
-  protected Player mp3Player; // 用于播放 MP3 文件
-  protected boolean isAudioPlaying = false;
+  protected MediaPlayer mediaPlayer; // MediaPlayer object for video/audio playback
+  protected Player mp3Player; // Player object for handling MP3 file playback
+  protected boolean isAudioPlaying = false; // Flag to track if audio is currently playing
 
-  @FXML protected ImageView audioImage; // 音频状态图标
+  @FXML protected ImageView audioImage; // ImageView to display the audio status icon
 
-  // 音频图标图片
+  // Image objects representing the audio on/off states
   private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
-  private final Image soundOffImage = new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
+  private final Image soundOffImage =
+      new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
   /**
-   * 初始化控制器。主要处理音频图标的更新。
+   * Initializes the controller by updating the mute status icon according to the current audio
+   * state.
    */
   @FXML
   public void initialize() {
-    updateMuteImage();
+    updateMuteImage(); // Update the audio status icon when the controller is initialized
   }
 
   /**
-   * 更新音频图标的显示状态。
+   * Updates the display image of the audio icon based on the current mute status. If the audio is
+   * not muted, the icon will show the sound-on image; otherwise, it will show the sound-off image.
    */
   protected void updateMuteImage() {
     if (!AudioStatus.INSTANCE.isMuted()) {
-      audioImage.setImage(soundOnImage); // 显示开启音频图标
+      audioImage.setImage(soundOnImage); // Show the sound-on icon
     } else {
-      audioImage.setImage(soundOffImage); // 显示关闭音频图标
+      audioImage.setImage(soundOffImage); // Show the sound-off icon
     }
   }
 
   /**
-   * 切换静音状态并更新图标。
+   * Toggles the audio mute status and updates the audio icon accordingly. If the audio is currently
+   * playing, it will be muted; otherwise, it will be unmuted.
    */
   @FXML
   protected void handleToggleSpeech() {
     boolean currentStatus = AudioStatus.INSTANCE.isMuted();
-    AudioStatus.INSTANCE.setMuted(!currentStatus);
-    updateMuteImage();
-    toggleAudioMute();
+    AudioStatus.INSTANCE.setMuted(!currentStatus); // Toggle the mute status
+    updateMuteImage(); // Update the mute image to reflect the new status
+    toggleAudioMute(); // Apply mute/unmute to any currently playing audio
   }
 
   /**
-   * 静音或取消静音当前播放的音频。
+   * Mutes or unmutes the currently playing audio. If the audio is muted, it will stop the playback
+   * for MP3 files, as the Player class does not have a built-in mute function.
    */
   protected void toggleAudioMute() {
     if (mediaPlayer != null) {
-      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted());
+      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute or unmute the MediaPlayer
     }
     if (mp3Player != null && AudioStatus.INSTANCE.isMuted()) {
-      mp3Player.close();
+      mp3Player.close(); // Stop the MP3 player when muted, as there is no built-in mute support
     }
   }
 
   /**
-   * 播放指定的 MP3 文件。
+   * Plays the specified MP3 file from the "resources/sounds" directory. This method checks if the
+   * audio is muted or already playing before starting playback.
    *
-   * @param mp3FilePath 不包含扩展名的文件路径。
+   * @param mp3FilePath The file path of the audio file (without the ".mp3" extension).
    */
   protected void playAudio(String mp3FilePath) {
+    // Do not play audio if it is muted or already playing
     if (AudioStatus.INSTANCE.isMuted() || isAudioPlaying) {
       return;
     }
 
-    isAudioPlaying = true;
+    isAudioPlaying = true; // Set the status to indicate audio is playing
 
     try {
-      FileInputStream fileInputStream = new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
+      // Load the specified MP3 file from the resources directory
+      FileInputStream fileInputStream =
+          new FileInputStream("src/main/resources/sounds/" + mp3FilePath + ".mp3");
       mp3Player = new Player(fileInputStream);
 
-      new Thread(() -> {
-        try {
-          mp3Player.play(); 
-        } catch (Exception e) {
-          e.printStackTrace();
-        } finally {
-          isAudioPlaying = false; 
-        }
-      }).start();
+      // Start a new thread to play the audio file
+      new Thread(
+              () -> {
+                try {
+                  mp3Player.play(); // Play the MP3 file
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } finally {
+                  isAudioPlaying = false; // Reset the playing status when playback is complete
+                }
+              })
+          .start();
     } catch (Exception e) {
       e.printStackTrace();
-      isAudioPlaying = false;
+      isAudioPlaying = false; // Reset the playing status if an error occurs
     }
   }
 
   /**
-   * 停止当前播放的音频。
+   * Stops the currently playing audio. This method stops both MediaPlayer and MP3Player if they are
+   * active, and resets the audio playing status.
    */
   protected void stopAudio() {
     if (mediaPlayer != null) {
-      mediaPlayer.stop(); // 停止 MediaPlayer 播放
+      mediaPlayer.stop(); // Stop MediaPlayer playback
       mediaPlayer = null;
     }
     if (mp3Player != null) {
-      mp3Player.close(); // 关闭 MP3 Player
+      mp3Player.close(); // Stop MP3 Player playback
       mp3Player = null;
     }
-    isAudioPlaying = false;
+    isAudioPlaying = false; // Reset the audio playing status
   }
 }

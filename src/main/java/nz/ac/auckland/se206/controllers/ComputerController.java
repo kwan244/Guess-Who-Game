@@ -39,6 +39,10 @@ public class ComputerController implements TimerListener {
   private boolean yellowConnected = false;
   private int wireCount = 0;
 
+  /**
+   * This method is triggered when the timer finishes. It transitions the game to the guess phase by
+   * opening the guessing view.
+   */
   @Override
   public void onTimerFinished() {
     // Open the guess view
@@ -50,6 +54,12 @@ public class ComputerController implements TimerListener {
     }
   }
 
+  /**
+   * Initializes the controller by setting up event handlers, initializing the timer, and applying
+   * the initial visual effects.
+   *
+   * @throws ApiProxyException if there is an error with the API proxy configuration
+   */
   public void initialize() throws ApiProxyException {
     //
     glove.setStyle("-fx-effect: dropshadow(three-pass-box, yellow, 12, 0.5, 0, 0);");
@@ -60,6 +70,11 @@ public class ComputerController implements TimerListener {
     sharedTimer.start();
   }
 
+  /**
+   * Sets the mouse event handlers for a given wire ImageView.
+   *
+   * @param wire the wire ImageView to apply handlers to
+   */
   private void setWireHandlers(ImageView wire) {
     wire.setOnMouseEntered(this::handleMouseEnterWire);
     wire.setOnMouseExited(this::handleMouseExitWire);
@@ -92,16 +107,31 @@ public class ComputerController implements TimerListener {
     setWireHandlers(rightYellowGlow);
   }
 
+  /**
+   * Handles mouse enter event for a wire, highlighting the wire with a glow effect.
+   *
+   * @param event the mouse enter event
+   */
   public void handleMouseEnterWire(MouseEvent event) {
     ImageView wire = (ImageView) event.getSource();
     wire.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
   }
 
+  /**
+   * Handles mouse exit event for a wire, removing the glow effect.
+   *
+   * @param event the mouse exit event
+   */
   public void handleMouseExitWire(MouseEvent event) {
     ImageView wire = (ImageView) event.getSource();
     wire.setStyle("-fx-effect:null;");
   }
 
+  /**
+   * Handles the click event on a wire, connecting the appropriate wires based on the game logic.
+   *
+   * @param event the mouse click event
+   */
   private void handleWireClick(MouseEvent event) {
     // if glove is clicked and wires are not connected
     if (glovewearing && wireCount < 2) {
@@ -230,6 +260,11 @@ public class ComputerController implements TimerListener {
     }
   }
 
+  /**
+   * Checks if all wires are connected, and if so, transitions the game to the next phase.
+   *
+   * @throws IOException if there is an error transitioning to the next view
+   */
   private void checkAllConnected() throws IOException {
     if (redConnected && blackConnected && yellowConnected) {
       // all wires connected
@@ -249,6 +284,11 @@ public class ComputerController implements TimerListener {
     }
   }
 
+  /**
+   * Checks the wire count and resets the state if more than 2 wires are clicked.
+   *
+   * @return true if the wire count is 2, false otherwise
+   */
   private boolean checkWireCount() {
     if (wireCount == 2) {
       wireCount = 1;
