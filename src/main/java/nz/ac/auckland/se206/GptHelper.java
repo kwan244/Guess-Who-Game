@@ -12,6 +12,11 @@ public class GptHelper {
 
   /** Callback interface for appending chat messages */
   public interface AppendChatCallback {
+    /**
+     * Appends a chat message to the UI.
+     *
+     * @param message the chat message to append
+     */
     void appendMessage(ChatMessage message);
   }
 

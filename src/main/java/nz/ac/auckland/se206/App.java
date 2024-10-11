@@ -78,6 +78,12 @@ public class App extends Application {
     stage.show();
   }
 
+  /**
+   * Opens the guess view for the current stage.
+   *
+   * @param currentStage the current stage to open the guess view in
+   * @throws IOException if the FXML file is not found
+   */
   public static void openGuess(Stage currentStage) throws IOException {
     // Open the guess view
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/AI.fxml"));
@@ -120,6 +126,12 @@ public class App extends Application {
     stage.show();
   }
 
+  /**
+   * Opens the introduction scene in the provided stage.
+   *
+   * @param currentStage the current stage to open the introduction scene in
+   * @throws IOException if the FXML file is not found
+   */
   public static void openIntro(Stage currentStage) throws IOException {
     // Open the guess view
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/IntroScene.fxml"));
@@ -138,6 +150,12 @@ public class App extends Application {
     stage.show();
   }
 
+  /**
+   * Opens the computer scene in the provided stage.
+   *
+   * @param currentStage the current stage to open the computer scene in
+   * @throws IOException if the FXML file is not found
+   */
   public static void openComputer(Stage currentStage) throws IOException {
     // Open the guess view
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/PasswordScene.fxml"));
@@ -177,6 +195,11 @@ public class App extends Application {
     root.requestFocus();
   }
 
+  /**
+   * Handles the window close event by deallocating the synthesizer.
+   *
+   * @param event the window event triggered when closing the application
+   */
   private void handleWindowClose(WindowEvent event) {
     FreeTextToSpeech.deallocateSynthesizer();
   }
