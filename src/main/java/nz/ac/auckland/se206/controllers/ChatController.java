@@ -112,11 +112,11 @@ public class ChatController {
       sender = "You";
     } else {
       if (this.profession.equals("FemaleCustomer")) {
-        sender = "FemaleCustomer";
+        sender = "Kamala";
       } else if (this.profession.equals("MaleCustomer")) {
-        sender = "MaleCustomer";
+        sender = "Donald";
       } else {
-        sender = "Manager";
+        sender = "Sophia";
       }
     }
     Platform.runLater(() -> txtaChat.appendText(sender + ": " + msg.getContent() + "\n\n"));
