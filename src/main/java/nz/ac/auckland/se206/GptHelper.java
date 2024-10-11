@@ -10,6 +10,11 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 
 public class GptHelper {
 
+  /** Callback interface for appending chat messages */
+  public interface AppendChatCallback {
+    void appendMessage(ChatMessage message);
+  }
+
   /**
    * Runs the GPT model asynchronously with a given chat message using CompletableFuture.
    *
@@ -72,10 +77,5 @@ public class GptHelper {
 
     // Use the helper to run GPT asynchronously
     runGptAsync(systemMessage, chatCompletionRequest, progressIndicator, appendChatMessage);
-  }
-
-  /** Callback interface for appending chat messages */
-  public interface AppendChatCallback {
-    void appendMessage(ChatMessage message);
   }
 }
