@@ -230,6 +230,7 @@ public class ComputerController implements TimerListener {
       // all wires connected
       // show clue
       // vistorLog.setVisible(true);
+      GuessCondition.INSTANCE.setWireCompleted(true);
       Stage currentStage = (Stage) leftYellowGlow.getScene().getWindow();
       App.openComputer(currentStage);
     }

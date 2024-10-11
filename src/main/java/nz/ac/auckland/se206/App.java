@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.GuessCondition;
 import nz.ac.auckland.se206.controllers.GuessController;
 import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
@@ -104,6 +105,9 @@ public class App extends Application {
    * @throws IOException if the FXML file is not found
    */
   public static void openClue(MouseEvent event, String clueName) throws IOException {
+    if (GuessCondition.INSTANCE.hasWireCompleted()) {
+      clueName = "PasswordScene";
+    }
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + clueName + ".fxml"));
     // Initial font
     Font.loadFont(App.class.getResource("/fonts/DigitalDismay.otf").toExternalForm(), 24.0);
