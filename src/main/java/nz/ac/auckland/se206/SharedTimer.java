@@ -82,7 +82,17 @@ public class SharedTimer {
     }
   }
 
-  /** Stops the timer. */
+  /**
+   * Stops the timer and updates the internal state.
+   *
+   * <p>This method stops the ongoing timer, halting any scheduled actions or events. It sets the
+   * {@code timerEnded} flag to {@code true}, indicating that the timer has completed its countdown
+   * or execution. This method is synchronized to ensure thread safety, preventing concurrent
+   * modifications to the timer state while it is being stopped.
+   *
+   * <p>If the timer was not previously running (i.e., {@code timeline} is {@code null}), the method
+   * will simply update the state without any further action.
+   */
   public synchronized void stop() {
     if (timeline != null) {
       timeline.stop();

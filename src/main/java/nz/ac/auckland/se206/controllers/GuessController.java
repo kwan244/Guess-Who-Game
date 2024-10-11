@@ -171,13 +171,13 @@ public class GuessController extends BaseController implements TimerListener {
     toggleAudioMute(); // Mute or unmute the playing audio
   }
 
-  @FXML
   /**
    * Handles the cick event on the male icon.
    *
    * @param event
    * @return void
    */
+  @FXML
   private void handleGuessMale(MouseEvent event) {
     if (!isGuessed) {
       currentGuess = "male"; // Store the guess
@@ -192,13 +192,13 @@ public class GuessController extends BaseController implements TimerListener {
     }
   }
 
-  @FXML
   /**
    * Handles the click event on the manager icon.
    *
    * @param event
    * @return void
    */
+  @FXML
   private void handleGuessManager(MouseEvent event) {
     if (!isGuessed) {
       currentGuess = "manager"; // Store the guess
@@ -213,6 +213,22 @@ public class GuessController extends BaseController implements TimerListener {
     }
   }
 
+  /**
+   * Handles the event when the user makes a guess for the "female" option.
+   *
+   * <p>This method is triggered by a mouse event when the user selects the female option. If the
+   * user has not already made a guess, it stores the current guess as "female" and updates the
+   * visual indicators by hiding the glow effects for male and manager images, while displaying the
+   * glow effect for the female image. Additionally, it updates the game state to indicate that the
+   * female customer option has been clicked.
+   *
+   * <p>If the user has already made a guess, the method checks whether the game conditions are met.
+   * If not, it plays an audio cue indicating that the guessing conditions are not satisfied. If the
+   * conditions are met, it plays an audio cue indicating that the guess has been successfully
+   * registered.
+   *
+   * @param event the mouse event triggered by the user's selection of the female option
+   */
   @FXML
   private void handleGuessFemale(MouseEvent event) {
     if (!isGuessed) {
@@ -228,6 +244,22 @@ public class GuessController extends BaseController implements TimerListener {
     }
   }
 
+  /**
+   * Handles the action of restarting the game when the "Play Again" button is clicked.
+   *
+   * <p>This method resets various game conditions and states to prepare for a new game session. It
+   * sets all relevant flags in the {@link GuessCondition} singleton instance to {@code false},
+   * indicating that no options have been selected by the user. The game state is updated to
+   * indicate that the game has not ended, and the timer is reset to five minutes.
+   *
+   * <p>After resetting the game conditions, the method transitions the state of the room controller
+   * to signify that a new game has started, initializing any necessary resources for the new
+   * session. Finally, it updates the application view to display the "CrimeScene" layout.
+   *
+   * @param event the action event triggered by the "Play Again" button click
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws IOException if there is an error loading the new view
+   */
   @FXML
   private void onPlayAgain(ActionEvent event) throws ApiProxyException, IOException {
     GuessCondition.INSTANCE.setWireCompleted(false);
@@ -257,11 +289,7 @@ public class GuessController extends BaseController implements TimerListener {
     return PromptEngineering.getPrompt("prompts/AI.txt", map);
   }
 
-  /**
-   * Sets the profession for the chat context and initializes the ChatCompletionRequest.
-   *
-   * @param profession the profession to set
-   */
+  /** Sets the profession for the chat context and initializes the ChatCompletionRequest. */
   public void setProfession() {
     try {
       // Read the API proxy configuration

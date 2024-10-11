@@ -14,6 +14,35 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 
+/**
+ * The {@code ComputerController} class handles the interactions and game logic for the computer
+ * section of the game, including wire connections and timer events.
+ *
+ * <p>This class implements the {@link TimerListener} interface to respond to timer events,
+ * transitioning the game to the guessing phase when the timer finishes. It manages the state of
+ * various visual elements representing wires and their connections. Users can interact with these
+ * elements, and the class tracks the state of wire connections, ensuring that the game logic is
+ * followed.
+ *
+ * <p>Key functionalities include:
+ *
+ * <ul>
+ *   <li>Managing the timer and responding to its completion.
+ *   <li>Handling user interactions with wires, including mouse events for clicking, entering, and
+ *       exiting the wires.
+ *   <li>Tracking the state of glove usage and wire connections to determine if the game conditions
+ *       are met.
+ *   <li>Transitioning the game view based on user actions and game state.
+ * </ul>
+ *
+ * <p>Usage Example:
+ *
+ * <pre>
+ *     // Example usage
+ *     ComputerController controller = new ComputerController();
+ *     controller.initialize();
+ * </pre>
+ */
 public class ComputerController implements TimerListener {
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
