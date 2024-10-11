@@ -45,31 +45,31 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
  */
 public class GuessController extends BaseController implements TimerListener {
 
-  @FXML private Label timerLabel;
-  @FXML private SharedTimer sharedTimer;
-  @FXML private ImageView incorrect;
-  @FXML private ImageView correct;
-  @FXML private ImageView femaleImageGlow;
-  @FXML private ImageView maleImageGlow;
-  @FXML private ImageView managerImageGlow;
-  @FXML private ImageView femaleImage;
-  @FXML private ImageView maleImage;
-  @FXML private ImageView managerImage;
-  @FXML private ImageView audioImage;
-  @FXML private ImageView timesUp;
+  @FXML private Label timerLabel; // Label to display the timer.
+  @FXML private SharedTimer sharedTimer; // Shared timer instance.
+  @FXML private ImageView incorrect; // Image view indicating incorrect guess.
+  @FXML private ImageView correct; // Image view indicating correct guess.
+  @FXML private ImageView femaleImageGlow; // Image glow for the female option.
+  @FXML private ImageView maleImageGlow; // Image glow for the male option.
+  @FXML private ImageView managerImageGlow; // Image glow for the manager option.
+  @FXML private ImageView femaleImage; // Image view for the female option.
+  @FXML private ImageView maleImage; // Image view for the male option.
+  @FXML private ImageView managerImage; // Image view for the manager option.
+  @FXML private ImageView audioImage; // Image view for the audio toggle button.
+  @FXML private ImageView timesUp; // Image indicating that time is up.
 
-  @FXML private TextArea txtaChat;
-  @FXML private TextField txtInput;
-  @FXML private Button btnSend;
-  @FXML private Text txtChooseFirst;
-  @FXML private ChatController chatController;
+  @FXML private TextArea txtaChat; // Text area to display chat messages.
+  @FXML private TextField txtInput; // Text field for user input.
+  @FXML private Button btnSend; // Button to send user input.
+  @FXML private Text txtChooseFirst; // Text message displayed if no option is chosen.
+  @FXML private ChatController chatController; // Controller for chat functionality.
 
-  @FXML private ProgressIndicator progressIndicator;
+  @FXML private ProgressIndicator progressIndicator; // Progress indicator for API responses.
 
-  private ChatCompletionRequest chatCompletionRequest;
-  private boolean isGuessed = false;
-  private boolean gameEnded = false;
-  private String currentGuess;
+  private ChatCompletionRequest chatCompletionRequest; // Request object for chat completion.
+  private boolean isGuessed = false; // Boolean to track if a guess has been made.
+  private boolean gameEnded = false; // Boolean to track if the game has ended.
+  private String currentGuess; // Stores the current user guess.
 
   /**
    * This method is triggered when the timer finishes. It checks if the player has made a guess and
@@ -77,24 +77,20 @@ public class GuessController extends BaseController implements TimerListener {
    */
   @Override
   public void onTimerFinished() {
-    // Reset timer to sixty seconds
     if (sharedTimer.getHasReset() == false) {
-      sharedTimer.resetToSixtySeconds();
+      sharedTimer.resetToSixtySeconds(); // Reset timer to 60 seconds.
     } else if (sharedTimer.getHasReset() == true) {
-      // Check if message if empty
-      String message = txtInput.getText().trim();
-      // If the player has chosen a guess, automatically send the message
+      String message = txtInput.getText().trim(); // Retrieve the current input text.
       if (currentGuess != null && !message.isEmpty()) {
         try {
-          onSendMessage(null);
+          onSendMessage(null); // Send the message if a guess was made.
         } catch (ApiProxyException | IOException e) {
           e.printStackTrace();
         }
       } else {
-        timesUp.setVisible(true);
-        btnSend.setDisable(true);
-        // Set the game as ended
-        gameEnded = true;
+        timesUp.setVisible(true); // Display time-up message.
+        btnSend.setDisable(true); // Disable send button.
+        gameEnded = true; // Set the game as ended.
       }
     }
   }
@@ -105,38 +101,40 @@ public class GuessController extends BaseController implements TimerListener {
    */
   @FXML
   public void initialize() {
-    // Reset the guess condition
+    // Initialize guess conditions.
     GuessCondition.INSTANCE.setManagerClicked(false);
     GuessCondition.INSTANCE.setThiefClicked(false);
     GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
 
     super.initialize();
 
-    // Start the timer
+    // Set up event handlers for guess selections.
     managerImage.setOnMouseClicked(this::handleGuessManager);
     femaleImage.setOnMouseClicked(this::handleGuessFemale);
     maleImage.setOnMouseClicked(this::handleGuessMale);
     audioImage.setOnMouseClicked(this::handleToggleSpeech);
+
+    // Initialize shared timer and start it.
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
 
-    // Set the visibliity of the images
-    txtChooseFirst.setVisible(false);
+    txtChooseFirst.setVisible(false); // Hide "Choose First" text initially.
 
+    // End game if conditions are not met.
     if (!GuessCondition.INSTANCE.isConditionMet()) {
       endGame(true);
       return;
     }
 
-    playAudio("GuessStarted");
+    playAudio("GuessStarted"); // Play the audio cue for starting the game.
   }
 
   /** Stops the shared timer when needed. */
   public void stopTimer() {
     if (sharedTimer != null) {
-      sharedTimer.stop();
+      sharedTimer.stop(); // Stop the shared timer if it's active.
     }
   }
 
@@ -156,7 +154,7 @@ public class GuessController extends BaseController implements TimerListener {
   @FXML
   public void onKeyReleased(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      onSendMessage(null);
+      onSendMessage(null); // Send message if the Enter key is released.
     }
   }
 

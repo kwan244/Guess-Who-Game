@@ -14,14 +14,23 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
 import nz.ac.auckland.se206.TimerListener;
 
+/**
+ * Controller class for managing the paper and glasses interaction phase of the game.
+ *
+ * <p>This phase involves the user interacting with a draggable pair of glasses and a crumpled
+ * paper. The goal is to click on the paper and glasses in a specific sequence to proceed. This
+ * class handles the user interactions and updates the visual state accordingly.
+ */
 public class PaperController implements TimerListener {
 
-  @FXML private ImageView draggableGlasses;
-  @FXML private ImageView paperImage;
-  @FXML private Label timerLabel;
-  @FXML private SharedTimer sharedTimer;
-  private int paperClick = 0;
-  private int glassesClick = 0;
+  @FXML private ImageView draggableGlasses; // ImageView for the draggable glasses.
+  @FXML private ImageView paperImage; // ImageView for the paper image.
+  @FXML private Label timerLabel; // Label to display the timer.
+  @FXML private SharedTimer sharedTimer; // Shared timer instance.
+
+  private int paperClick = 0; // Counter for the number of clicks on the paper.
+  private int glassesClick = 0; // Counter for the number of clicks on the glasses.
+
   private final String[] paperImages = {
     "/images/CrumplePaper1.png",
     "/images/CrumplePaper2.png",
@@ -29,6 +38,10 @@ public class PaperController implements TimerListener {
     "/images/CrumplePaper4.png",
   };
 
+  /**
+   * Method called when the timer finishes. Transitions the game to the guessing phase by opening
+   * the guess view.
+   */
   @Override
   public void onTimerFinished() {
     // Open the guess view
@@ -77,6 +90,9 @@ public class PaperController implements TimerListener {
     }
   }
 
+  /**
+   * Initializes the paper image view, sets the image and event handlers for the paper interactions.
+   */
   private void intializePaper() {
     if (paperImage != null) {
       paperImage.setImage(new Image(getClass().getResourceAsStream(paperImages[paperClick])));
@@ -87,9 +103,10 @@ public class PaperController implements TimerListener {
   }
 
   /**
-   * Handles the click event for the paper image.
+   * Handles the click event for the paper image. Updates the paper state and appearance based on
+   * the click sequence.
    *
-   * @param event
+   * @param event the mouse event triggered by clicking the paper image
    */
   private void handlePaperClick(MouseEvent event) {
     // Handle the click event for the paper image
@@ -115,34 +132,61 @@ public class PaperController implements TimerListener {
     }
   }
 
+  /**
+   * Handles mouse enter event for the paper, updating the cursor and visual effect.
+   *
+   * @param event the mouse event for entering the paper image area
+   */
   private void handleMouseEnterPaper(MouseEvent event) {
     paperImage.setCursor(Cursor.OPEN_HAND);
     paperImage.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
   }
 
+  /**
+   * Handles mouse exit event for the paper, resetting the cursor and visual effect.
+   *
+   * @param event the mouse event for exiting the paper image area
+   */
   private void handleMouseExitPaper(MouseEvent event) {
     paperImage.setCursor(Cursor.DEFAULT);
     paperImage.setStyle("-fx-effect: null;");
   }
 
+  /**
+   * Handles mouse enter event for the draggable glasses, updating the cursor and visual effect.
+   *
+   * @param event the mouse event for entering the glasses image area
+   */
   private void handleMouseEnterDragGlasses(MouseEvent event) {
     // Handle mouse enter event for draggable glasses
     draggableGlasses.setCursor(Cursor.OPEN_HAND);
     draggableGlasses.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
   }
 
+  /**
+   * Handles mouse exit event for the draggable glasses, resetting the cursor and visual effect.
+   *
+   * @param event the mouse event for exiting the glasses image area
+   */
   private void handleMouseExitDragGlasses(MouseEvent event) {
     // Handle mouse exit event for draggable glasses
     draggableGlasses.setCursor(Cursor.DEFAULT);
     draggableGlasses.setStyle("-fx-effect: null;");
   }
 
+  /**
+   * Handles mouse press event for the draggable glasses, updating the cursor and incrementing the
+   * click counter.
+   *
+   * @param event the mouse event for pressing the glasses image area
+   */
   private void handleMousePressDragGlasses(MouseEvent event) {
     // Handle mouse press event for draggable glasses
     draggableGlasses.setCursor(Cursor.CLOSED_HAND);
     glassesClick++;
   }
 
+  /** Updates the paper image based on the current paper click state. */
   private void updatePaperImage() {
     paperImage.setImage(new Image(getClass().getResourceAsStream(paperImages[paperClick])));
   }
