@@ -127,7 +127,7 @@ public class IntroController {
           protected Void call() throws Exception {
             // Load the video from the specified path
             String videoPath =
-                new File("src/main/resources/videos/intro_noButtonNoSounds.mp4").toURI().toString();
+                new File("src/main/resources/videos/IntroVideo_Caption.mp4").toURI().toString();
             Media media = new Media(videoPath);
             mediaPlayer = new MediaPlayer(media);
 
