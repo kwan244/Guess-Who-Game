@@ -1,7 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.File;
 import java.io.IOException;
-import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -30,6 +33,7 @@ public class RoomController extends BaseController implements TimerListener {
   public static boolean isFirstTimeInit = true;
   public static GameStateContext context = new GameStateContext();
 
+  @FXML private MediaView mediaView;
   @FXML private Pane room;
   @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
@@ -51,6 +55,7 @@ public class RoomController extends BaseController implements TimerListener {
   @FXML private Text clueProgression;
   @FXML private Text suspectProgression;
 
+  private MediaPlayer mediaPlayer; // Media player to control playback
   private int suspectcount = 0;
   private int cluecount = 0;
 
@@ -133,6 +138,25 @@ public class RoomController extends BaseController implements TimerListener {
     }
   }
 
+  private void playVideo(String videoPath) {
+    String videoSrc;
+    // Play the intro audio if not muted
+    if (!AudioStatus.INSTANCE.isMuted()) {
+      videoSrc = new File("src/main/resources/videos/IntroVideo_withSounds.mp4").toURI().toString();
+    } else {
+      videoSrc = new File("src/main/resources/videos/IntroVideo_Caption.mp4").toURI().toString();
+    }
+    // Media media = new Media(getClass().getResource("/videos/" + videoPath).toExternalForm());
+    Media media = new Media(videoSrc);
+    mediaPlayer = new MediaPlayer(media);
+
+    mediaView.setMediaPlayer(mediaPlayer);
+    mediaPlayer.play();
+
+    mediaPlayer.setOnEndOfMedia(
+        () -> mediaView.setVisible(false)); // Hide MediaView); // Loop video
+  }
+
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
   public void stopTimer() {
     if (sharedTimer != null) {
@@ -179,8 +203,9 @@ public class RoomController extends BaseController implements TimerListener {
   @FXML
   private void handleIntroClick(ActionEvent event) throws IOException {
     // make fade out transition and disable the button to prevent multiple clicks
-    makeFadeOut();
-    btnBackground.setDisable(true);
+    // makeFadeOut();
+    mediaView.setVisible(true);
+    playVideo("videos/IntroVideo_withSounds.mp4"); // Adjust the path as necessary
   }
 
   /**
@@ -261,29 +286,6 @@ public class RoomController extends BaseController implements TimerListener {
           flashRedThenReset(thirdClue, originalFirstClue);
         }
       }
-    }
-  }
-
-  private void makeFadeOut() {
-    FadeTransition fadeTransition = new FadeTransition();
-    fadeTransition.setDuration(Duration.millis(1000));
-    fadeTransition.setNode(room);
-    fadeTransition.setFromValue(1);
-    fadeTransition.setToValue(0);
-
-    fadeTransition.setOnFinished(
-        (ActionEvent event) -> {
-          loadIntro();
-        });
-    fadeTransition.play();
-  }
-
-  private void loadIntro() {
-    try {
-      Stage currentStage = (Stage) btnGuess.getScene().getWindow();
-      App.openIntro(currentStage);
-    } catch (IOException e) {
-      e.printStackTrace();
     }
   }
 
