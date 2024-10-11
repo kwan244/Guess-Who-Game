@@ -1,12 +1,14 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SharedTimer;
@@ -15,7 +17,6 @@ import nz.ac.auckland.se206.TimerListener;
 public class ComputerController implements TimerListener {
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
-  @FXML private ImageView vistorLog;
   @FXML private ImageView leftRedGlow;
   @FXML private ImageView rightRedGlow;
   @FXML private ImageView leftBlackGlow;
@@ -53,22 +54,16 @@ public class ComputerController implements TimerListener {
     //
     glove.setStyle("-fx-effect: dropshadow(three-pass-box, yellow, 12, 0.5, 0, 0);");
     glove.setOnMouseClicked(this::handleGloveClick);
-    leftBlackGlow.setOnMouseClicked(this::handleWireClick);
-    rightBlackGlow.setOnMouseClicked(this::handleWireClick);
-    leftRedGlow.setOnMouseClicked(this::handleWireClick);
-    rightRedGlow.setOnMouseClicked(this::handleWireClick);
-    leftYellowGlow.setOnMouseClicked(this::handleWireClick);
-    rightYellowGlow.setOnMouseClicked(this::handleWireClick);
-    leftRedGlow.setVisible(false);
-    rightRedGlow.setVisible(false);
-    leftBlackGlow.setVisible(false);
-    rightBlackGlow.setVisible(false);
-    leftYellowGlow.setVisible(false);
-    rightYellowGlow.setVisible(false);
     sharedTimer = SharedTimer.getInstance();
     sharedTimer.setTimerLabel(timerLabel);
     sharedTimer.setTimerListener(this);
     sharedTimer.start();
+  }
+
+  private void setWireHandlers(ImageView wire) {
+    wire.setOnMouseEntered(this::handleMouseEnterWire);
+    wire.setOnMouseExited(this::handleMouseExitWire);
+    wire.setOnMouseClicked(this::handleWireClick);
   }
 
   /** Stops the timer. This method can be called to stop the timer when it is no longer needed. */
@@ -89,12 +84,22 @@ public class ComputerController implements TimerListener {
     // show glow effect
     glove.setStyle("-fx-effect:null;");
     glove.setDisable(true);
-    leftRedGlow.setVisible(true);
-    rightRedGlow.setVisible(true);
-    leftBlackGlow.setVisible(true);
-    rightBlackGlow.setVisible(true);
-    leftYellowGlow.setVisible(true);
-    rightYellowGlow.setVisible(true);
+    setWireHandlers(leftRedGlow);
+    setWireHandlers(rightRedGlow);
+    setWireHandlers(leftBlackGlow);
+    setWireHandlers(rightBlackGlow);
+    setWireHandlers(leftYellowGlow);
+    setWireHandlers(rightYellowGlow);
+  }
+
+  public void handleMouseEnterWire(MouseEvent event) {
+    ImageView wire = (ImageView) event.getSource();
+    wire.setStyle("-fx-effect: dropshadow(three-pass-box, green, 10, 0.5, 0, 0);");
+  }
+
+  public void handleMouseExitWire(MouseEvent event) {
+    ImageView wire = (ImageView) event.getSource();
+    wire.setStyle("-fx-effect:null;");
   }
 
   private void handleWireClick(MouseEvent event) {
@@ -228,11 +233,19 @@ public class ComputerController implements TimerListener {
   private void checkAllConnected() throws IOException {
     if (redConnected && blackConnected && yellowConnected) {
       // all wires connected
-      // show clue
-      // vistorLog.setVisible(true);
       GuessCondition.INSTANCE.setWireCompleted(true);
-      Stage currentStage = (Stage) leftYellowGlow.getScene().getWindow();
-      App.openComputer(currentStage);
+      // Add a 1-second delay using PauseTransition
+      PauseTransition delay = new PauseTransition(Duration.seconds(0.05));
+      delay.setOnFinished(
+          event -> {
+            try {
+              Stage currentStage = (Stage) leftYellowGlow.getScene().getWindow();
+              App.openComputer(currentStage);
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          });
+      delay.play();
     }
   }
 
