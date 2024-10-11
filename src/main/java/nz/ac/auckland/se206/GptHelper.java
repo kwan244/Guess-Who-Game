@@ -8,9 +8,22 @@ import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 
+/**
+ * A helper class for interacting with the GPT model asynchronously.
+ *
+ * <p>This class provides methods to run GPT model requests and manage chat messages, including
+ * displaying progress indicators while processing and appending chat messages to the user
+ * interface. It uses CompletableFuture to handle asynchronous execution without blocking the UI
+ * thread.
+ */
 public class GptHelper {
 
-  /** Callback interface for appending chat messages */
+  /**
+   * Callback interface that defines the behavior for appending chat messages to the user interface.
+   * This can be implemented in various contexts, such as when new messages are received from a
+   * server or a local user sends a message. By separating the logic for appending messages, the
+   * interface allows for flexible implementations, such as updating the chat window in real-time.
+   */
   public interface AppendChatCallback {
     /**
      * Appends a chat message to the UI.
