@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
@@ -13,13 +12,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javazoom.jl.player.Player;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.SharedTimer;
@@ -29,14 +25,11 @@ import nz.ac.auckland.se206.TimerListener;
  * Controller class for the room view. Handles user interactions within the room where the user can
  * chat with customers and guess their profession.
  */
-public class RoomController implements TimerListener {
+public class RoomController extends BaseController implements TimerListener {
 
   public static boolean isFirstTimeInit = true;
   public static GameStateContext context = new GameStateContext();
-  private MediaPlayer mediaPlayer;
-  private Player mp3Player; // For the introSounds MP3 player
 
-  private boolean isAudioPlaying = false;
   @FXML private Pane room;
   @FXML private Rectangle rectComputer;
   @FXML private Rectangle rectPerson1;
@@ -60,9 +53,6 @@ public class RoomController implements TimerListener {
 
   private int suspectcount = 0;
   private int cluecount = 0;
-  private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
-  private final Image soundOffImage =
-      new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
   @Override
   public void onTimerFinished() {
@@ -82,7 +72,7 @@ public class RoomController implements TimerListener {
   @FXML
   public void initialize() {
 
-    updateMuteImage();
+    super.initialize();
 
     // Check if clue has been interacted with and update the image
     if (GuessCondition.INSTANCE.isComputerClicked()) {
@@ -172,24 +162,6 @@ public class RoomController implements TimerListener {
     AudioStatus.INSTANCE.setMuted(!currentStatus);
     updateMuteImage(); // Update Image according to the status of the audio
     toggleAudioMute(); // Mute or unmute the playing audio
-  }
-
-  /** Update the image in ImageView according to the speech status */
-  private void updateMuteImage() {
-    if (!AudioStatus.INSTANCE.isMuted()) {
-      audioImage.setImage(soundOnImage); // Show Speaker Icon
-    } else {
-      audioImage.setImage(soundOffImage); // Show Mute icon
-    }
-  }
-
-  private void toggleAudioMute() {
-    if (mediaPlayer != null) {
-      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
-    }
-    if (mp3Player != null && AudioStatus.INSTANCE.isMuted()) {
-      mp3Player.close(); // Stop the mp3Player immediately
-    }
   }
 
   /**
@@ -289,33 +261,6 @@ public class RoomController implements TimerListener {
           flashRedThenReset(thirdClue, originalFirstClue);
         }
       }
-    }
-  }
-
-  private void playAudio(String fileName) {
-    if (AudioStatus.INSTANCE.isMuted() || isAudioPlaying) {
-      return;
-    }
-
-    isAudioPlaying = true;
-
-    // Play the audio file
-    try {
-      // Create a new Media object with the file path
-      Media sound =
-          new Media(new File("src/main/resources/sounds/" + fileName + ".mp3").toURI().toString());
-      mediaPlayer = new MediaPlayer(sound);
-      mediaPlayer.play();
-      isAudioPlaying = true;
-
-      // Handle the audio finishing
-      mediaPlayer.setOnEndOfMedia(
-          () -> {
-            isAudioPlaying = false;
-          });
-    } catch (Exception e) {
-      e.printStackTrace();
-      isAudioPlaying = false;
     }
   }
 
