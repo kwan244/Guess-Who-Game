@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 public enum GuessCondition {
   INSTANCE;
 
+  private boolean hasWireCompleted = false;
   private boolean isComputerClicked = false;
   private boolean isShoeprintClicked = false;
   private boolean isPaperClicked = false;
@@ -10,6 +11,10 @@ public enum GuessCondition {
   private boolean isManagerClicked = false;
   private boolean isFemaleCustomerClicked = false;
   private boolean isConditionMet = false;
+
+  public boolean hasWireCompleted() {
+    return hasWireCompleted;
+  }
 
   public boolean isComputerClicked() {
     return isComputerClicked;
@@ -37,6 +42,10 @@ public enum GuessCondition {
 
   public boolean isConditionMet() {
     return isConditionMet;
+  }
+
+  public void setWireCompleted(boolean hasWireCompleted) {
+    this.hasWireCompleted = hasWireCompleted;
   }
 
   public void setComputerClicked(boolean isComputerClicked) {
