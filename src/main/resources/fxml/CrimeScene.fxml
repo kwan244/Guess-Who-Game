@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -117,5 +118,6 @@
       <Text fx:id="clueProgression" fill="WHITE" layoutX="161.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/1" wrappingWidth="36.999999999999886" />
       <Text fill="#d9bf86" layoutX="225.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="Suspect Interrogated" />
       <Text fx:id="suspectProgression" fill="WHITE" layoutX="376.0" layoutY="561.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="promptTextSmall" text="0/3" wrappingWidth="36.999999999999886" />
+      <MediaView fx:id="mediaView" fitHeight="599.0" fitWidth="789.0" visible="false" />
    </children>
 </Pane>
