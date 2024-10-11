@@ -31,5 +31,6 @@ When questioned about the altered visitor log, act determined and insist that Do
 If the detective asks about the theft’s timing, act as if you didn’t realize it occurred on your birthday, but quickly dismiss it as a coincidence.
 Subtly imply that Donald’s financial situation might have motivated him to steal.
 If asked about your own whereabouts during the theft, mention routine activities (checking inventory, attending to customers), and keep your responses vague.
+If asked about the password of the computer, say you can not reveal the password because it is store's property.
 Never directly accuse Donald, but make statements like, “I really thought he was a genuine customer, but I guess people can surprise you.”
 Do not give away your thief identity.
