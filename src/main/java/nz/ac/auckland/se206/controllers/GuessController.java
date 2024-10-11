@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,15 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
-import javazoom.jl.player.Player;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -49,7 +44,7 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
  *       expired, and if the game has ended.
  * </ul>
  */
-public class GuessController implements TimerListener {
+public class GuessController extends BaseController implements TimerListener {
 
   @FXML private Label timerLabel;
   @FXML private SharedTimer sharedTimer;
@@ -72,17 +67,10 @@ public class GuessController implements TimerListener {
 
   @FXML private ProgressIndicator progressIndicator;
 
-  private MediaPlayer mediaPlayer;
   private ChatCompletionRequest chatCompletionRequest;
   private boolean isGuessed = false;
   private boolean gameEnded = false;
-  private boolean isAudioPlaying = false;
   private String currentGuess;
-  private Player mp3Player;
-
-  private final Image soundOnImage = new Image(getClass().getResourceAsStream("/images/audio.png"));
-  private final Image soundOffImage =
-      new Image(getClass().getResourceAsStream("/images/muteaudio.png"));
 
   /**
    * This method is triggered when the timer finishes. It checks if the player has made a guess and
@@ -123,7 +111,7 @@ public class GuessController implements TimerListener {
     GuessCondition.INSTANCE.setThiefClicked(false);
     GuessCondition.INSTANCE.setFemaleCustomerClicked(false);
 
-    updateMuteImage();
+    super.initialize();
 
     // Start the timer
     managerImage.setOnMouseClicked(this::handleGuessManager);
@@ -184,24 +172,6 @@ public class GuessController implements TimerListener {
     AudioStatus.INSTANCE.setMuted(!currentStatus);
     updateMuteImage(); // Update the image in ImageView according to the speech status
     toggleAudioMute(); // Mute or unmute the playing audio
-  }
-
-  /** Update the image in ImageView according to the speech status */
-  private void updateMuteImage() {
-    if (!AudioStatus.INSTANCE.isMuted()) {
-      audioImage.setImage(soundOnImage); // Show Speaker Icon
-    } else {
-      audioImage.setImage(soundOffImage); // Show Mute icon
-    }
-  }
-
-  private void toggleAudioMute() {
-    if (mediaPlayer != null) {
-      mediaPlayer.setMute(AudioStatus.INSTANCE.isMuted()); // Mute/unmute the MediaPlayer
-    }
-    if (mp3Player != null && AudioStatus.INSTANCE.isMuted()) {
-      mp3Player.close(); // Stop the mp3Player immediately
-    }
   }
 
   @FXML
@@ -416,36 +386,6 @@ public class GuessController implements TimerListener {
       }
     } else {
       txtChooseFirst.setVisible(true);
-    }
-  }
-
-  /**
-   * Plays the audio file.
-   *
-   * @param mp3FilePath
-   */
-  private void playAudio(String fileName) {
-    if (AudioStatus.INSTANCE.isMuted() || isAudioPlaying) {
-      return;
-    }
-
-    // Play the audio file
-    try {
-      // Create a new Media object with the file path
-      Media sound =
-          new Media(new File("src/main/resources/sounds/" + fileName + ".mp3").toURI().toString());
-      mediaPlayer = new MediaPlayer(sound);
-      mediaPlayer.play();
-      isAudioPlaying = true;
-
-      // Handle the audio finishing
-      mediaPlayer.setOnEndOfMedia(
-          () -> {
-            isAudioPlaying = false;
-          });
-    } catch (Exception e) {
-      e.printStackTrace();
-      isAudioPlaying = false;
     }
   }
 
